@@ -42,28 +42,28 @@ const ProductSchema = new mongoose.Schema(
         },
 
         images: {
-  type: [
-    {
-      id: {
-        type: String,
-        required: true,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      url: {
-        type: String,
-        required: true,
-      },
-      public_id: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  default: [],
-},
+            type: [
+                {
+                    id: {
+                        type: String,
+                        required: true,
+                    },
+                    name: {
+                        type: String,
+                        required: true,
+                    },
+                    url: {
+                        type: String,
+                        required: true,
+                    },
+                    public_id: {
+                        type: String,
+                        required: true,
+                    },
+                },
+            ],
+            default: [],
+        },
     },
     { timestamps: true }
 );
