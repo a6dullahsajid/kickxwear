@@ -11,10 +11,19 @@ const initialFormState = {
     category: "",
     description: "",
     featuredTags: "",
+    sku: "",
     MRP: "",
     SP: "",
-    inStock: true,
     featured: false,
+
+    variants: [
+        {
+            colorName: "",
+            stock: true,
+            sizes: [],
+            images: [],
+        },
+    ],
 };
 
 const Productform = ({ onClose, onSuccess }) => {
@@ -31,51 +40,144 @@ const Productform = ({ onClose, onSuccess }) => {
         }));
     };
 
-    const handleFileChange = async (event) => {
-        const files = Array.from(event.target.files || []);
-        if (!files.length) {
+    // const handleFileChange = async (event) => {
+    //     const files = Array.from(event.target.files || []);
+    //     if (!files.length) {
+    //         return;
+    //     }
+
+    //     setUploading(true);
+
+    //     for (const file of files) {
+    //         const formData = new FormData();
+    //         formData.append("file", file);
+
+    //         try {
+    //             const response = await fetch("/api/media", {
+    //                 method: "POST",
+    //                 body: formData,
+    //             });
+
+    //             if (!response.ok) {
+    //                 const errorData = await response.json();
+    //                 throw new Error(errorData.message || "Image upload failed");
+    //             }
+
+    //             const result = await response.json();
+
+    //             setImages((prev) => [
+    //                 ...prev,
+    //                 {
+    //                     id: `${file.name}-${Date.now()}`,
+    //                     name: file.name,
+    //                     url: result.secure_url,
+    //                     public_id: result.public_id,
+    //                 },
+    //             ]);
+    //             toast.success(`${file.name} uploaded successfully`);
+    //         } catch (error) {
+    //             toast.error(`Upload failed: ${error.message}`);
+    //         }
+    //     }
+
+    //     setUploading(false);
+    //     event.target.value = "";
+    // };
+
+    const addVariant = () => {
+        setFormState((prev) => ({
+            ...prev,
+            variants: [
+                ...prev.variants,
+                {
+                    colorName: "",
+                    stock: true,
+                    sizes: [],
+                    images: [],
+                },
+            ],
+        }));
+    };
+
+    const removeVariant = (index) => {
+        if (formState.variants.length === 1) {
+            toast.warning("At least one variant is required");
             return;
         }
 
-        setUploading(true);
+        setFormState((prev) => ({
+            ...prev,
+            variants: prev.variants.filter((_, i) => i !== index),
+        }));
+    };
+
+    const updateVariant = (index, field, value) => {
+        setFormState((prev) => {
+            const updated = [...prev.variants];
+
+            updated[index] = {
+                ...updated[index],
+                [field]: value,
+            };
+
+            return {
+                ...prev,
+                variants: updated,
+            };
+        });
+    };
+
+    const uploadVariantImages = async (
+        event,
+        variantIndex
+    ) => {
+        const files = Array.from(event.target.files || []);
 
         for (const file of files) {
-            const formData = new FormData();
-            formData.append("file", file);
-
             try {
+                const formData = new FormData();
+                formData.append("file", file);
+
                 const response = await fetch("/api/media", {
                     method: "POST",
                     body: formData,
                 });
 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || "Image upload failed");
-                }
-
                 const result = await response.json();
 
-                setImages((prev) => [
-                    ...prev,
-                    {
-                        id: `${file.name}-${Date.now()}`,
-                        name: file.name,
-                        url: result.secure_url,
-                        public_id: result.public_id,
-                    },
-                ]);
-                toast.success(`${file.name} uploaded successfully`);
+                setFormState((prev) => {
+                    const variants = [...prev.variants];
+
+                    variants[variantIndex] = {
+                        ...variants[variantIndex],
+                        images: [
+                            ...variants[variantIndex].images,
+                            {
+                                name: file.name,
+                                url: result.secure_url,
+                                public_id: result.public_id,
+                            },
+                        ],
+                    };
+
+                    return {
+                        ...prev,
+                        variants,
+                    };
+                });
             } catch (error) {
-                toast.error(`Upload failed: ${error.message}`);
+                console.error(error);
             }
+            console.log("Form state after image upload:", formState);
         }
 
-        setUploading(false);
         event.target.value = "";
     };
 
-    const removeImage = async (image) => {
+    const removeVariantImage = async (
+        variantIndex,
+        image
+    ) => {
         try {
             const response = await fetch("/api/media", {
                 method: "DELETE",
@@ -90,23 +192,74 @@ const Productform = ({ onClose, onSuccess }) => {
             const result = await response.json();
 
             if (!response.ok) {
-                throw new Error(result.message || "Failed to delete image");
+                throw new Error(
+                    result.message || "Failed to delete image"
+                );
             }
 
-            setImages((prev) =>
-                prev.filter((img) => img.id !== image.id)
-            );
+            setFormState((prev) => {
+                const variants = [...prev.variants];
 
-            toast.success("Image deleted");
+                variants[variantIndex] = {
+                    ...variants[variantIndex],
+                    images: variants[
+                        variantIndex
+                    ].images.filter(
+                        (img) =>
+                            img.public_id !== image.public_id
+                    ),
+                };
+
+                return {
+                    ...prev,
+                    variants,
+                };
+            });
+
+            toast.success("Image removed");
         } catch (error) {
             toast.error(error.message);
         }
     };
 
+    // const removeImage = async (image) => {
+    //     try {
+    //         const response = await fetch("/api/media", {
+    //             method: "DELETE",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify({
+    //                 public_id: image.public_id,
+    //             }),
+    //         });
+
+    //         const result = await response.json();
+
+    //         if (!response.ok) {
+    //             throw new Error(result.message || "Failed to delete image");
+    //         }
+
+    //         setImages((prev) =>
+    //             prev.filter((img) => img.id !== image.id)
+    //         );
+
+    //         toast.success("Image deleted");
+    //     } catch (error) {
+    //         toast.error(error.message);
+    //     }
+    // };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!images.length) {
-            toast.warning("Please upload at least one image before submitting.");
+        const hasImages = formState.variants.some(
+            (variant) => variant.images.length > 0
+        );
+
+        if (!hasImages) {
+            toast.warning(
+                "Upload at least one variant image."
+            );
             return;
         }
 
@@ -116,18 +269,22 @@ const Productform = ({ onClose, onSuccess }) => {
             const body = {
                 title: formState.title,
                 category: formState.category,
+
                 description: {
                     text: formState.description,
                     featured: formState.featuredTags
                         .split(",")
-                        .map((tag) => tag.trim())
+                        .map((x) => x.trim())
                         .filter(Boolean),
                 },
+
+                sku: formState.sku,
+
                 MRP: Number(formState.MRP),
                 SP: Number(formState.SP),
-                inStock: formState.inStock,
                 featured: formState.featured,
-                images: images,
+
+                variants: formState.variants,
             };
 
             const response = await fetch("/api/products", {
@@ -153,25 +310,25 @@ const Productform = ({ onClose, onSuccess }) => {
         }
     };
 
-    return (<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-        <div className="w-full max-w-4xl rounded-3xl bg-white p-8 max-h-[90vh] overflow-y-auto">
-            <div className="mb-4 flex justify-between">
-                <h2 className="text-2xl font-bold">
+    return (<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+        <div className="w-full max-w-4xl rounded-xl bg-white p-6 max-h-[90vh] overflow-y-auto">
+            <div className="mb-2 flex justify-between">
+                <h2 className="text-4xl text-amber-900 font-bold">
                     Add Product
                 </h2>
 
                 <button
                     onClick={onClose}
-                    className="text-2xl"
+                    className="text-2xl cursor-pointer hover:text-amber-900 transition"
                 >
                     ×
                 </button>
             </div>
-            <div className="min-h-screen bg-zinc-50 text-amber-900 py-10 px-4 sm:px-6 lg:px-8">
-                <div className="mx-auto max-w-3xl rounded-3xl border border-zinc-200 bg-white p-8 shadow-xl">
-                    <h1 className="text-3xl font-bold mb-4">Add New Product</h1>
+            <div className="min-h-screen text-amber-900 py-5 px-2">
+                <div className="max-w-3xl rounded-3xl bg-white p-2">
+                    {/* <h1 className="text-3xl font-bold mb-4">Add New Product</h1> */}
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="grid gap-6 sm:grid-cols-2">
+                        <div className="grid gap-4 sm:grid-cols-2">
                             <label className="block">
                                 <span className="text-sm font-medium">Title</span>
                                 <input
@@ -197,6 +354,7 @@ const Productform = ({ onClose, onSuccess }) => {
                                     <option value="football-studs">Football Studs</option>
                                     <option value="casual-shoes">Casual Shoes</option>
                                     <option value="jersey">Jersey</option>
+                                    <option value="accessories">Sports Accessories</option>
                                 </select>
                             </label>
                         </div>
@@ -213,7 +371,19 @@ const Productform = ({ onClose, onSuccess }) => {
                         </label>
 
                         <label className="block">
-                            <span className="text-sm font-medium">Featured tags</span>
+                            <span className="text-sm font-medium">SKU</span>
+                            <input
+                                name="sku"
+                                value={formState.sku}
+                                onChange={handleChange}
+                                className="mt-1 block w-full rounded-3xl border border-zinc-300 bg-zinc-50 px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+                            />
+                        </label>
+
+
+
+                        <label className="block">
+                            <span className="text-sm font-medium">Featured Description</span>
                             <input
                                 name="featuredTags"
                                 value={formState.featuredTags}
@@ -223,7 +393,7 @@ const Productform = ({ onClose, onSuccess }) => {
                             />
                         </label>
 
-                        <div className="grid gap-6 sm:grid-cols-2">
+                        <div className="grid gap-4 sm:grid-cols-2">
                             <label className="block">
                                 <span className="text-sm font-medium">MRP</span>
                                 <input
@@ -254,7 +424,7 @@ const Productform = ({ onClose, onSuccess }) => {
                         </div>
 
                         <div className="grid gap-6 sm:grid-cols-2">
-                            <label className="flex items-center gap-3">
+                            {/* <label className="flex items-center gap-3">
                                 <input
                                     name="inStock"
                                     type="checkbox"
@@ -263,7 +433,7 @@ const Productform = ({ onClose, onSuccess }) => {
                                     className="h-5 w-5 rounded border-zinc-300 text-amber-600 focus:ring-amber-500"
                                 />
                                 <span className="text-sm">In stock</span>
-                            </label>
+                            </label> */}
 
                             <label className="flex items-center gap-3">
                                 <input
@@ -276,40 +446,164 @@ const Productform = ({ onClose, onSuccess }) => {
                                 <span className="text-sm">Featured product</span>
                             </label>
                         </div>
+                        <h2 className="text-xl font-bold">
+                            Variants
+                        </h2>
 
-                        <label className="block">
-                            <span className="text-sm font-medium">Product images</span>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                multiple
-                                onChange={handleFileChange}
-                                className="mt-1 block w-full text-sm text-zinc-700 file:rounded-3xl file:border-0 file:bg-amber-100 file:px-4 file:py-2 file:text-amber-800"
-                            />
-                        </label>
+                        {formState.variants.map((variant, index) => (
+                            <div
+                                key={index}
+                                className="space-y-4 rounded-3xl border border-zinc-200 p-5"
+                            >
+                                <div className="flex items-center justify-between">
+                                    <h3 className="font-semibold">
+                                        Color {index + 1}
+                                    </h3>
 
-                        {images.length > 0 && (
-                            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-                                {images.map((image) => (
-                                    <div key={image.id} className="group relative overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-50">
-                                        <img src={image.url} alt={image.name} className="h-32 w-full object-cover" />
+                                    {formState.variants.length > 1 && (
                                         <button
                                             type="button"
-                                            onClick={() => removeImage(image)}
-                                            className="absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/70 text-white transition hover:bg-black"
+                                            onClick={() => removeVariant(index)}
+                                            className="rounded-xl bg-red-100 px-3 py-1 text-red-600"
                                         >
-                                            ×
+                                            Remove
                                         </button>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                                    )}
+                                </div>
 
+                                <div className="grid gap-4 md:grid-cols-2">
+                                    <label className="block">
+                                        <span className="text-sm font-medium">
+                                            Color Name
+                                        </span>
+
+                                        <input
+                                            value={variant.colorName}
+                                            onChange={(e) =>
+                                                updateVariant(
+                                                    index,
+                                                    "colorName",
+                                                    e.target.value
+                                                )
+                                            }
+                                            placeholder="Black"
+                                            required
+                                            className="mt-1 w-full rounded-3xl border border-zinc-300 px-4 py-3"
+                                        />
+                                    </label>
+
+                                    <label className="flex items-center gap-3 pt-8">
+                                        <input
+                                            type="checkbox"
+                                            checked={variant.stock > 0}
+                                            onChange={(e) =>
+                                                updateVariant(
+                                                    index,
+                                                    "stock",
+                                                    e.target.checked ? 1 : 0
+                                                )
+                                            }
+                                        />
+
+                                        <span>In Stock</span>
+                                    </label>
+                                </div>
+
+                                <label className="block">
+                                    <span className="text-sm font-medium">
+                                        Sizes
+                                    </span>
+
+                                    <div className="flex flex-wrap gap-2">
+                                        {[4, 5, 6, 7, 8, 9, 10, 11].map((size) => (
+                                            <button
+                                                type="button"
+                                                key={size}
+                                                onClick={() => {
+                                                    const exists =
+                                                        variant.sizes.includes(size);
+
+                                                    updateVariant(
+                                                        index,
+                                                        "sizes",
+                                                        exists
+                                                            ? variant.sizes.filter(
+                                                                (s) => s !== size
+                                                            )
+                                                            : [...variant.sizes, size]
+                                                    );
+                                                }}
+                                                className={`px-4 py-2 cursor-pointer hover:text-black rounded-xl border ${variant.sizes.includes(size)
+                                                    ? "bg-amber-700 text-white"
+                                                    : "bg-white"
+                                                    }`}
+                                            >
+                                                {size}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </label>
+
+                                <label className="block">
+                                    <span className="text-sm font-medium">
+                                        Variant Images
+                                    </span>
+
+                                    <input
+                                        type="file"
+                                        multiple
+                                        accept="image/*"
+                                        onChange={(e) =>
+                                            uploadVariantImages(e, index)
+                                        }
+                                        className="mt-1 w-full"
+                                    />
+                                </label>
+
+                                {variant.images.length > 0 && (
+                                    <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+                                        {variant.images.map((image) => (
+                                            <div
+                                                key={image.public_id}
+                                                className="relative overflow-hidden rounded-2xl"
+                                            >
+                                                <img
+                                                    src={image.url}
+                                                    alt=""
+                                                    className="h-28 w-full object-cover"
+                                                />
+
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        removeVariantImage(
+                                                            index,
+                                                            image
+                                                        )
+                                                    }
+                                                    className="absolute cursor-pointer hover:text-gray-500 right-2 top-2 rounded-full bg-black/70 px-2 text-white"
+                                                >
+                                                    ×
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+
+                        <button
+                            type="button"
+                            onClick={addVariant}
+                            className="rounded-3xl cursor-pointer hover:bg-amber-200 bg-amber-100 px-5 py-3 font-medium text-amber-800"
+                        >
+                            + Add Another Color
+                        </button>
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                             <button
                                 type="submit"
                                 disabled={submitting || uploading}
-                                className="inline-flex items-center justify-center rounded-3xl bg-amber-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-amber-800 disabled:cursor-not-allowed disabled:opacity-50"
+                                className="inline-flex items-center cursor-pointer justify-center rounded-3xl bg-amber-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-amber-800 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 {submitting ? "Saving..." : "Create product"}
                             </button>

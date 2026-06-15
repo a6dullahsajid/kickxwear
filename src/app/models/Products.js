@@ -1,10 +1,55 @@
 import mongoose from "mongoose";
 
+const ImageSchema = new mongoose.Schema(
+    {
+        name: String,
+
+        url: {
+            type: String,
+            required: true,
+        },
+
+        public_id: {
+            type: String,
+            required: true,
+        },
+    },
+);
+
+const VariantSchema = new mongoose.Schema(
+    {
+        colorName: {
+            type: String,
+            required: true,
+            trim: true,
+        },
+
+        inStock: {
+            type: Boolean,
+            default: true,
+            index: true,
+        },
+
+        sizes: {
+            type: [Number],
+            required: true,
+            default: [],
+        },
+
+        images: {
+            type: [ImageSchema],
+            default: [],
+        },
+    },
+    { _id: false }
+);
+
 const ProductSchema = new mongoose.Schema(
     {
         title: {
             type: String,
             required: true,
+            trim: true,
         },
 
         category: {
@@ -12,11 +57,21 @@ const ProductSchema = new mongoose.Schema(
             required: true,
             index: true,
         },
+
+        sku: {
+            type: String,
+            required: true,
+            unique: true,
+            trim: true,
+            index: true,
+        },
+
         description: {
             text: {
                 type: String,
                 default: "",
             },
+
             featured: {
                 type: [String],
                 default: [],
@@ -26,61 +81,45 @@ const ProductSchema = new mongoose.Schema(
         MRP: {
             type: Number,
             required: true,
+            min: 0,
         },
 
         SP: {
             type: Number,
             required: true,
-        },
-        inStock: {
-            type: Boolean,
-            default: true
-        },
-        featured: {
-            type: Boolean,
-            default: false,
+            min: 0,
+            index: true,
         },
 
-        images: {
-            type: [
-                {
-                    id: {
-                        type: String,
-                        required: true,
-                    },
-                    name: {
-                        type: String,
-                        required: true,
-                    },
-                    url: {
-                        type: String,
-                        required: true,
-                    },
-                    public_id: {
-                        type: String,
-                        required: true,
-                    },
-                },
-            ],
+        isfeatured: {
+            type: Boolean,
+            default: false,
+            index: true,
+        },
+
+        variants: {
+            type: [VariantSchema],
             default: [],
         },
     },
-    { timestamps: true }
+    {
+        timestamps: true,
+    }
 );
 
-// Search by title
+// Search
 ProductSchema.index({ title: "text" });
 
-// Common filters
+// Filters
 ProductSchema.index({ category: 1 });
-ProductSchema.index({ featured: 1 });
+ProductSchema.index({ isFeatured: 1 });
 ProductSchema.index({ inStock: 1 });
 ProductSchema.index({ SP: 1 });
 
-// Homepage queries
+// Homepage
 ProductSchema.index({
     category: 1,
-    featured: 1,
+    isFeatured: 1,
 });
 
 export default mongoose.models.Product ||
