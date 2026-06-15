@@ -6,27 +6,27 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 
-const initialFormState = {
-    title: "",
-    category: "",
-    description: "",
-    featuredTags: "",
-    sku: "",
-    MRP: "",
-    SP: "",
-    featured: false,
 
-    variants: [
-        {
-            colorName: "",
-            stock: true,
-            sizes: [],
-            images: [],
-        },
-    ],
-};
-
-const Productform = ({ onClose, onSuccess }) => {
+const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) => {
+    const initialFormState = {
+        title: product?.title || "",
+        category: product?.category || "",
+        description: product?.description?.text || "",
+        featuredTags:
+            product?.description?.featured?.join(", ") || "",
+        sku: product?.sku || "",
+        MRP: product?.MRP || "",
+        SP: product?.SP || "",
+        featured: product?.featured || false,
+        variants: product?.variants || [
+            {
+                colorName: "",
+                inStock: true,
+                sizes: [],
+                images: [],
+            },
+        ],
+    };
     const [formState, setFormState] = useState(initialFormState);
     const [images, setImages] = useState([]);
     const [uploading, setUploading] = useState(false);
@@ -83,6 +83,37 @@ const Productform = ({ onClose, onSuccess }) => {
     //     setUploading(false);
     //     event.target.value = "";
     // };
+    // useEffect(() => {
+    //     if (!product) return;
+
+    //     setFormState({
+    //         title: product.title || "",
+    //         category: product.category || "",
+    //         description: product.description?.text || "",
+
+    //         featuredTags:
+    //             product.description?.featured?.join(", ") || "",
+
+    //         sku: product.sku || "",
+
+    //         MRP: product.MRP || "",
+    //         SP: product.SP || "",
+
+    //         featured: product.featured || false,
+
+    //         variants:
+    //             product.variants?.length > 0
+    //                 ? product.variants
+    //                 : [
+    //                     {
+    //                         colorName: "",
+    //                         stock: true,
+    //                         sizes: [],
+    //                         images: [],
+    //                     },
+    //                 ],
+    //     });
+    // }, [product]);
 
     const addVariant = () => {
         setFormState((prev) => ({
@@ -286,10 +317,17 @@ const Productform = ({ onClose, onSuccess }) => {
 
                 variants: formState.variants,
             };
+            const url = isEdit
+                ? `/api/products/${product._id}`
+                : "/api/products";
 
-            const response = await fetch("/api/products", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            const method = isEdit ? "PATCH" : "POST";
+
+            const response = await fetch(url, {
+                method,
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify(body),
             });
 
@@ -314,7 +352,7 @@ const Productform = ({ onClose, onSuccess }) => {
         <div className="w-full max-w-4xl rounded-xl bg-white p-6 max-h-[90vh] overflow-y-auto">
             <div className="mb-2 flex justify-between">
                 <h2 className="text-4xl text-amber-900 font-bold">
-                    Add Product
+                    {isEdit ? "Edit" : "Add"} Product
                 </h2>
 
                 <button
@@ -605,7 +643,11 @@ const Productform = ({ onClose, onSuccess }) => {
                                 disabled={submitting || uploading}
                                 className="inline-flex items-center cursor-pointer justify-center rounded-3xl bg-amber-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-amber-800 disabled:cursor-not-allowed disabled:opacity-50"
                             >
-                                {submitting ? "Saving..." : "Create product"}
+                                {submitting
+                                    ? "Saving..."
+                                    : isEdit
+                                        ? "Update Product"
+                                        : "Create Product"}
                             </button>
                             {(uploading || submitting) && <p className="text-sm text-zinc-500">Please wait...</p>}
                         </div>
