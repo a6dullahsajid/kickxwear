@@ -283,6 +283,7 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log("Submitting form with state:", formState);
         const hasImages = formState.variants.some(
             (variant) => variant.images.length > 0
         );
@@ -304,7 +305,7 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                 description: {
                     text: formState.description,
                     featured: formState.featuredTags
-                        .split(",")
+                        .split(";")
                         .map((x) => x.trim())
                         .filter(Boolean),
                 },
@@ -313,7 +314,7 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
 
                 MRP: Number(formState.MRP),
                 SP: Number(formState.SP),
-                featured: formState.featured,
+                isFeatured: formState.featured,
 
                 variants: formState.variants,
             };

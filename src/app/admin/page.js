@@ -41,7 +41,6 @@ export default function AdminPage() {
                     Add Product
                 </button>
             </div>
-
             {/* Product cards will come here */}
             <div className="flex flex-col gap-1 mt-12">
                 <div className="w-full grid grid-cols-8 items-center gap-8 text-gray-900 text-lg font-semibold">
@@ -54,7 +53,7 @@ export default function AdminPage() {
                     <p className="text-right">Featured Points</p>
                     <p className="text-right mr-8">Actions</p>
                 </div>
-                <div className="flex flex-wrap gap-6">
+                <div className="flex flex-wrap">
                     {products.map((product) => (
                         <ProductCard
                             key={product._id}
@@ -101,7 +100,7 @@ const ProductCard = ({ product, onEdit }) => {
 
     return (
         <div className="overflow-hidden w-full flex items-center justify-between p-2 border border-zinc-300 bg-white">
-            <div className="relative flex items-center">
+            <div className="relative flex items-center w-[20%]">
                 <img
                     src={product.variants[0]?.images?.[0]?.url}
                     alt={product.title}
@@ -113,7 +112,7 @@ const ProductCard = ({ product, onEdit }) => {
                         Featured
                     </span>
                 )}
-                <div className="ml-1 min-w-fit flex flex-col gap-1">
+                <div className="ml-1 min-w-fit flex flex-col gap-1 w-[15%]">
                     <p className="text-sm uppercase text-zinc-500">
                         {product.category}
                     </p>
@@ -126,7 +125,7 @@ const ProductCard = ({ product, onEdit }) => {
                     </p>
                 </div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col w-[15%] pl-4">
                 <span className="text-md font-bold text-green-600">
                     SP: ₹{product.SP}
                 </span>
@@ -135,7 +134,7 @@ const ProductCard = ({ product, onEdit }) => {
                     MRP: ₹{product.MRP}
                 </span>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between w-[10%]">
                 <span
                     className={`rounded-full px-2 py-1 text-xs`}
                 >
@@ -144,16 +143,16 @@ const ProductCard = ({ product, onEdit }) => {
                         : <span className="rounded-full px-2 py-1 text-xs bg-red-100 text-red-700">Out of Stock</span>}
                 </span>
             </div>
-            <div className="flex items-center justify-between ml-4">
+            <div className="flex items-center justify-between ml-4 w-[5%]">
                 {product.variants.length}
             </div>
-            <div className="flex italic text-sm gap-1 text-stone-500 items-center justify-between">
-                {product.description.text.substring(0, 50)}...
+            <div className="flex italic text-sm gap-1 pl-4 text-stone-500 items-center justify-between w-[15%]">
+                {product.description.text.substring(0, 20)}...
             </div>
-            <div className="flex italic text-sm gap-1 text-stone-500 items-center justify-between">
+            <div className="flex italic text-sm gap-1 text-stone-500 items-center justify-between w-[5%]">
                 {product.description.featured.length}
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 w-[10%] pl-8">
                 <button className="rounded border px-1 cursor-pointer text-sm hover:bg-zinc-200"
                     onClick={onEdit}
                 >
