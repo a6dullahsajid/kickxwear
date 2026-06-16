@@ -9,22 +9,65 @@ export default function AdminPage() {
     const [showAddProduct, setShowAddProduct] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showEditProduct, setShowEditProduct] = useState(false);
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("all");
+    const [featured, setFeatured] = useState(false);
+    const [stock, setStock] = useState(false);
 
     useEffect(() => {
         const getProducts = async () => {
             try {
-                const response = await fetch("/api/products");
+                const params = new URLSearchParams();
+
+                if (search.trim()) {
+                    params.append("search", search.trim());
+                }
+
+                if (category !== "all") {
+                    params.append("category", category);
+                }
+
+                if (featured) {
+                    params.append("featured", "true");
+                }
+
+                if (stock) {
+                    params.append("stock", "true");
+                }
+
+                const url = params.toString()
+                    ? `/api/products?${params.toString()}`
+                    : "/api/products";
+
+                const response = await fetch(url);
+
                 const data = await response.json();
-                console.log("Products:", data);
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.message ||
+                        "Failed to fetch products"
+                    );
+                }
+
                 setProducts(data);
             } catch (error) {
-                console.error("Error fetching products:", error);
+                console.error(
+                    "Error fetching products:",
+                    error
+                );
             }
         };
 
         getProducts();
-    }, [showAddProduct, showEditProduct]);
-
+    }, [
+        showAddProduct,
+        showEditProduct,
+        search,
+        category,
+        featured,
+        stock,
+    ]);
     return (
         <div className="p-8">
             <div className="flex justify-between mb-6">
@@ -40,6 +83,95 @@ export default function AdminPage() {
                 >
                     Add Product
                 </button>
+            </div>
+            <div className="w-full h-px bg-zinc-300 mb-6">
+                <div className="mb-6 flex flex-wrap items-center gap-4">
+                    {/* Search */}
+                    <div className="flex-1 min-w-[250px]">
+                        <input
+                            type="text"
+                            placeholder="Search products..."
+                            value={search}
+                            onChange={(e) =>
+                                setSearch(e.target.value)
+                            }
+                            className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 outline-none transition focus:border-brand"
+                        />
+                    </div>
+
+                    {/* Category */}
+                    <select
+                        value={category}
+                        onChange={(e) =>
+                            setCategory(e.target.value)
+                        }
+                        className="rounded-xl border border-zinc-300 bg-white px-4 py-3 outline-none focus:border-brand"
+                    >
+                        <option value="all">
+                            All Categories
+                        </option>
+
+                        <option value="casual-shoes">
+                            Casual Shoes
+                        </option>
+
+                        <option value="football-studs">
+                            Football Studs
+                        </option>
+                        <option value="running-shoes">
+                            Running Shoes
+                        </option>
+                        <option value="jersey">
+                            Jersey
+                        </option>
+                        <option value="accessories">
+                            Sports Accessories
+                        </option>
+                    </select>
+
+                    {/* Featured */}
+                    <label className="flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-4 py-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            checked={featured}
+                            onChange={(e) =>
+                                setFeatured(
+                                    e.target.checked
+                                )
+                            }
+                        />
+
+                        <span>Featured</span>
+                    </label>
+
+                    {/* Stock */}
+                    <label className="flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-4 py-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            checked={stock}
+                            onChange={(e) =>
+                                setStock(
+                                    e.target.checked
+                                )
+                            }
+                        />
+
+                        <span>In Stock</span>
+                    </label>
+
+                    {/* Clear */}
+                    <button
+                        onClick={() => {
+                            setSearch("");
+                            setCategory("all");
+                            setFeatured(false);
+                            setStock(false);
+                        }}
+                        className="rounded-xl border border-red-300 px-4 py-3 text-red-500 hover:bg-red-50"
+                    >
+                        Reset
+                    </button>
+                </div>
             </div>
             {/* Product cards will come here */}
             <div className="flex flex-col gap-1 mt-12">
@@ -101,11 +233,13 @@ const ProductCard = ({ product, onEdit }) => {
     return (
         <div className="overflow-hidden w-full flex items-center justify-between p-2 border border-zinc-300 bg-white">
             <div className="relative flex items-center w-[20%]">
-                <img
-                    src={product.variants[0]?.images?.[0]?.url}
-                    alt={product.title}
-                    className="h-18 w-full object-cover"
-                />
+                <div className="w-1/2 h-full flex justify-center" >
+                    <img
+                        src={product.variants[0]?.images?.[0]?.url}
+                        alt={product.title}
+                        className="h-full w-24 object-cover"
+                    />
+                </div>
 
                 {product.isfeatured && (
                     <span className="absolute -left-1.5 -top-1.5 rounded-full bg-amber-600 py-0.5 px-1.5 text-xs text-white">
