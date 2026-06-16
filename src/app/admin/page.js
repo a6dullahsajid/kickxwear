@@ -69,7 +69,7 @@ export default function AdminPage() {
         stock,
     ]);
     return (
-        <div className="p-8">
+        <div className="p-2 md:p-8">
             <div className="flex justify-between mb-6">
                 <h1 className="text-3xl font-bold text-black">
                     All Products
@@ -84,10 +84,10 @@ export default function AdminPage() {
                     Add Product
                 </button>
             </div>
-            <div className="w-full h-px bg-zinc-300 mb-6">
-                <div className="mb-6 flex flex-wrap items-center gap-4">
+            <div className="w-full">
+                <div className="flex flex-wrap items-center gap-1 md:gap-4">
                     {/* Search */}
-                    <div className="flex-1 min-w-[250px]">
+                    <div className="flex-1 min-w-40 md:min-w-62.5">
                         <input
                             type="text"
                             placeholder="Search products..."
@@ -95,7 +95,7 @@ export default function AdminPage() {
                             onChange={(e) =>
                                 setSearch(e.target.value)
                             }
-                            className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 outline-none transition focus:border-brand"
+                            className="w-full rounded-lg border border-zinc-300 bg-white px-2 py-1 md:p-3 outline-none transition focus:border-brand"
                         />
                     </div>
 
@@ -105,7 +105,7 @@ export default function AdminPage() {
                         onChange={(e) =>
                             setCategory(e.target.value)
                         }
-                        className="rounded-xl border border-zinc-300 bg-white px-4 py-3 outline-none focus:border-brand"
+                        className="rounded-lg border border-zinc-300 bg-white px-2 py-1 md:p-3 outline-none focus:border-brand"
                     >
                         <option value="all">
                             All Categories
@@ -130,7 +130,7 @@ export default function AdminPage() {
                     </select>
 
                     {/* Featured */}
-                    <label className="flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-4 py-3 cursor-pointer">
+                    <label className="flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-2 py-1 md:p-3 cursor-pointer">
                         <input
                             type="checkbox"
                             checked={featured}
@@ -145,7 +145,7 @@ export default function AdminPage() {
                     </label>
 
                     {/* Stock */}
-                    <label className="flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-4 py-3 cursor-pointer">
+                    <label className="flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-2 py-1 md:p-3 cursor-pointer">
                         <input
                             type="checkbox"
                             checked={stock}
@@ -167,25 +167,25 @@ export default function AdminPage() {
                             setFeatured(false);
                             setStock(false);
                         }}
-                        className="rounded-xl border border-red-300 px-4 py-3 text-red-500 hover:bg-red-50"
+                        className="rounded-lg border border-red-300 px-2 py-1 md:p-3 text-red-500 hover:bg-red-50"
                     >
                         Reset
                     </button>
                 </div>
             </div>
             {/* Product cards will come here */}
-            <div className="flex flex-col gap-1 mt-12">
-                <div className="w-full grid grid-cols-8 items-center gap-8 text-gray-900 text-lg font-semibold">
-                    <p>Product Details</p>
+            <div className="flex flex-col gap-1 mt-2 md:mt-6">
+                <div className="w-full grid grid-cols-8 items-center gap-0 md:gap-8 text-gray-900 text-[8px] md:text-lg font-semibold">
+                    <p className="text-nowrap">Product Details</p>
                     <p className="text-white">.</p>
                     <p className="text-left ml-3">Price</p>
                     <p className="text-center">Stock Status</p>
                     <p className="text-center">Variants</p>
                     <p className="text-center">Description</p>
-                    <p className="text-right">Featured Points</p>
-                    <p className="text-right mr-8">Actions</p>
+                    <p className="text-left text-nowrap">Featured Points</p>
+                    <p className="text-right md:mr-8">Actions</p>
                 </div>
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap overflow-scroll">
                     {products.map((product) => (
                         <ProductCard
                             key={product._id}
@@ -231,9 +231,9 @@ export default function AdminPage() {
 const ProductCard = ({ product, onEdit }) => {
 
     return (
-        <div className="overflow-hidden w-full flex items-center justify-between p-2 border border-zinc-300 bg-white">
+        <div className="w-full flex items-center justify-between md:p-2 border border-zinc-300 bg-white">
             <div className="relative flex items-center w-[20%]">
-                <div className="w-1/2 h-full flex justify-center" >
+                <div className="w-3/4 md:w-1/2 h-full flex justify-center" >
                     <img
                         src={product.variants[0]?.images?.[0]?.url}
                         alt={product.title}
@@ -242,57 +242,57 @@ const ProductCard = ({ product, onEdit }) => {
                 </div>
 
                 {product.isfeatured && (
-                    <span className="absolute -left-1.5 -top-1.5 rounded-full bg-amber-600 py-0.5 px-1.5 text-xs text-white">
+                    <span className="absolute md:-left-1.5 md:-top-1.5 rounded-full bg-amber-600 md:py-0.5 md:px-1.5 left-0.5 top-0.5 text-[4px] md:text-xs text-white">
                         Featured
                     </span>
                 )}
-                <div className="ml-1 min-w-fit flex flex-col gap-1 w-[15%]">
-                    <p className="text-sm uppercase text-zinc-500">
+                <div className="ml-1 min-w-fit flex flex-col md:gap-1 w-[15%]">
+                    <p className="text-[6px] md:text-sm uppercase text-zinc-500">
                         {product.category}
                     </p>
 
-                    <h3 className="text-lg font-semibold">
+                    <h3 className="text-[8px] md:text-lg font-semibold">
                         {product.title}
                     </h3>
-                    <p className="text-xs underline uppercase text-zinc-500">
+                    <p className="text-[5px] md:text-xs underline uppercase text-zinc-500">
                         {product.sku}
                     </p>
                 </div>
             </div>
-            <div className="flex flex-col w-[15%] pl-4">
-                <span className="text-md font-bold text-green-600">
+            <div className="flex flex-col w-[10%] md:w-[15%] md:pl-4">
+                <span className="text-[7px] md:text-md font-bold text-green-600">
                     SP: ₹{product.SP}
                 </span>
 
-                <span className="text-md font-bold text-blue-600">
+                <span className="text-[7px] md:text-md font-bold text-blue-600">
                     MRP: ₹{product.MRP}
                 </span>
             </div>
-            <div className="flex items-center justify-between w-[10%]">
+            <div className="flex items-center justify-between w-[8%] md:w-[10%]">
                 <span
-                    className={`rounded-full px-2 py-1 text-xs`}
+                    className={`rounded-full md:px-2 md:py-1 text-xs`}
                 >
                     {product.variants.some((variant) => variant.inStock)
-                        ? <span className="rounded-full px-2 py-1 text-xs bg-green-100 text-green-700">In Stock</span>
-                        : <span className="rounded-full px-2 py-1 text-xs bg-red-100 text-red-700">Out of Stock</span>}
+                        ? <span className="rounded-full p-0.5 md:px-2 md:py-1 text-[6px] md:text-xs bg-green-100 text-green-700">In Stock</span>
+                        : <span className="rounded-full p-0.5 md:px-2 md:py-1 text-[6px] md:text-xs bg-red-100 text-red-700">Out of Stock</span>}
                 </span>
             </div>
-            <div className="flex items-center justify-between ml-4 w-[5%]">
+            <div className="flex items-center text-[8px] md:text-md justify-between ml-4 w-[2%] md:w-[5%]">
                 {product.variants.length}
             </div>
-            <div className="flex italic text-sm gap-1 pl-4 text-stone-500 items-center justify-between w-[15%]">
+            <div className="flex italic text-[8px] md:text-sm gap-1 pl-4 text-stone-500 items-center justify-between w-[15%]">
                 {product.description.text.substring(0, 20)}...
             </div>
-            <div className="flex italic text-sm gap-1 text-stone-500 items-center justify-between w-[5%]">
+            <div className="flex italic text-[8px] md:text-sm gap-1 text-stone-500 items-center justify-between w-[2%] md:w-[5%]">
                 {product.description.featured.length}
             </div>
-            <div className="flex gap-2 w-[10%] pl-8">
-                <button className="rounded border px-1 cursor-pointer text-sm hover:bg-zinc-200"
+            <div className="flex gap-2 w-[23%] md:w-[10%] pl-8">
+                <button className="rounded border px-1 cursor-pointer text-[8px] md:text-sm hover:bg-zinc-200"
                     onClick={onEdit}
                 >
                     Edit
                 </button>
-                <button className="rounded bg-red-500 cursor-pointer px-2 text-sm text-white hover:bg-red-600">
+                <button className="rounded bg-red-500 cursor-pointer px-1 text-[8px] md:text-sm text-white hover:bg-red-600">
                     Delete
                 </button>
             </div>
