@@ -9,54 +9,184 @@ export default function AdminPage() {
     const [showAddProduct, setShowAddProduct] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showEditProduct, setShowEditProduct] = useState(false);
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("all");
+    const [featured, setFeatured] = useState(false);
+    const [stock, setStock] = useState(false);
 
     useEffect(() => {
         const getProducts = async () => {
             try {
-                const response = await fetch("/api/products");
+                const params = new URLSearchParams();
+
+                if (search.trim()) {
+                    params.append("search", search.trim());
+                }
+
+                if (category !== "all") {
+                    params.append("category", category);
+                }
+
+                if (featured) {
+                    params.append("featured", "true");
+                }
+
+                if (stock) {
+                    params.append("stock", "true");
+                }
+
+                const url = params.toString()
+                    ? `/api/products?${params.toString()}`
+                    : "/api/products";
+
+                const response = await fetch(url);
+
                 const data = await response.json();
-                console.log("Products:", data);
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.message ||
+                        "Failed to fetch products"
+                    );
+                }
+
                 setProducts(data);
             } catch (error) {
-                console.error("Error fetching products:", error);
+                console.error(
+                    "Error fetching products:",
+                    error
+                );
             }
         };
 
         getProducts();
-    }, [showAddProduct, showEditProduct]);
+    }, [
+        showAddProduct,
+        showEditProduct,
+        search,
+        category,
+        featured,
+        stock,
+    ]);
+
 
     return (
-        <div className="p-8">
-            <div className="flex justify-between mb-6">
-                <h1 className="text-3xl font-bold text-black">
-                    All Products
-                </h1>
+        <div className="min-h-screen p-4 md:p-8 bg-bg-dark text-white">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between mb-8">
+                <div>
+                    <p className="text-sm uppercase tracking-[0.3em] text-[#99ef12]/80">
+                        Product Management
+                    </p>
+                    <h1 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight text-white">
+                        All Products
+                    </h1>
+                </div>
 
                 <button
-                    onClick={() =>
-                        setShowAddProduct(true)
-                    }
-                    className="rounded-xl bg-brand px-4 py-2 text-white"
+                    onClick={() => setShowAddProduct(true)}
+                    className="inline-flex items-center justify-center rounded-3xl bg-[#99ef12] px-5 py-3 text-sm font-semibold text-[#0b0b0b] shadow-[0_18px_45px_rgba(153,239,18,0.18)] transition hover:brightness-95"
                 >
                     Add Product
                 </button>
             </div>
 
-            {/* Product cards will come here */}
-            <div className="flex flex-col gap-1 mt-12">
-                <div className="w-full grid grid-cols-8 items-center gap-8 text-gray-900 text-lg font-semibold">
-                    <p>Product Details</p>
-                    <p className="text-white">.</p>
-                    <p className="text-left ml-3">Price</p>
-                    <p className="text-center">Stock Status</p>
-                    <p className="text-center">Variants</p>
-                    <p className="text-center">Description</p>
-                    <p className="text-right">Featured Points</p>
-                    <p className="text-right mr-8">Actions</p>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4 mb-8">
+                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4">
+                    <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+                        Search
+                    </p>
+                    <input
+                        type="text"
+                        placeholder="Search products..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="mt-3 w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-sm text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                    />
                 </div>
-                <div className="flex flex-wrap gap-6">
+
+                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4">
+                    <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+                        Category
+                    </p>
+                    <select
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        className="mt-3 w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-sm text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                    >
+                        <option value="all">All Categories</option>
+                        <option value="casual-shoes">Casual Shoes</option>
+                        <option value="football-studs">Football Studs</option>
+                        <option value="running-shoes">Running Shoes</option>
+                        <option value="jersey">Jersey</option>
+                        <option value="accessories">Sports Accessories</option>
+                    </select>
+                </div>
+
+                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4">
+                    <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+                        Filters
+                    </p>
+                    <div className="mt-3 space-y-3">
+                        <label className="flex items-center gap-3 rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3">
+                            <input
+                                type="checkbox"
+                                checked={featured}
+                                onChange={(e) => setFeatured(e.target.checked)}
+                                className="h-4 w-4 rounded border-neutral-600 bg-[#111111] text-[#99ef12] focus:ring-[#99ef12]"
+                            />
+                            <span className="text-sm text-neutral-200">Featured</span>
+                        </label>
+
+                        <label className="flex items-center gap-3 rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3">
+                            <input
+                                type="checkbox"
+                                checked={stock}
+                                onChange={(e) => setStock(e.target.checked)}
+                                className="h-4 w-4 rounded border-neutral-600 bg-[#111111] text-[#99ef12] focus:ring-[#99ef12]"
+                            />
+                            <span className="text-sm text-neutral-200">In Stock</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4 flex flex-col justify-between">
+                    <div>
+                        <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+                            Reset
+                        </p>
+                        <p className="mt-3 text-sm text-neutral-400">
+                            Clear query and filters to see every product.
+                        </p>
+                    </div>
+                    <button
+                        onClick={() => {
+                            setSearch("");
+                            setCategory("all");
+                            setFeatured(false);
+                            setStock(false);
+                        }}
+                        className="mt-4 inline-flex items-center justify-center rounded-2xl border border-[#99ef12] bg-transparent px-4 py-3 text-sm font-semibold text-[#99ef12] transition hover:bg-[#99ef12]/10"
+                    >
+                        Reset Filters
+                    </button>
+                </div>
+            </div>
+
+            <div className="overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0">
+                <div className="flex flex-col gap-2 min-w-fit md:min-w-full">
+                    <div className="grid grid-cols-[120px_1fr_100px_80px_80px_150px_80px_100px] gap-4 px-4 py-3 text-xs font-semibold text-neutral-400 uppercase tracking-[0.2em] bg-[#0b0b0b] rounded-t-2xl border border-b-0 border-[#262626]">
+                        <div>Product</div>
+                        <div></div>
+                        <div>Price</div>
+                        <div className="text-center">Stock</div>
+                        <div className="text-center">Variants</div>
+                        <div>Description</div>
+                        <div className="text-center">Featured</div>
+                        <div className="text-right pr-2">Actions</div>
+                    </div>
+
                     {products.map((product) => (
-                        <ProductCard
+                        <ProductRow
                             key={product._id}
                             product={product}
                             onEdit={() => {
@@ -67,6 +197,7 @@ export default function AdminPage() {
                     ))}
                 </div>
             </div>
+
             {showEditProduct && (
                 <Productform
                     isEdit={true}
@@ -92,78 +223,137 @@ export default function AdminPage() {
                 />
             )}
         </div>
+
     );
 }
 
 
 
-const ProductCard = ({ product, onEdit }) => {
+const ProductRow = ({ product, onEdit }) => {
+    const deleteProduct = async (id) => {
+        const confirmDelete = window.confirm(
+            "Delete this product?"
+        );
 
+        if (!confirmDelete) return;
+
+        try {
+            const response = await fetch(
+                `/api/products/${id}`,
+                {
+                    method: "DELETE",
+                }
+            );
+
+            const data =
+                await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message
+                );
+            }
+
+            toast.success(
+                "Product deleted successfully"
+            );
+
+            getProducts();
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
     return (
-        <div className="overflow-hidden w-full flex items-center justify-between p-2 border border-zinc-300 bg-white">
+        <div className="grid grid-cols-[120px_1fr_100px_80px_80px_150px_80px_100px] gap-4 items-center px-4 py-4 border border-[#262626] bg-[#101010] hover:bg-[#151515] transition rounded-lg">
+            {/* Product Image & Details */}
             <div className="relative flex items-center">
-                <img
-                    src={product.variants[0]?.images?.[0]?.url}
-                    alt={product.title}
-                    className="h-18 w-full object-cover"
-                />
-
-                {product.isfeatured && (
-                    <span className="absolute -left-1.5 -top-1.5 rounded-full bg-amber-600 py-0.5 px-1.5 text-xs text-white">
-                        Featured
-                    </span>
-                )}
-                <div className="ml-1 min-w-fit flex flex-col gap-1">
-                    <p className="text-sm uppercase text-zinc-500">
-                        {product.category}
-                    </p>
-
-                    <h3 className="text-lg font-semibold">
-                        {product.title}
-                    </h3>
-                    <p className="text-xs underline uppercase text-zinc-500">
-                        {product.sku}
-                    </p>
+                <div className="relative w-24 h-24 bg-[#0b0b0b] rounded-lg overflow-hidden">
+                    <Image
+                        src={product.variants[0]?.images?.[0]?.url || '/placeholder.png'}
+                        alt={product.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        loading="lazy"
+                        className="object-cover"
+                    />
+                    {product.isfeatured && (
+                        <span className="absolute top-1 left-1 rounded-full bg-[#99ef12] px-2 py-0.5 text-[8px] font-bold text-[#0b0b0b]">
+                            Featured
+                        </span>
+                    )}
                 </div>
             </div>
-            <div className="flex flex-col">
-                <span className="text-md font-bold text-green-600">
-                    SP: ₹{product.SP}
-                </span>
 
-                <span className="text-md font-bold text-blue-600">
-                    MRP: ₹{product.MRP}
-                </span>
+            {/* Name, Category, SKU */}
+            <div className="flex flex-col gap-1">
+                <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+                    {product.category}
+                </p>
+                <h3 className="font-semibold text-white">
+                    {product.title}
+                </h3>
+                <p className="text-xs text-neutral-500 uppercase">
+                    {product.sku}
+                </p>
             </div>
-            <div className="flex items-center justify-between">
-                <span
-                    className={`rounded-full px-2 py-1 text-xs`}
-                >
-                    {product.variants.some((variant) => variant.inStock)
-                        ? <span className="rounded-full px-2 py-1 text-xs bg-green-100 text-green-700">In Stock</span>
-                        : <span className="rounded-full px-2 py-1 text-xs bg-red-100 text-red-700">Out of Stock</span>}
-                </span>
+
+            {/* Price */}
+            <div className="flex flex-col gap-1">
+                <p className="text-sm font-bold text-[#99ef12]">
+                    ₹{product.SP}
+                </p>
+                <p className="text-xs text-neutral-500 line-through">
+                    ₹{product.MRP}
+                </p>
             </div>
-            <div className="flex items-center justify-between ml-4">
-                {product.variants.length}
+
+            {/* Stock Status */}
+            <div className="text-center">
+                {product.variants.some((variant) => variant.inStock) ? (
+                    <span className="inline-flex items-center rounded-full bg-emerald-100/20 px-2 py-1 text-xs font-semibold text-emerald-400">
+                        In Stock
+                    </span>
+                ) : (
+                    <span className="inline-flex items-center rounded-full bg-red-100/20 px-2 py-1 text-xs font-semibold text-red-400">
+                        Out of Stock
+                    </span>
+                )}
             </div>
-            <div className="flex italic text-sm gap-1 text-stone-500 items-center justify-between">
-                {product.description.text.substring(0, 50)}...
+
+            {/* Variants Count */}
+            <div className="text-center">
+                <p className="text-sm font-semibold text-neutral-200">
+                    {product.variants.length}
+                </p>
             </div>
-            <div className="flex italic text-sm gap-1 text-stone-500 items-center justify-between">
-                {product.description.featured.length}
+
+            {/* Description */}
+            <div className="text-xs text-neutral-400 line-clamp-2">
+                {product.description?.text?.slice(0, 60) || ''}...
             </div>
-            <div className="flex gap-2">
-                <button className="rounded border px-1 cursor-pointer text-sm hover:bg-zinc-200"
+
+            {/* Featured Points Count */}
+            <div className="text-center">
+                <p className="text-sm font-semibold text-neutral-200">
+                    {product.description?.featured?.length || 0}
+                </p>
+            </div>
+
+            {/* Actions */}
+            <div className="flex gap-2 justify-end">
+                <button
                     onClick={onEdit}
+                    className="rounded-lg border border-[#4d4d4d] bg-transparent px-3 py-1 text-xs font-semibold text-white transition hover:border-[#99ef12] hover:text-[#99ef12]"
                 >
                     Edit
                 </button>
-                <button className="rounded bg-red-500 cursor-pointer px-2 text-sm text-white hover:bg-red-600">
+                <button
+                    onClick={() => deleteProduct(product._id)}
+                    className="rounded-lg bg-red-600 px-3 py-1 text-xs font-semibold text-white transition hover:bg-red-700"
+                >
                     Delete
                 </button>
             </div>
         </div>
-
     );
 }

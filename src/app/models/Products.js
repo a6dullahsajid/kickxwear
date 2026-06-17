@@ -119,7 +119,7 @@ ProductSchema.index({ SP: 1 });
 // Homepage
 ProductSchema.index({
     category: 1,
-    isFeatured: 1,
+    isfeatured: 1,
 });
 
 export default mongoose.models.Product ||
