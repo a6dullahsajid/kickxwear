@@ -68,98 +68,96 @@ export default function AdminPage() {
         featured,
         stock,
     ]);
+
+
     return (
-        <div className="p-2 md:p-8">
-            <div className="flex justify-between mb-6">
-                <h1 className="text-3xl font-bold text-black">
-                    All Products
-                </h1>
+        <div className="min-h-screen p-4 md:p-8 bg-bg-dark text-white">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between mb-8">
+                <div>
+                    <p className="text-sm uppercase tracking-[0.3em] text-[#99ef12]/80">
+                        Product Management
+                    </p>
+                    <h1 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight text-white">
+                        All Products
+                    </h1>
+                </div>
 
                 <button
-                    onClick={() =>
-                        setShowAddProduct(true)
-                    }
-                    className="rounded-xl bg-brand px-4 py-2 text-white"
+                    onClick={() => setShowAddProduct(true)}
+                    className="inline-flex items-center justify-center rounded-3xl bg-[#99ef12] px-5 py-3 text-sm font-semibold text-[#0b0b0b] shadow-[0_18px_45px_rgba(153,239,18,0.18)] transition hover:brightness-95"
                 >
                     Add Product
                 </button>
             </div>
-            <div className="w-full">
-                <div className="flex flex-wrap items-center gap-1 md:gap-4">
-                    {/* Search */}
-                    <div className="flex-1 min-w-40 md:min-w-62.5">
-                        <input
-                            type="text"
-                            placeholder="Search products..."
-                            value={search}
-                            onChange={(e) =>
-                                setSearch(e.target.value)
-                            }
-                            className="w-full rounded-lg border border-zinc-300 bg-white px-2 py-1 md:p-3 outline-none transition focus:border-brand"
-                        />
-                    </div>
 
-                    {/* Category */}
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4 mb-8">
+                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4">
+                    <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+                        Search
+                    </p>
+                    <input
+                        type="text"
+                        placeholder="Search products..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="mt-3 w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-sm text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                    />
+                </div>
+
+                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4">
+                    <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+                        Category
+                    </p>
                     <select
                         value={category}
-                        onChange={(e) =>
-                            setCategory(e.target.value)
-                        }
-                        className="rounded-lg border border-zinc-300 bg-white px-2 py-1 md:p-3 outline-none focus:border-brand"
+                        onChange={(e) => setCategory(e.target.value)}
+                        className="mt-3 w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-sm text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
                     >
-                        <option value="all">
-                            All Categories
-                        </option>
-
-                        <option value="casual-shoes">
-                            Casual Shoes
-                        </option>
-
-                        <option value="football-studs">
-                            Football Studs
-                        </option>
-                        <option value="running-shoes">
-                            Running Shoes
-                        </option>
-                        <option value="jersey">
-                            Jersey
-                        </option>
-                        <option value="accessories">
-                            Sports Accessories
-                        </option>
+                        <option value="all">All Categories</option>
+                        <option value="casual-shoes">Casual Shoes</option>
+                        <option value="football-studs">Football Studs</option>
+                        <option value="running-shoes">Running Shoes</option>
+                        <option value="jersey">Jersey</option>
+                        <option value="accessories">Sports Accessories</option>
                     </select>
+                </div>
 
-                    {/* Featured */}
-                    <label className="flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-2 py-1 md:p-3 cursor-pointer">
-                        <input
-                            type="checkbox"
-                            checked={featured}
-                            onChange={(e) =>
-                                setFeatured(
-                                    e.target.checked
-                                )
-                            }
-                        />
+                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4">
+                    <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+                        Filters
+                    </p>
+                    <div className="mt-3 space-y-3">
+                        <label className="flex items-center gap-3 rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3">
+                            <input
+                                type="checkbox"
+                                checked={featured}
+                                onChange={(e) => setFeatured(e.target.checked)}
+                                className="h-4 w-4 rounded border-neutral-600 bg-[#111111] text-[#99ef12] focus:ring-[#99ef12]"
+                            />
+                            <span className="text-sm text-neutral-200">Featured</span>
+                        </label>
 
-                        <span>Featured</span>
-                    </label>
+                        <label className="flex items-center gap-3 rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3">
+                            <input
+                                type="checkbox"
+                                checked={stock}
+                                onChange={(e) => setStock(e.target.checked)}
+                                className="h-4 w-4 rounded border-neutral-600 bg-[#111111] text-[#99ef12] focus:ring-[#99ef12]"
+                            />
+                            <span className="text-sm text-neutral-200">In Stock</span>
+                        </label>
+                    </div>
+                </div>
 
-                    {/* Stock */}
-                    <label className="flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-2 py-1 md:p-3 cursor-pointer">
-                        <input
-                            type="checkbox"
-                            checked={stock}
-                            onChange={(e) =>
-                                setStock(
-                                    e.target.checked
-                                )
-                            }
-                        />
-
-                        <span>In Stock</span>
-                    </label>
-
-                    {/* Clear */}
+                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4 flex flex-col justify-between">
+                    <div>
+                        <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+                            Reset
+                        </p>
+                        <p className="mt-3 text-sm text-neutral-400">
+                            Clear query and filters to see every product.
+                        </p>
+                    </div>
                     <button
                         onClick={() => {
                             setSearch("");
@@ -167,27 +165,28 @@ export default function AdminPage() {
                             setFeatured(false);
                             setStock(false);
                         }}
-                        className="rounded-lg border border-red-300 px-2 py-1 md:p-3 text-red-500 hover:bg-red-50"
+                        className="mt-4 inline-flex items-center justify-center rounded-2xl border border-[#99ef12] bg-transparent px-4 py-3 text-sm font-semibold text-[#99ef12] transition hover:bg-[#99ef12]/10"
                     >
-                        Reset
+                        Reset Filters
                     </button>
                 </div>
             </div>
-            {/* Product cards will come here */}
-            <div className="flex flex-col gap-1 mt-2 md:mt-6">
-                <div className="w-full grid grid-cols-8 items-center gap-0 md:gap-8 text-gray-900 text-[8px] md:text-lg font-semibold">
-                    <p className="text-nowrap">Product Details</p>
-                    <p className="text-white">.</p>
-                    <p className="text-left ml-3">Price</p>
-                    <p className="text-center">Stock Status</p>
-                    <p className="text-center">Variants</p>
-                    <p className="text-center">Description</p>
-                    <p className="text-left text-nowrap">Featured Points</p>
-                    <p className="text-right md:mr-8">Actions</p>
-                </div>
-                <div className="flex flex-wrap overflow-scroll">
+
+            <div className="overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0">
+                <div className="flex flex-col gap-2 min-w-fit md:min-w-full">
+                    <div className="grid grid-cols-[120px_1fr_100px_80px_80px_150px_80px_100px] gap-4 px-4 py-3 text-xs font-semibold text-neutral-400 uppercase tracking-[0.2em] bg-[#0b0b0b] rounded-t-2xl border border-b-0 border-[#262626]">
+                        <div>Product</div>
+                        <div></div>
+                        <div>Price</div>
+                        <div className="text-center">Stock</div>
+                        <div className="text-center">Variants</div>
+                        <div>Description</div>
+                        <div className="text-center">Featured</div>
+                        <div className="text-right pr-2">Actions</div>
+                    </div>
+
                     {products.map((product) => (
-                        <ProductCard
+                        <ProductRow
                             key={product._id}
                             product={product}
                             onEdit={() => {
@@ -198,6 +197,7 @@ export default function AdminPage() {
                     ))}
                 </div>
             </div>
+
             {showEditProduct && (
                 <Productform
                     isEdit={true}
@@ -223,80 +223,137 @@ export default function AdminPage() {
                 />
             )}
         </div>
+
     );
 }
 
 
 
-const ProductCard = ({ product, onEdit }) => {
+const ProductRow = ({ product, onEdit }) => {
+    const deleteProduct = async (id) => {
+        const confirmDelete = window.confirm(
+            "Delete this product?"
+        );
 
+        if (!confirmDelete) return;
+
+        try {
+            const response = await fetch(
+                `/api/products/${id}`,
+                {
+                    method: "DELETE",
+                }
+            );
+
+            const data =
+                await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message
+                );
+            }
+
+            toast.success(
+                "Product deleted successfully"
+            );
+
+            getProducts();
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
     return (
-        <div className="w-full flex items-center justify-between md:p-2 border border-zinc-300 bg-white">
-            <div className="relative flex items-center w-[20%]">
-                <div className="w-3/4 md:w-1/2 h-full flex justify-center" >
-                    <img
-                        src={product.variants[0]?.images?.[0]?.url}
+        <div className="grid grid-cols-[120px_1fr_100px_80px_80px_150px_80px_100px] gap-4 items-center px-4 py-4 border border-[#262626] bg-[#101010] hover:bg-[#151515] transition rounded-lg">
+            {/* Product Image & Details */}
+            <div className="relative flex items-center">
+                <div className="relative w-24 h-24 bg-[#0b0b0b] rounded-lg overflow-hidden">
+                    <Image
+                        src={product.variants[0]?.images?.[0]?.url || '/placeholder.png'}
                         alt={product.title}
-                        className="h-full w-24 object-cover"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        loading="lazy"
+                        className="object-cover"
                     />
+                    {product.isfeatured && (
+                        <span className="absolute top-1 left-1 rounded-full bg-[#99ef12] px-2 py-0.5 text-[8px] font-bold text-[#0b0b0b]">
+                            Featured
+                        </span>
+                    )}
                 </div>
+            </div>
 
-                {product.isfeatured && (
-                    <span className="absolute md:-left-1.5 md:-top-1.5 rounded-full bg-amber-600 md:py-0.5 md:px-1.5 left-0.5 top-0.5 text-[4px] md:text-xs text-white">
-                        Featured
+            {/* Name, Category, SKU */}
+            <div className="flex flex-col gap-1">
+                <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+                    {product.category}
+                </p>
+                <h3 className="font-semibold text-white">
+                    {product.title}
+                </h3>
+                <p className="text-xs text-neutral-500 uppercase">
+                    {product.sku}
+                </p>
+            </div>
+
+            {/* Price */}
+            <div className="flex flex-col gap-1">
+                <p className="text-sm font-bold text-[#99ef12]">
+                    ₹{product.SP}
+                </p>
+                <p className="text-xs text-neutral-500 line-through">
+                    ₹{product.MRP}
+                </p>
+            </div>
+
+            {/* Stock Status */}
+            <div className="text-center">
+                {product.variants.some((variant) => variant.inStock) ? (
+                    <span className="inline-flex items-center rounded-full bg-emerald-100/20 px-2 py-1 text-xs font-semibold text-emerald-400">
+                        In Stock
+                    </span>
+                ) : (
+                    <span className="inline-flex items-center rounded-full bg-red-100/20 px-2 py-1 text-xs font-semibold text-red-400">
+                        Out of Stock
                     </span>
                 )}
-                <div className="ml-1 min-w-fit flex flex-col md:gap-1 w-[15%]">
-                    <p className="text-[6px] md:text-sm uppercase text-zinc-500">
-                        {product.category}
-                    </p>
+            </div>
 
-                    <h3 className="text-[8px] md:text-lg font-semibold">
-                        {product.title}
-                    </h3>
-                    <p className="text-[5px] md:text-xs underline uppercase text-zinc-500">
-                        {product.sku}
-                    </p>
-                </div>
+            {/* Variants Count */}
+            <div className="text-center">
+                <p className="text-sm font-semibold text-neutral-200">
+                    {product.variants.length}
+                </p>
             </div>
-            <div className="flex flex-col w-[10%] md:w-[15%] md:pl-4">
-                <span className="text-[7px] md:text-md font-bold text-green-600">
-                    SP: ₹{product.SP}
-                </span>
 
-                <span className="text-[7px] md:text-md font-bold text-blue-600">
-                    MRP: ₹{product.MRP}
-                </span>
+            {/* Description */}
+            <div className="text-xs text-neutral-400 line-clamp-2">
+                {product.description?.text?.slice(0, 60) || ''}...
             </div>
-            <div className="flex items-center justify-between w-[8%] md:w-[10%]">
-                <span
-                    className={`rounded-full md:px-2 md:py-1 text-xs`}
-                >
-                    {product.variants.some((variant) => variant.inStock)
-                        ? <span className="rounded-full p-0.5 md:px-2 md:py-1 text-[6px] md:text-xs bg-green-100 text-green-700">In Stock</span>
-                        : <span className="rounded-full p-0.5 md:px-2 md:py-1 text-[6px] md:text-xs bg-red-100 text-red-700">Out of Stock</span>}
-                </span>
+
+            {/* Featured Points Count */}
+            <div className="text-center">
+                <p className="text-sm font-semibold text-neutral-200">
+                    {product.description?.featured?.length || 0}
+                </p>
             </div>
-            <div className="flex items-center text-[8px] md:text-md justify-between ml-4 w-[2%] md:w-[5%]">
-                {product.variants.length}
-            </div>
-            <div className="flex italic text-[8px] md:text-sm gap-1 pl-4 text-stone-500 items-center justify-between w-[15%]">
-                {product.description.text.substring(0, 20)}...
-            </div>
-            <div className="flex italic text-[8px] md:text-sm gap-1 text-stone-500 items-center justify-between w-[2%] md:w-[5%]">
-                {product.description.featured.length}
-            </div>
-            <div className="flex gap-2 w-[23%] md:w-[10%] pl-8">
-                <button className="rounded border px-1 cursor-pointer text-[8px] md:text-sm hover:bg-zinc-200"
+
+            {/* Actions */}
+            <div className="flex gap-2 justify-end">
+                <button
                     onClick={onEdit}
+                    className="rounded-lg border border-[#4d4d4d] bg-transparent px-3 py-1 text-xs font-semibold text-white transition hover:border-[#99ef12] hover:text-[#99ef12]"
                 >
                     Edit
                 </button>
-                <button className="rounded bg-red-500 cursor-pointer px-1 text-[8px] md:text-sm text-white hover:bg-red-600">
+                <button
+                    onClick={() => deleteProduct(product._id)}
+                    className="rounded-lg bg-red-600 px-3 py-1 text-xs font-semibold text-white transition hover:bg-red-700"
+                >
                     Delete
                 </button>
             </div>
         </div>
-
     );
 }

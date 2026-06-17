@@ -2,9 +2,25 @@
 
 @theme {
   --color-brand: #99ef12;
-  --color-bg-dark: #121212;
+  --color-bg-dark: #070707;
   --color-dark-text: #f5f5f5;
   --color-dark-button: #99ef12;
-  --color-button: ##99ef12;
-  --color-text: #3f3f46;
+  --color-button: #99ef12;
+  --color-text: #f5f5f5;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background: #070707;
+  color: #f5f5f5;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
