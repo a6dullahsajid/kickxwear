@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-<<<<<<< HEAD
   --color-brand: #A8FF00;
   --font-bungee: var(--font-bungee);
   --font-inter: var(--font-inter);

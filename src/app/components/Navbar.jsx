@@ -55,7 +55,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="relative bg-white h-16 border-brand border-b flex items-center justify-between pl-8 pr-8">
+      <div className="relative bg-white h-16 border-brand border-b flex items-center justify-between pl-8 pr-8 text-black">
         <div className="nav-left">
           <Image
             src={kickxwear_logo}
