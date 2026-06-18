@@ -49,7 +49,7 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                 ...prev.variants,
                 {
                     colorName: "",
-                    stock: true,
+                    inStock: true,
                     sizes: [],
                     images: [],
                 },
@@ -434,7 +434,7 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                                             onChange={(e) =>
                                                 updateVariant(
                                                     index,
-                                                    "stock",
+                                                    "inStock",
                                                     e.target.checked ? 1 : 0
                                                 )
                                             }
