@@ -247,20 +247,20 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
     };
 
     return (<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
-        <div className="w-full max-w-4xl rounded-3xl bg-[#101010] border border-[#262626] p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div className="w-full max-w-4xl rounded-3xl bg-white border border-gray-200 p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
             <div className="mb-6 flex justify-between items-center">
                 <div>
                     <p className="text-xs uppercase tracking-[0.3em] text-[#99ef12]/80">
                         Product Management
                     </p>
-                    <h2 className="mt-2 text-3xl font-semibold text-white">
+                    <h2 className="mt-2 text-3xl font-semibold text-black">
                         {isEdit ? "Edit" : "Add New"} Product
                     </h2>
                 </div>
 
                 <button
                     onClick={onClose}
-                    className="text-3xl cursor-pointer text-neutral-400 hover:text-[#99ef12] transition font-light"
+                    className="text-3xl cursor-pointer text-neutral-500 hover:text-[#99ef12] transition font-light"
                 >
                     ×
                 </button>
@@ -270,24 +270,24 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                 {/* Title & Category */}
                 <div className="grid gap-4 sm:grid-cols-2">
                     <label className="block">
-                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-400">Title</span>
+                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-700">Title</span>
                         <input
                             name="title"
                             value={formState.title}
                             onChange={handleChange}
                             required
-                            className="mt-3 block w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                            className="mt-3 block w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
                         />
                     </label>
 
                     <label className="block">
-                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-400">Category</span>
+                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-700">Category</span>
                         <select
                             name="category"
                             value={formState.category}
                             onChange={handleChange}
                             required
-                            className="mt-3 block w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                            className="mt-3 block w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
                         >
                             <option value="">Select category</option>
                             <option value="running-shoes">Running Shoes</option>
@@ -301,36 +301,36 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
 
                 {/* Description */}
                 <label className="block">
-                    <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-400">Description</span>
+                    <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-700">Description</span>
                     <textarea
                         name="description"
                         value={formState.description}
                         onChange={handleChange}
                         rows={4}
-                        className="mt-3 block w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20 resize-none"
+                        className="mt-3 block w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20 resize-none"
                     />
                 </label>
 
                 {/* SKU & Featured Tags */}
                 <div className="grid gap-4 sm:grid-cols-2">
                     <label className="block">
-                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-400">SKU</span>
+                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-700">SKU</span>
                         <input
                             name="sku"
                             value={formState.sku}
                             onChange={handleChange}
-                            className="mt-3 block w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                            className="mt-3 block w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
                         />
                     </label>
 
                     <label className="block">
-                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-400">Featured Tags</span>
+                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-700">Featured Tags</span>
                         <input
                             name="featuredTags"
                             value={formState.featuredTags}
                             onChange={handleChange}
                             placeholder="separated by semicolon"
-                            className="mt-3 block w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                            className="mt-3 block w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
                         />
                     </label>
                 </div>
@@ -338,7 +338,7 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                 {/* Pricing */}
                 <div className="grid gap-4 sm:grid-cols-2">
                     <label className="block">
-                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-400">MRP</span>
+                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-700">MRP</span>
                         <input
                             name="MRP"
                             value={formState.MRP}
@@ -347,12 +347,12 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                             min="0"
                             step="0.01"
                             required
-                            className="mt-3 block w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                            className="mt-3 block w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
                         />
                     </label>
 
                     <label className="block">
-                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-400">Selling Price</span>
+                        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-700">Selling Price</span>
                         <input
                             name="SP"
                             value={formState.SP}
@@ -361,26 +361,26 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                             min="0"
                             step="0.01"
                             required
-                            className="mt-3 block w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                            className="mt-3 block w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
                         />
                     </label>
                 </div>
 
                 {/* Featured Checkbox */}
-                <label className="flex items-center gap-3 rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] p-4">
+                <label className="flex items-center gap-3 rounded-2xl border border-gray-300 bg-white p-4">
                     <input
                         name="featured"
                         type="checkbox"
                         checked={formState.featured}
                         onChange={handleChange}
-                        className="h-5 w-5 rounded border-[#4d4d4d] bg-[#0b0b0b] text-[#99ef12] cursor-pointer"
+                        className="h-5 w-5 rounded border-neutral-400 bg-white text-[#99ef12] cursor-pointer"
                     />
-                    <span className="text-sm font-semibold text-neutral-200">Mark as Featured Product</span>
+                    <span className="text-sm font-semibold text-black">Mark as Featured Product</span>
                 </label>
 
                 {/* Variants Section */}
                 <div>
-                    <h3 className="text-lg font-semibold text-white mb-4 uppercase tracking-[0.2em]">
+                    <h3 className="text-lg font-semibold text-black mb-4 uppercase tracking-[0.2em]">
                         Product Variants
                     </h3>
 
@@ -388,10 +388,10 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                         {formState.variants.map((variant, index) => (
                             <div
                                 key={index}
-                                className="rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] p-5 space-y-4"
+                                className="rounded-2xl border border-gray-300 bg-white p-5 space-y-4"
                             >
                                 <div className="flex items-center justify-between">
-                                    <h4 className="font-semibold text-white">
+                                    <h4 className="font-semibold text-black">
                                         Color Variant {index + 1}
                                     </h4>
 
@@ -423,11 +423,11 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                                             }
                                             placeholder="e.g., Black"
                                             required
-                                            className="mt-3 w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                                            className="mt-3 w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
                                         />
                                     </label>
 
-                                    <label className="flex items-center gap-3 rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3">
+                                    <label className="flex items-center gap-3 rounded-2xl border border-gray-300 bg-white px-4 py-3">
                                         <input
                                             type="checkbox"
                                             checked={variant.inStock > 0}
@@ -438,14 +438,14 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                                                     e.target.checked ? 1 : 0
                                                 )
                                             }
-                                            className="h-5 w-5 rounded border-[#4d4d4d] bg-[#0b0b0b] text-[#99ef12] cursor-pointer"
+                                            className="h-5 w-5 rounded border-neutral-400 bg-white text-[#99ef12] cursor-pointer"
                                         />
-                                        <span className="text-sm font-semibold text-neutral-200">In Stock</span>
+                                        <span className="text-sm font-semibold text-black">In Stock</span>
                                     </label>
                                 </div>
 
                                 <label className="block">
-                                    <span className="text-sm font-semibold text-neutral-400 uppercase tracking-[0.2em]">
+                                    <span className="text-sm font-semibold text-neutral-700 uppercase tracking-[0.2em]">
                                         Sizes
                                     </span>
 
@@ -470,7 +470,7 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                                                 }}
                                                 className={`px-4 py-2 rounded-lg cursor-pointer font-semibold transition border ${variant.sizes.includes(size)
                                                     ? "bg-[#99ef12] text-[#0b0b0b] border-[#99ef12]"
-                                                    : "bg-[#0b0b0b] text-neutral-300 border-[#2e2e2e] hover:border-[#99ef12]"
+                                                    : "bg-white text-black border-gray-300 hover:border-[#99ef12]"
                                                     }`}
                                             >
                                                 {size}
@@ -491,7 +491,7 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                                         onChange={(e) =>
                                             uploadVariantImages(e, index)
                                         }
-                                        className="mt-3 w-full px-4 py-3 rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] text-neutral-300 file:bg-[#99ef12] file:text-[#0b0b0b] file:border-0 file:rounded-lg file:px-4 file:py-2 file:font-semibold cursor-pointer"
+                                        className="mt-3 w-full px-4 py-3 rounded-2xl border border-gray-300 bg-white text-black file:bg-[#99ef12] file:text-[#0b0b0b] file:border-0 file:rounded-lg file:px-4 file:py-2 file:font-semibold cursor-pointer"
                                     />
                                 </label>
 
@@ -500,7 +500,7 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                                         {variant.images.map((image) => (
                                             <div
                                                 key={image.public_id}
-                                                className="relative overflow-hidden rounded-lg border border-[#2e2e2e]"
+                                                className="relative overflow-hidden rounded-lg border border-gray-300"
                                             >
                                                 <Image
                                                     src={image.url}
@@ -541,7 +541,7 @@ const Productform = ({ onClose, onSuccess, product = null, isEdit = false, }) =>
                 </button>
 
                 {/* Submit Section */}
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between pt-6 border-t border-[#2e2e2e]">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between pt-6 border-t border-gray-200">
                     <button
                         type="submit"
                         disabled={submitting || uploading}

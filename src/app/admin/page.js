@@ -71,13 +71,13 @@ export default function AdminPage() {
 
 
     return (
-        <div className="min-h-screen p-4 md:p-8 bg-bg-dark text-white">
+        <div className="min-h-screen p-4 md:p-8 bg-white text-black">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between mb-8">
                 <div>
                     <p className="text-sm uppercase tracking-[0.3em] text-[#99ef12]/80">
                         Product Management
                     </p>
-                    <h1 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight text-white">
+                    <h1 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
                         All Products
                     </h1>
                 </div>
@@ -91,7 +91,7 @@ export default function AdminPage() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4 mb-8">
-                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4">
+                <div className="rounded-3xl border border-gray-200 bg-white p-4 shadow-sm">
                     <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
                         Search
                     </p>
@@ -100,18 +100,18 @@ export default function AdminPage() {
                         placeholder="Search products..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="mt-3 w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-sm text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                        className="mt-3 w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-black outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
                     />
                 </div>
 
-                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4">
+                <div className="rounded-3xl border border-gray-200 bg-white p-4 shadow-sm">
                     <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
                         Category
                     </p>
                     <select
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                        className="mt-3 w-full rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3 text-sm text-white outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
+                        className="mt-3 w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-black outline-none transition focus:border-[#99ef12] focus:ring-2 focus:ring-[#99ef12]/20"
                     >
                         <option value="all">All Categories</option>
                         <option value="casual-shoes">Casual Shoes</option>
@@ -122,39 +122,39 @@ export default function AdminPage() {
                     </select>
                 </div>
 
-                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4">
+                <div className="rounded-3xl border border-gray-200 bg-white p-4 shadow-sm">
                     <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
                         Filters
                     </p>
                     <div className="mt-3 space-y-3">
-                        <label className="flex items-center gap-3 rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3">
+                        <label className="flex items-center gap-3 rounded-2xl border border-gray-300 bg-white px-4 py-3">
                             <input
                                 type="checkbox"
                                 checked={featured}
                                 onChange={(e) => setFeatured(e.target.checked)}
-                                className="h-4 w-4 rounded border-neutral-600 bg-[#111111] text-[#99ef12] focus:ring-[#99ef12]"
+                                className="h-4 w-4 rounded border-neutral-400 bg-white text-[#99ef12] focus:ring-[#99ef12]"
                             />
-                            <span className="text-sm text-neutral-200">Featured</span>
+                            <span className="text-sm text-black">Featured</span>
                         </label>
 
-                        <label className="flex items-center gap-3 rounded-2xl border border-[#2e2e2e] bg-[#0b0b0b] px-4 py-3">
+                        <label className="flex items-center gap-3 rounded-2xl border border-gray-300 bg-white px-4 py-3">
                             <input
                                 type="checkbox"
                                 checked={stock}
                                 onChange={(e) => setStock(e.target.checked)}
-                                className="h-4 w-4 rounded border-neutral-600 bg-[#111111] text-[#99ef12] focus:ring-[#99ef12]"
+                                className="h-4 w-4 rounded border-neutral-400 bg-white text-[#99ef12] focus:ring-[#99ef12]"
                             />
-                            <span className="text-sm text-neutral-200">In Stock</span>
+                            <span className="text-sm text-black">In Stock</span>
                         </label>
                     </div>
                 </div>
 
-                <div className="rounded-3xl border border-[#262626] bg-[#101010] p-4 flex flex-col justify-between">
+                <div className="rounded-3xl border border-gray-200 bg-white p-4 flex flex-col justify-between shadow-sm">
                     <div>
                         <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
                             Reset
                         </p>
-                        <p className="mt-3 text-sm text-neutral-400">
+                        <p className="mt-3 text-sm text-neutral-500">
                             Clear query and filters to see every product.
                         </p>
                     </div>
@@ -174,7 +174,7 @@ export default function AdminPage() {
 
             <div className="overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0">
                 <div className="flex flex-col gap-2 min-w-fit md:min-w-full">
-                    <div className="grid grid-cols-[120px_1fr_100px_80px_80px_150px_80px_100px] gap-4 px-4 py-3 text-xs font-semibold text-neutral-400 uppercase tracking-[0.2em] bg-[#0b0b0b] rounded-t-2xl border border-b-0 border-[#262626]">
+                    <div className="grid grid-cols-[120px_1fr_100px_80px_80px_150px_80px_100px] gap-4 px-4 py-3 text-xs font-semibold text-neutral-700 uppercase tracking-[0.2em] bg-gray-200 rounded-t-2xl border border-b-0 border-gray-200">
                         <div>Product</div>
                         <div></div>
                         <div>Price</div>
@@ -264,10 +264,10 @@ const ProductRow = ({ product, onEdit }) => {
         }
     };
     return (
-        <div className="grid grid-cols-[120px_1fr_100px_80px_80px_150px_80px_100px] gap-4 items-center px-4 py-4 border border-[#262626] bg-[#101010] hover:bg-[#151515] transition rounded-lg">
+        <div className="grid grid-cols-[120px_1fr_100px_80px_80px_150px_80px_100px] gap-4 items-center px-4 py-4 border border-gray-200 bg-gray-200 hover:bg-gray-50 transition rounded-lg">
             {/* Product Image & Details */}
             <div className="relative flex items-center">
-                <div className="relative w-24 h-24 bg-[#0b0b0b] rounded-lg overflow-hidden">
+                <div className="relative w-24 h-24 rounded-lg overflow-hidden">
                     <Image
                         src={product.variants[0]?.images?.[0]?.url || '/placeholder.png'}
                         alt={product.title}
@@ -289,7 +289,7 @@ const ProductRow = ({ product, onEdit }) => {
                 <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
                     {product.category}
                 </p>
-                <h3 className="font-semibold text-white">
+                <h3 className="font-semibold text-black">
                     {product.title}
                 </h3>
                 <p className="text-xs text-neutral-500 uppercase">
@@ -310,11 +310,11 @@ const ProductRow = ({ product, onEdit }) => {
             {/* Stock Status */}
             <div className="text-center">
                 {product.variants.some((variant) => variant.inStock) ? (
-                    <span className="inline-flex items-center rounded-full bg-emerald-100/20 px-2 py-1 text-xs font-semibold text-emerald-400">
+                    <span className="inline-flex items-center rounded-full bg-emerald-400/30 px-2 py-1 text-xs font-semibold text-emerald-800">
                         In Stock
                     </span>
                 ) : (
-                    <span className="inline-flex items-center rounded-full bg-red-100/20 px-2 py-1 text-xs font-semibold text-red-400">
+                    <span className="inline-flex items-center rounded-full bg-red-400/30 px-2 py-1 text-xs font-semibold text-red-800">
                         Out of Stock
                     </span>
                 )}
@@ -322,19 +322,19 @@ const ProductRow = ({ product, onEdit }) => {
 
             {/* Variants Count */}
             <div className="text-center">
-                <p className="text-sm font-semibold text-neutral-200">
+                <p className="text-sm font-semibold text-neutral-600">
                     {product.variants.length}
                 </p>
             </div>
 
             {/* Description */}
-            <div className="text-xs text-neutral-400 line-clamp-2">
+            <div className="text-xs text-neutral-600 line-clamp-2">
                 {product.description?.text?.slice(0, 60) || ''}...
             </div>
 
             {/* Featured Points Count */}
             <div className="text-center">
-                <p className="text-sm font-semibold text-neutral-200">
+                <p className="text-sm font-semibold text-neutral-600">
                     {product.description?.featured?.length || 0}
                 </p>
             </div>
@@ -343,7 +343,7 @@ const ProductRow = ({ product, onEdit }) => {
             <div className="flex gap-2 justify-end">
                 <button
                     onClick={onEdit}
-                    className="rounded-lg border border-[#4d4d4d] bg-transparent px-3 py-1 text-xs font-semibold text-white transition hover:border-[#99ef12] hover:text-[#99ef12]"
+                    className="rounded-lg border border-gray-300 bg-transparent px-3 py-1 text-xs font-semibold text-black transition hover:border-[#99ef12] hover:text-[#99ef12]"
                 >
                     Edit
                 </button>
