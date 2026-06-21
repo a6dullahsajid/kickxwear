@@ -87,7 +87,7 @@ export default function Navbar() {
               </button>
 
               <div className="absolute left-0 top-5 w-32 bg-white opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 pt-2 pb-2">
-                <ul className="flex flex-col gap-2 text-[12px] text-gray-600 p-3">
+                <ul className="flex flex-col gap-2 text-[12px] text-gray-500 p-3">
                   <li className="hover:text-black cursor-pointer hover:underline">
                     Shoes
                   </li>
@@ -155,7 +155,7 @@ export default function Navbar() {
 
                 {categoryOpen && (
                   <ul
-                    className={`mt-3 pl-4 flex flex-col justify-center gap-3 text-sm text-gray-600 overflow-hidden transition-all duration-300 ${
+                    className={`mt-3 pl-4 flex flex-col justify-center gap-3 text-sm text-gray-500 overflow-hidden transition-all duration-300 ${
                       categoryOpen ? "max-h-40 mt-3" : "max-h-0"
                     }`}
                   >

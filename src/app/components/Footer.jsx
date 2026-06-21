@@ -59,7 +59,7 @@ export default function Footer() {
         </div>
         <div className="company">
           <p className="font-bold">Company</p>
-          <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-600">
+          <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-500">
             <li className="hover:text-black">
               <a href="#">About Us</a>
             </li>
@@ -73,7 +73,7 @@ export default function Footer() {
         </div>
         <div className="customer-service">
           <p className="font-bold">Customer Service</p>
-          <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-600">
+          <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-500">
             <li className="hover:text-black">
               <a href="#">Explore Products</a>
             </li>
@@ -87,7 +87,7 @@ export default function Footer() {
         </div>
         <div className="our-info">
           <p className="font-bold">Our Information</p>
-          <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-600">
+          <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-500">
             <li className="hover:text-black">
               <a href="#">Privacy</a>
             </li>
@@ -101,7 +101,7 @@ export default function Footer() {
         </div>
         <div className="contact-info">
           <p className="font-bold">Contact Info</p>
-          <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-600">
+          <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-500">
             <li>+91 48516592</li>
             <li>example@gmail.com</li>
             <li>Kanpur, India</li>
