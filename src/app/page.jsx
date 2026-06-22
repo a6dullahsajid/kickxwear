@@ -1,6 +1,5 @@
 "use client";
-
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Archivo_Black } from "next/font/google";
 import shoe_1 from "../assests/icons/shoe1.png";
@@ -14,13 +13,9 @@ import jersey from "../assests/icons/jersey.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import Card from "./components/Card";
-import { getFeaturedProducts } from "./lib/products";
 
 import "swiper/css";
 
-const products = await getFeaturedProducts();
-
-console.log(products)
 
 const archivo = Archivo_Black({
   subsets: ["latin"],
@@ -28,6 +23,19 @@ const archivo = Archivo_Black({
 });
 
 export default function Home() {
+    const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      const res = await fetch("/api/products?featured=true&limit=6");
+      const data = await res.json();
+      setProducts(data);
+    }
+
+    fetchProducts();
+  }, []);
+
+  console.log(products)
   return (
     <div className="main">
       <div className="hero-section bg-bg-lightgrey pt-20 pb-40 md:pt-40 md:pb-40 lg:pt-30 lg:pb:35 flex flex-col justify-center items-center">
@@ -177,12 +185,12 @@ export default function Home() {
         </div>
         </div>
       </div>
-      <div className="featured-products-section pt-[60px] pb-[50px] border-t border-b  border-brand">
+      <div className="featured-products-section pt-[60px] pb-[60px] border-t border-b  border-brand bg-bg-lightgrey">
         <div className="flex flex-col justify-center items-center gap-3">
         <p className="text-[14px]"><span className="text-brand">--</span> Our Products</p>
         <h4 className="text-[20px] font-semibold">Our <span className="text-brand">Products Collections</span></h4>
         </div>
-        <div className="products-carosel pt-15 pb-5 pl-[20px] pr-[20px] flex gap-5 overflow-x-auto scrollbar-hide">
+       <div className="products-carosel flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide px-5 md:px-10 lg:px-15 pt-15">
           {/* <div className="card">
             <a href="google.com">
             <div className="bg-[#E6E6E6] rounded-[20px] p-3 w-[200px]">
@@ -224,7 +232,30 @@ export default function Home() {
               <p>₹599<span className="text-[#B1B1B1] ml-2 line-through">₹899</span></p>
             </div>
           </div> */}
-          <Card
+          {products.map((product) => (
+
+            <Card
+            key={product._id}
+  href="#"
+  image={product.variants?.[0]?.images?.[0]?.url}
+  category={product.category}
+  title={product.title}
+  price={product.SP}
+  originalPrice={product.MRP}
+  discount="10% off"
+/>
+
+
+          ))}
+
+          <a
+  href="#"
+  className="flex justify-center items-center p-3 w-[150px] md:w-[250px] h-[250px] md:h-[300px] shrink-0 hover:underline"
+>
+  View All → 
+</a>
+          
+  {/* <Card
   href="/product/1"
   image={jersey}
   category="Jersey"
@@ -232,16 +263,7 @@ export default function Home() {
   price={599}
   originalPrice={899}
   discount="10% off"
-/>
-  <Card
-  href="/product/1"
-  image={jersey}
-  category="Jersey"
-  title="White Jersey"
-  price={599}
-  originalPrice={899}
-  discount="10% off"
-/>
+/> */}
         </div>
       </div>
     </div>
