@@ -10,12 +10,20 @@ import shipping from "../assests/icons/shiping.png";
 import payment from "../assests/icons/payment.png";
 import support from "../assests/icons/support.png";
 import jersey from "../assests/icons/jersey.png";
+import testimonial from "../assests/icons/testimonial.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import Card from "./components/Card";
+import TestimonialCard from "./components/TestimoniaCard";
+import reel_1 from "../assests/icons/reel_1.png";
+import reel_2 from "../assests/icons/reel_2.png";
+import reel_3 from "../assests/icons/reel_3.png";
+import reel_4 from "../assests/icons/reel_4.png";
+import reel_5 from "../assests/icons/reel_5.png";
+import reel_6 from "../assests/icons/reel_6.png";
+import instagram_icon from "../assests/icons/instagram_icon.png";
 
 import "swiper/css";
-
 
 const archivo = Archivo_Black({
   subsets: ["latin"],
@@ -23,7 +31,7 @@ const archivo = Archivo_Black({
 });
 
 export default function Home() {
-    const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -35,7 +43,108 @@ export default function Home() {
     fetchProducts();
   }, []);
 
-  console.log(products)
+  const testimonials = [
+    {
+      id: 1,
+      icon: testimonial,
+      text: "Good running shoes for good price 👍 Thank you  🙏.",
+      name: "Kishor Kumar",
+    },
+    {
+      id: 2,
+      icon: testimonial,
+      text: "Quality is top notch, good cushioning, good bouncing.",
+      name: "Jiyad P",
+    },
+    {
+      id: 3,
+      icon: testimonial,
+      text: "I bought these shoes 3 days ago, and I have already completed 26 km of running in them.",
+      name: "V Senthil Kumar",
+    },
+    {
+      id: 4,
+      icon: testimonial,
+      text: "Ordered from Instagram and received exactly what I expected.",
+      name: "Ahmed Khan",
+    },
+    {
+      id: 5,
+      icon: testimonial,
+      text: "Excellent quality for the price.",
+      name: "Sarthak",
+    },
+    {
+      id: 1,
+      icon: testimonial,
+      text: "Fantastic shoes go for it if u buy it for running this is best out of all⭐⭐",
+      name: "Dave Yaksh",
+    },
+    {
+      id: 2,
+      icon: testimonial,
+      text: "Productive very helpful and shoes 1000 km running so best quality in best soul carbon blade 💪",
+      name: "Saurabh Parkhe",
+    },
+    {
+      id: 3,
+      icon: testimonial,
+      text: "It is better than the photos. Best according to the price. Also good for the long run.",
+      name: "Bhaskar",
+    },
+    {
+      id: 4,
+      icon: testimonial,
+      text: "Best for running. Good quality and material. Best brand for running 💨",
+      name: "Ankit Aski",
+    },
+    {
+      id: 5,
+      icon: testimonial,
+      text: "Stylish look and overall value for money.",
+      name: "Jit Debsarma",
+    },
+  ];
+
+  const reels = [
+    {
+      id: 51,
+      reelLink:
+        "https://www.instagram.com/reel/DZXwfp1v9Gk/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==",
+      image: reel_1,
+    },
+    {
+      id: 52,
+      reelLink:
+        "https://www.instagram.com/reel/DZabkwdpmyV/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==",
+      image: reel_2,
+    },
+    {
+      id: 53,
+      reelLink:
+        "https://www.instagram.com/reel/DZin5yxTb0s/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==",
+      image: reel_3,
+    },
+    {
+      id: 54,
+      reelLink:
+        "https://www.instagram.com/reel/DZnZdRxPxlX/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==",
+      image: reel_4,
+    },
+    {
+      id: 55,
+      reelLink:
+        "https://www.instagram.com/reel/DZpwo5Np8wO/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==",
+      image: reel_5,
+    },
+    {
+      id: 56,
+      reelLink:
+        "https://www.instagram.com/reel/DZsTgx_v-UR/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==",
+      image: reel_6,
+    },
+  ];
+
   return (
     <div className="main">
       <div className="hero-section bg-bg-lightgrey pt-20 pb-40 md:pt-40 md:pb-40 lg:pt-30 lg:pb:35 flex flex-col justify-center items-center">
@@ -137,60 +246,71 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col  gap-10 min-w-[280px] w-full max-w-[350px] md:max-w-[420px]">
-        <div className="min-w-[280px] w-full max-w-[350px] md:max-w-[420px] flex flex-col justify-between gap-6 bg-[#E6E6E6] rounded-4xl p-5">
-          <div className="price-label bg-white w-fit pl-3 pt-2 pb-2 pr-3 rounded-[50px] ">
-            <p className="text-[12px]">
-              <span className="text-brand">500+</span> Items
-            </p>
-          </div>
-          <div className="flex relative">
-            <div>
-              <div className="text-gray-500">
-                <h3 className="text-[28px] font-semibold text-black">Jersey</h3>
-                <p className="text-[14px] text-gray-600 mt-2 max-w-[140px] md:max-w-[180px] lg:max-w-[200px]">
-                  Authentic-inspired football jerseys from the world's biggest clubs. Represent your team with pride, on match day and every day.
-                </p>
-                {/* <p className="text-[14px] mt-2">Football Shoes</p>
+          <div className="min-w-[280px] w-full max-w-[350px] md:max-w-[420px] flex flex-col justify-between gap-6 bg-[#E6E6E6] rounded-4xl p-5">
+            <div className="price-label bg-white w-fit pl-3 pt-2 pb-2 pr-3 rounded-[50px] ">
+              <p className="text-[12px]">
+                <span className="text-brand">500+</span> Items
+              </p>
+            </div>
+            <div className="flex relative">
+              <div>
+                <div className="text-gray-500">
+                  <h3 className="text-[28px] font-semibold text-black">
+                    Jersey
+                  </h3>
+                  <p className="text-[14px] text-gray-600 mt-2 max-w-[140px] md:max-w-[180px] lg:max-w-[200px]">
+                    Authentic-inspired football jerseys from the world's biggest
+                    clubs. Represent your team with pride, on match day and
+                    every day.
+                  </p>
+                  {/* <p className="text-[14px] mt-2">Football Shoes</p>
                 <p className="text-[14px] mt-2">Sports Shoes</p>
                 <p className="text-[14px] mt-2">Casual Shoes</p> */}
+                </div>
+              </div>
+              <div className="absolute right-[-25] bottom-[-18]">
+                <Image src={jersey} alt="shoe1" width={150} className="" />
               </div>
             </div>
-            <div className="absolute right-[-25] bottom-[-18]">
-              <Image src={jersey} alt="shoe1" width={150} className="" />
+          </div>
+          <div className="min-w-[280px] w-full max-w-[350px] md:max-w-[420px] flex flex-col justify-between gap-6 bg-[#E6E6E6] rounded-4xl p-5">
+            <div className="price-label bg-white w-fit pl-3 pt-2 pb-2 pr-3 rounded-[50px] ">
+              <p className="text-[12px]">
+                <span className="text-brand">500+</span> Items
+              </p>
             </div>
-          </div>
-        </div>
-        <div className="min-w-[280px] w-full max-w-[350px] md:max-w-[420px] flex flex-col justify-between gap-6 bg-[#E6E6E6] rounded-4xl p-5">
-          <div className="price-label bg-white w-fit pl-3 pt-2 pb-2 pr-3 rounded-[50px] ">
-            <p className="text-[12px]">
-              <span className="text-brand">500+</span> Items
-            </p>
-          </div>
-          <div className="flex relative">
-            <div>
-              <div className="text-gray-500">
-                <h3 className="text-[28px] font-semibold text-black">Accessories</h3>
-                <p className="text-[14px] text-gray-600 mt-2 max-w-[140px] md:max-w-[180px] lg:max-w-[200px]">
-                 Premium sports accessories for athletes and champions. Built for training, competition, and beyond.
-                </p>
-                {/* <p className="text-[14px] mt-2">Football Shoes</p>
+            <div className="flex relative">
+              <div>
+                <div className="text-gray-500">
+                  <h3 className="text-[28px] font-semibold text-black">
+                    Accessories
+                  </h3>
+                  <p className="text-[14px] text-gray-600 mt-2 max-w-[140px] md:max-w-[180px] lg:max-w-[200px]">
+                    Premium sports accessories for athletes and champions. Built
+                    for training, competition, and beyond.
+                  </p>
+                  {/* <p className="text-[14px] mt-2">Football Shoes</p>
                 <p className="text-[14px] mt-2">Sports Shoes</p>
                 <p className="text-[14px] mt-2">Casual Shoes</p> */}
+                </div>
+              </div>
+              <div className="absolute right-[-25] bottom-[-18]">
+                <Image src={jersey} alt="shoe1" width={150} className="" />
               </div>
             </div>
-            <div className="absolute right-[-25] bottom-[-18]">
-              <Image src={jersey} alt="shoe1" width={150} className="" />
-            </div>
           </div>
-        </div>
         </div>
       </div>
       <div className="featured-products-section pt-[60px] pb-[60px] border-t border-b  border-brand bg-bg-lightgrey">
         <div className="flex flex-col justify-center items-center gap-3">
-        <p className="text-[14px]"><span className="text-brand">--</span> Our Products</p>
-        <h4 className="text-[20px] font-semibold">Our <span className="text-brand">Products Collections</span></h4>
+          <p className="text-[14px]">
+            <span className="text-brand">--</span> Our Products
+          </p>
+          <h4 className="text-[20px] font-semibold">
+            Our <span className="text-brand">Products Collections</span>
+          </h4>
         </div>
-       <div className="products-carosel flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide px-5 md:px-10 lg:px-15 pt-15">
+        <div className="products-carosel flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide px-5 md:px-10 lg:px-15 pt-15">
           {/* <div className="card">
             <a href="google.com">
             <div className="bg-[#E6E6E6] rounded-[20px] p-3 w-[200px]">
@@ -233,39 +353,207 @@ export default function Home() {
             </div>
           </div> */}
           {products.map((product) => (
-
             <Card
-            key={product._id}
-  href="#"
-  image={product.variants?.[0]?.images?.[0]?.url}
-  category={product.category}
-  title={product.title}
-  price={product.SP}
-  originalPrice={product.MRP}
-  discount="10% off"
-/>
-
-
+              key={product._id}
+              href="#"
+              image={product.variants?.[0]?.images?.[0]?.url}
+              category={product.category}
+              title={product.title}
+              price={product.SP}
+              originalPrice={product.MRP}
+              discount="10% off"
+            />
           ))}
 
           <a
-  href="#"
-  className="flex justify-center items-center p-3 w-[150px] md:w-[250px] h-[250px] md:h-[300px] shrink-0 hover:underline"
->
-  View All → 
-</a>
-          
-  {/* <Card
-  href="/product/1"
-  image={jersey}
-  category="Jersey"
-  title="White Jersey"
-  price={599}
-  originalPrice={899}
-  discount="10% off"
-/> */}
+            href="#"
+            className="flex justify-center items-center p-3 w-[150px] md:w-[250px] h-[250px] md:h-[300px] shrink-0 hover:underline"
+          >
+            View All →
+          </a>
         </div>
       </div>
+      <div className="testimonial-section pt-[60px] pb-[60px] border-t border-b  border-brand">
+        <div className="flex flex-col justify-center items-center gap-3">
+          <p className="text-[14px]">
+            <span className="text-brand">--</span> Testimonial
+          </p>
+          <h4 className="text-[20px] font-semibold">
+            What <span className="text-brand">Our Customer Say</span>
+          </h4>
+        </div>
+        {/* <div className="textimonial-carosel px-5 pt-15 pb-5">
+          <div className="testimonial-card flex flex-col gap-3 bg-bg-lightgrey p-5 rounded-[30px]">
+            <div>
+              <Image src={testimonial} alt="testimonial-icon" width={32}/>
+            </div>
+            <p className="text-[12px]">sfjb dsf jfs sdfsf fd, sdffsfs dsfsdf sfsf sfjdfj sdfjh sdfhkasdfasdafasfsdfsdaf sf fsdasdf af a sdffa sdfasa dsfa</p>
+            <p className="text-[14px]">Abdul Bhai</p>
+          </div>
+        </div> */}
+        <div className="testimonial-carousel pb-5 pt-10">
+          <Swiper
+            modules={[Autoplay]}
+            slidesPerView={"auto"}
+            spaceBetween={20}
+            loop
+            speed={3000}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+          >
+            {testimonials.map((item) => (
+              <SwiperSlide key={item.id} className="!w-[250px] !h-[180px]">
+                <TestimonialCard {...item} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <Swiper
+            modules={[Autoplay]}
+            slidesPerView={"auto"}
+            spaceBetween={20}
+            loop
+            speed={3000}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+              reverseDirection: true,
+            }}
+          >
+            {testimonials.map((item) => (
+              <SwiperSlide
+                key={item.id + 1}
+                className="!w-[250px]"
+              >
+                <TestimonialCard {...item} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+      <div className="folow-us pt-[60px] pb-[60px] border-t border-b  border-brand">
+        <div className="flex flex-col justify-center items-center gap-3">
+          <p className="text-[14px]">
+            <span className="text-brand">--</span> Follow Us
+          </p>
+          <h4 className="text-[20px] font-semibold">
+            Follow Us On<span className="text-brand"> Instagram</span>
+          </h4>
+        </div>
+        <div className="insta-carousel flex lg:justify-between gap-6 md:gap-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-5 md:px-10 lg:px-15 pt-15 pb-5">
+          {reels.map((reel) => (
+            <a
+              key={reel.id}
+              href={reel.reelLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="reel-card group relative flex-shrink-0 w-[200px] h-[200px] bg-bg-lightgrey rounded-[30px] overflow-hidden">
+                <Image
+                  src={reel.image}
+                  alt={`Reel ${reel.id}`}
+                  className="w-full h-full object-cover"
+                  width={200}
+                  height={200}
+                />
+
+                <div className="absolute inset-0 flex items-center justify-center bg-black/0 backdrop-blur-none transition-all duration-300 group-hover:bg-black/20 group-hover:backdrop-blur-sm">
+                  <Image
+                    src={instagram_icon}
+                    alt="Instagram"
+                    width={32}
+                    height={32}
+                    className="opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100"
+                  />
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div className="faq-section pt-[60px] pb-[60px] border-t border-b border-brand">
+        <div className="flex flex-col justify-center items-center gap-3">
+          <p className="text-[14px]">
+            <span className="text-brand">--</span> Faqs
+          </p>
+          <h4 className="text-[20px] font-semibold">
+            Question? <span className="text-brand">Look Here.</span>
+          </h4>
+        </div>
+
+        <div className="max-w-[900px] mx-auto px-5 md:px-10 mt-12 flex flex-col gap-4">
+          <details className="group bg-bg-lightgrey rounded-[24px] p-5">
+            <summary className="flex justify-between items-center cursor-pointer list-none">
+              <h5 className="font-medium text-[15px] md:text-[16px]">
+                How long does shipping take?
+              </h5>
+
+              <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
+                +
+              </span>
+            </summary>
+
+            <p className="mt-4 text-[14px] text-gray-600 leading-6">
+              Orders are typically delivered within 3–7 business days depending
+              on your location.
+            </p>
+          </details>
+
+          <details className="group bg-bg-lightgrey rounded-[24px] p-5">
+            <summary className="flex justify-between items-center cursor-pointer list-none">
+              <h5 className="font-medium text-[15px] md:text-[16px]">
+                Do you offer Cash on Delivery?
+              </h5>
+
+              <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
+                +
+              </span>
+            </summary>
+
+            <p className="mt-4 text-[14px] text-gray-600 leading-6">
+              Yes, Cash on Delivery is available on selected products and
+              locations.
+            </p>
+          </details>
+
+          <details className="group bg-bg-lightgrey rounded-[24px] p-5">
+            <summary className="flex justify-between items-center cursor-pointer list-none">
+              <h5 className="font-medium text-[15px] md:text-[16px]">
+                Can I exchange my order?
+              </h5>
+
+              <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
+                +
+              </span>
+            </summary>
+
+            <p className="mt-4 text-[14px] text-gray-600 leading-6">
+              Yes, exchanges are accepted within the specified return window if
+              the product is unused and in original condition.
+            </p>
+          </details>
+
+          <details className="group bg-bg-lightgrey rounded-[24px] p-5">
+            <summary className="flex justify-between items-center cursor-pointer list-none">
+              <h5 className="font-medium text-[15px] md:text-[16px]">
+                How can I contact support?
+              </h5>
+
+              <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
+                +
+              </span>
+            </summary>
+
+            <p className="mt-4 text-[14px] text-gray-600 leading-6">
+              You can reach us through Instagram or WhatsApp for quick support.
+            </p>
+          </details>
+        </div>
+      </div>
+      <div></div>
     </div>
   );
 }
