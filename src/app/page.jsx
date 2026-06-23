@@ -75,31 +75,31 @@ export default function Home() {
       name: "Sarthak",
     },
     {
-      id: 1,
+      id: 6,
       icon: testimonial,
       text: "Fantastic shoes go for it if u buy it for running this is best out of all⭐⭐",
       name: "Dave Yaksh",
     },
     {
-      id: 2,
+      id: 7,
       icon: testimonial,
       text: "Productive very helpful and shoes 1000 km running so best quality in best soul carbon blade 💪",
       name: "Saurabh Parkhe",
     },
     {
-      id: 3,
+      id: 8,
       icon: testimonial,
       text: "It is better than the photos. Best according to the price. Also good for the long run.",
       name: "Bhaskar",
     },
     {
-      id: 4,
+      id: 9,
       icon: testimonial,
       text: "Best for running. Good quality and material. Best brand for running 💨",
       name: "Ankit Aski",
     },
     {
-      id: 5,
+      id: 10,
       icon: testimonial,
       text: "Stylish look and overall value for money.",
       name: "Jit Debsarma",
@@ -156,7 +156,7 @@ export default function Home() {
           </h1>
         </div>
 
-        <div className="absolute top-25 md:top-30 w-full max-w-[350px] md:max-w-[550px] z-20">
+        <div className="absolute top-25 md:top-30 w-ful h-full max-w-[350px] md:max-w-[550px] z-20">
           <Swiper
             modules={[Autoplay]}
             autoplay={{
@@ -171,7 +171,6 @@ export default function Home() {
                 src={shoe_1}
                 alt="shoe 1"
                 className="w-full h-auto"
-                width={500}
               />
             </SwiperSlide>
 
@@ -184,7 +183,7 @@ export default function Home() {
             </SwiperSlide>
           </Swiper>
         </div>
-        <div className="absolute w-full max-w-[1000px]">
+        <div className="absolute w-full h-auto max-w-[1000px]">
           <Image src={shadow} alt="shadow" />
         </div>
 
@@ -242,7 +241,7 @@ export default function Home() {
             <p className="text-[14px] mt-2">Sports Shoes</p>
             <p className="text-[14px] mt-2">Casual Shoes</p>
           </div>
-          <Image src={shoe_1} alt="shoe1" width={300} className="" />
+          <Image src={shoe_1} alt="shoe1" width={300}/>
         </div>
 
         <div className="flex flex-col  gap-10 min-w-[280px] w-full max-w-[350px] md:max-w-[420px]">
@@ -266,7 +265,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="absolute right-[-25] bottom-[-18]">
-                <Image src={jersey} alt="shoe1" width={150} className="" />
+                <Image src={jersey} alt="shoe1" width={150}/>
               </div>
             </div>
           </div>
@@ -289,7 +288,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="absolute right-[-25] bottom-[-18]">
-                <Image src={jersey} alt="shoe1" width={150} className="" />
+                <Image src={jersey} alt="shoe1" width={150}/>
               </div>
             </div>
           </div>
@@ -368,7 +367,7 @@ export default function Home() {
             }}
           >
             {testimonials.map((item) => (
-              <SwiperSlide key={item.id + 1} className="!w-[250px]">
+              <SwiperSlide key={`reverse-${item.id}`} className="!w-[250px]">
                 <TestimonialCard {...item} />
               </SwiperSlide>
             ))}

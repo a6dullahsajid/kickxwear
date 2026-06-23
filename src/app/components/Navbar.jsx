@@ -17,7 +17,7 @@ export default function Navbar() {
   return (
     <div className="header">
       <div className="banner bg-black h-11 text-brand flex justify-center md:justify-between items-center pl-8 pr-8 text-[12px]">
-        <p className="contact hidden md:block">Contact Us : +91 789-655-8485</p>
+        <p className="contact hidden md:block">Contact Us : +91 9569603674</p>
         <div className="announcement flex justify-center items-center">
           <p className="announcement-text hover:underline">
             <a href="#">Get 20% off or any announcement</a>
@@ -62,6 +62,10 @@ export default function Navbar() {
             alt="kickxwear logo"
             width={60}
             height={40}
+            style={{
+              width: "auto",
+              height: "auto",
+            }}
           />
         </div>
 
