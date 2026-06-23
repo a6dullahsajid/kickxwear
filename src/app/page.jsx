@@ -1,20 +1,13 @@
-"use client";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Archivo_Black } from "next/font/google";
 import shoe_1 from "../assests/icons/shoe1.png";
-import shoe_2 from "../assests/icons/shoe2.png";
-import shoe_3 from "../assests/icons/shoe3.png";
 import shadow from "../assests/icons/shadow.png";
 import shipping from "../assests/icons/shiping.png";
 import payment from "../assests/icons/payment.png";
 import support from "../assests/icons/support.png";
 import jersey from "../assests/icons/jersey.png";
 import testimonial from "../assests/icons/testimonial.png";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 import Card from "./components/Card";
-import TestimonialCard from "./components/TestimoniaCard";
 import reel_1 from "../assests/icons/reel_1.png";
 import reel_2 from "../assests/icons/reel_2.png";
 import reel_3 from "../assests/icons/reel_3.png";
@@ -22,26 +15,25 @@ import reel_4 from "../assests/icons/reel_4.png";
 import reel_5 from "../assests/icons/reel_5.png";
 import reel_6 from "../assests/icons/reel_6.png";
 import instagram_icon from "../assests/icons/instagram_icon.png";
-
-import "swiper/css";
+import HeroCarousel from "./components/HeroCarousel";
+import TestimonialCarousel from "./components/TestimonialCarousel";
+import connectDB from "@/app/lib/mongodb";
+import Product from "@/app/models/Products";
 
 const archivo = Archivo_Black({
   subsets: ["latin"],
   weight: "400",
 });
 
-export default function Home() {
-  const [products, setProducts] = useState([]);
+export default async function Home() {
+  // 1. Connect to the database
+  await connectDB();
 
-  useEffect(() => {
-    async function fetchProducts() {
-      const res = await fetch("/api/products?featured=true&limit=6");
-      const data = await res.json();
-      setProducts(data);
-    }
-
-    fetchProducts();
-  }, []);
+  // 2. Fetch featured products directly from MongoDB
+  const products = await Product.find({ isfeatured: true })
+    .sort({ createdAt: -1 })
+    .limit(6)
+    .lean();
 
   const testimonials = [
     {
@@ -156,32 +148,8 @@ export default function Home() {
           </h1>
         </div>
 
-        <div className="absolute top-25 md:top-30 w-ful h-full max-w-[350px] md:max-w-[550px] z-20">
-          <Swiper
-            modules={[Autoplay]}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            loop={true}
-            slidesPerView={1}
-          >
-            <SwiperSlide>
-              <Image
-                src={shoe_1}
-                alt="shoe 1"
-                className="w-full h-auto"
-              />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <Image src={shoe_2} alt="shoe 2" className="w-full h-auto" />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <Image src={shoe_3} alt="shoe 3" className="w-full h-auto" />
-            </SwiperSlide>
-          </Swiper>
+        <div className="absolute top-28 md:top-30 w-ful h-full max-w-[300px] md:max-w-[550px] z-20">
+          <HeroCarousel />
         </div>
         <div className="absolute w-full h-auto max-w-[1000px]">
           <Image src={shadow} alt="shadow" />
@@ -241,7 +209,7 @@ export default function Home() {
             <p className="text-[14px] mt-2">Sports Shoes</p>
             <p className="text-[14px] mt-2">Casual Shoes</p>
           </div>
-          <Image src={shoe_1} alt="shoe1" width={300}/>
+          <Image src={shoe_1} alt="shoe1" width={300} />
         </div>
 
         <div className="flex flex-col  gap-10 min-w-[280px] w-full max-w-[350px] md:max-w-[420px]">
@@ -258,14 +226,14 @@ export default function Home() {
                     Jersey
                   </h3>
                   <p className="text-[14px] text-gray-600 mt-2 max-w-[140px] md:max-w-[180px] lg:max-w-[200px]">
-                    Authentic-inspired football jerseys from the world&apm;s biggest
-                    clubs. Represent your team with pride, on match day and
-                    every day.
+                    Authentic-inspired football jerseys from the world&apm;s
+                    biggest clubs. Represent your team with pride, on match day
+                    and every day.
                   </p>
                 </div>
               </div>
               <div className="absolute right-[-25] bottom-[-18]">
-                <Image src={jersey} alt="shoe1" width={150}/>
+                <Image src={jersey} alt="shoe1" width={150} />
               </div>
             </div>
           </div>
@@ -288,7 +256,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="absolute right-[-25] bottom-[-18]">
-                <Image src={jersey} alt="shoe1" width={150}/>
+                <Image src={jersey} alt="shoe1" width={150} />
               </div>
             </div>
           </div>
@@ -334,45 +302,7 @@ export default function Home() {
             What <span className="text-brand">Our Customer Say</span>
           </h4>
         </div>
-        <div className="testimonial-carousel pb-5 pt-10">
-          <Swiper
-            modules={[Autoplay]}
-            slidesPerView={"auto"}
-            spaceBetween={20}
-            loop
-            speed={3000}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-          >
-            {testimonials.map((item) => (
-              <SwiperSlide key={item.id} className="!w-[250px] !h-[180px]">
-                <TestimonialCard {...item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <Swiper
-            modules={[Autoplay]}
-            slidesPerView={"auto"}
-            spaceBetween={20}
-            loop
-            speed={3000}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-              reverseDirection: true,
-            }}
-          >
-            {testimonials.map((item) => (
-              <SwiperSlide key={`reverse-${item.id}`} className="!w-[250px]">
-                <TestimonialCard {...item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+        <TestimonialCarousel testimonials={testimonials} />
       </div>
       <div className="folow-us pt-[60px] pb-[60px] border-t border-b  border-brand">
         <div className="flex flex-col justify-center items-center gap-3">
