@@ -16,7 +16,7 @@ export default function Navbar() {
 
   return (
     <div className="header">
-      <div className="banner bg-black h-11 text-brand flex justify-center md:justify-between items-center pl-8 pr-8 text-[12px]">
+      <div className="banner bg-black h-12 text-brand flex justify-center md:justify-between items-center pl-8 pr-8 text-[12px]">
         <p className="contact hidden md:block">Contact Us : +91 9569603674</p>
         <div className="announcement flex justify-center items-center">
           <p className="announcement-text hover:underline">
@@ -55,17 +55,14 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="relative bg-white h-16 border-brand border-b flex items-center justify-between pl-8 pr-8 text-black">
+      <div className="relative bg-white h-20 flex items-center justify-between pl-8 pr-8 text-black border-b border-gray-200">
         <div className="nav-left">
           <Image
             src={kickxwear_logo}
             alt="kickxwear logo"
-            width={60}
-            height={40}
-            style={{
-              width: "auto",
-              height: "auto",
-            }}
+            width={80}
+            height={80}
+            className="w-18 h-auto"
           />
         </div>
 

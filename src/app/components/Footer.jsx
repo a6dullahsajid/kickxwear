@@ -15,7 +15,7 @@ const bungee = Bungee_Shade({
 export default function Footer() {
   return (
     <>
-      <div className="footer-top pt-15 pb-15 pl-10 pr-10 flex flex-col md:flex-row md:justify-around gap-10 bg-white text-black border-t border-brand">
+      <div className="footer-top pt-15 pb-15 pl-10 pr-10 flex flex-col md:flex-row md:justify-around gap-10 bg-white text-black border-t border-gray-200">
         <div className="brand flex flex-col gap-3">
           <div className="flex items-center font-semibold">
             <Image src={kickxwear_logo} alt="kickxwear logo" />
@@ -108,19 +108,20 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="footer-middle h-11 bg-black pl-8 pr-8 pt-12 pb-12 text-[12px] flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4 sm:pt-0 sm:pb-0">
-        <p className="text-brand">
-          Copyright © 2026 kickxwear. All Rights Reserved.
-        </p>
-        <p className="text-white">Designed by Ali Arshad Khan</p>
-      </div>
-      <div className="footer-bottom flex justify-center items-center pt-4 pb-4 md:pt-10 md:pb-10 pl-2 pr-2 bg-white text-black">
+      <div className="footer-bottom flex justify-center items-center pt-4 pb-15 md:pt-10 md:pb-20 pl-2 pr-2 bg-white text-black">
         <h1
-          className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl ${bungee.className}`}
+          className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl ${bungee.className} text-bg-lightgrey`}
         >
           kick<span className="text-brand">x</span>wear
         </h1>
       </div>
+      <div className="footer-middle bg-black pl-8 pr-8 pt-8 text-center pb-8 md:pt-6 md:pb-6 text-[12px] flex justify-center items-center gap-4">
+        <p className="text-brand">
+          Copyright © 2026 kickxwear. All Rights Reserved.
+        </p>
+        {/* <p className="text-white text-[10px] md:text-[12px]">Designed by Ali Arshad Khan</p> */}
+      </div>
+      
     </>
   );
 }
