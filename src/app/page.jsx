@@ -259,13 +259,10 @@ export default function Home() {
                     Jersey
                   </h3>
                   <p className="text-[14px] text-gray-600 mt-2 max-w-[140px] md:max-w-[180px] lg:max-w-[200px]">
-                    Authentic-inspired football jerseys from the world's biggest
+                    Authentic-inspired football jerseys from the world&apm;s biggest
                     clubs. Represent your team with pride, on match day and
                     every day.
                   </p>
-                  {/* <p className="text-[14px] mt-2">Football Shoes</p>
-                <p className="text-[14px] mt-2">Sports Shoes</p>
-                <p className="text-[14px] mt-2">Casual Shoes</p> */}
                 </div>
               </div>
               <div className="absolute right-[-25] bottom-[-18]">
@@ -289,9 +286,6 @@ export default function Home() {
                     Premium sports accessories for athletes and champions. Built
                     for training, competition, and beyond.
                   </p>
-                  {/* <p className="text-[14px] mt-2">Football Shoes</p>
-                <p className="text-[14px] mt-2">Sports Shoes</p>
-                <p className="text-[14px] mt-2">Casual Shoes</p> */}
                 </div>
               </div>
               <div className="absolute right-[-25] bottom-[-18]">
@@ -311,47 +305,6 @@ export default function Home() {
           </h4>
         </div>
         <div className="products-carosel flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide px-5 md:px-10 lg:px-15 pt-15">
-          {/* <div className="card">
-            <a href="google.com">
-            <div className="bg-[#E6E6E6] rounded-[20px] p-3 w-[200px]">
-              <div className="label bg-brand w-fit pl-3 pt-1 pb-1 pr-3 rounded-[50px] text-[12px]">10% off</div>
-              <div className="p-3">
-              <Image src={jersey} alt="jersey"/>
-              </div>
-            </div>
-            <div className="flex flex-col gap-2 pt-5 pb-5 pl-1">
-              <p className="text-[#4C4C4C] text-[12px]">Jersey</p>
-              <h4>White Jersey</h4>
-              <p>₹599<span className="text-[#B1B1B1] ml-2 line-through">₹899</span></p>
-            </div>
-            </a>
-          </div>
-          <div className="card">
-            <div className="bg-[#E6E6E6] rounded-[20px] p-3 w-[200px]">
-              <div className="label bg-brand w-fit pl-3 pt-1 pb-1 pr-3 rounded-[50px] text-[12px]">10% off</div>
-              <div className="p-3">
-              <Image src={jersey} alt="jersey"/>
-              </div>
-            </div>
-            <div className="flex flex-col gap-2 pt-5 pb-5 pl-1">
-              <p className="text-[#4C4C4C] text-[12px]">Jersey</p>
-              <h4>White Jersey</h4>
-              <p>₹599<span className="text-[#B1B1B1] ml-2 line-through">₹899</span></p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="bg-[#E6E6E6] rounded-[20px] p-3 w-[200px]">
-              <div className="label bg-brand w-fit pl-3 pt-1 pb-1 pr-3 rounded-[50px] text-[12px]">10% off</div>
-              <div className="p-3">
-              <Image src={jersey} alt="jersey"/>
-              </div>
-            </div>
-            <div className="flex flex-col gap-2 pt-5 pb-5 pl-1">
-              <p className="text-[#4C4C4C] text-[12px]">Jersey</p>
-              <h4>White Jersey</h4>
-              <p>₹599<span className="text-[#B1B1B1] ml-2 line-through">₹899</span></p>
-            </div>
-          </div> */}
           {products.map((product) => (
             <Card
               key={product._id}
@@ -382,15 +335,6 @@ export default function Home() {
             What <span className="text-brand">Our Customer Say</span>
           </h4>
         </div>
-        {/* <div className="textimonial-carosel px-5 pt-15 pb-5">
-          <div className="testimonial-card flex flex-col gap-3 bg-bg-lightgrey p-5 rounded-[30px]">
-            <div>
-              <Image src={testimonial} alt="testimonial-icon" width={32}/>
-            </div>
-            <p className="text-[12px]">sfjb dsf jfs sdfsf fd, sdffsfs dsfsdf sfsf sfjdfj sdfjh sdfhkasdfasdafasfsdfsdaf sf fsdasdf af a sdffa sdfasa dsfa</p>
-            <p className="text-[14px]">Abdul Bhai</p>
-          </div>
-        </div> */}
         <div className="testimonial-carousel pb-5 pt-10">
           <Swiper
             modules={[Autoplay]}
@@ -424,10 +368,7 @@ export default function Home() {
             }}
           >
             {testimonials.map((item) => (
-              <SwiperSlide
-                key={item.id + 1}
-                className="!w-[250px]"
-              >
+              <SwiperSlide key={item.id + 1} className="!w-[250px]">
                 <TestimonialCard {...item} />
               </SwiperSlide>
             ))}
@@ -514,8 +455,7 @@ export default function Home() {
             </summary>
 
             <p className="mt-4 text-[14px] text-gray-600 leading-6">
-              Yes, Cash on Delivery is available on selected products and
-              locations.
+              No, Cash on Delivery is not available as of now.
             </p>
           </details>
 
@@ -553,7 +493,31 @@ export default function Home() {
           </details>
         </div>
       </div>
-      <div></div>
+      <div className="cta-section pt-[70px] pb-[70px] px-10 border-t border-b  border-brand bg-bg-lightgrey">
+        <div className="flex flex-col justify-center items-center gap-10">
+          <p className="text-[14px]">
+            <span className="text-brand">--</span> Buy Now
+          </p>
+          <div className="flex flex-col justify-center items-center gap-10 ">
+            <div className="text-[18px] lg:text-[24px] lg: font-semibold text-center flex flex-col gap-4">
+              <h4>Gear Up Like a Champion </h4>
+              <h4>Play Hard, Drip Harder</h4>
+            </div>
+            <h5 className="text-center text-[14px]">
+              Don&amp;t wait—message us on WhatsApp and get your favorite gear
+              today.
+            </h5>
+          </div>
+          <div className="cta-button flex flex-col gap-5 md:flex-row">
+            <button className="bg-brand text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
+              Chat and Order On Whatsapp
+            </button>
+            <button className="bg-white text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
+              Explore Products
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
