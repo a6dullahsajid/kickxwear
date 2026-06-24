@@ -5,7 +5,8 @@ import shadow from "../assests/icons/shadow.png";
 import shipping from "../assests/icons/shiping.png";
 import payment from "../assests/icons/payment.png";
 import support from "../assests/icons/support.png";
-import jersey from "../assests/icons/jersey.png";
+import shooe_2 from "../assests/icons/shoe2.png";
+import shooe_3 from "../assests/icons/shoe3.png";
 import testimonial from "../assests/icons/testimonial.png";
 import Card from "./components/Card";
 import reel_1 from "../assests/icons/reel_1.png";
@@ -199,80 +200,153 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="category-section flex flex-col md:flex-row gap-10 justify-center items-center pt-[50px] pb-[50px] pr-[20px] pl-[20px]">
+      <div className="category-section flex flex-col md:flex-row gap-10 justify-center items-center pt-[50px] pb-[100px] pr-[20px] pl-[20px]">
         <ScrollReveal>
-          <div className="min-w-[280px] w-full max-w-[350px] md:max-w-[400px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl p-5">
-            <div className="price-label bg-white w-fit pl-3 pt-2 pb-2 pr-3 rounded-[50px] ">
-              <p className="text-[12px]">
-                <span className="text-brand">500+</span> Items
-              </p>
-            </div>
-            <div className="text-gray-500">
-              <h3 className="text-[28px] font-semibold text-black">Shoes</h3>
-              <p className="text-[14px] text-gray-600 mt-2">
-                Footwear engineered for sport and designed for everyday life.
-              </p>
-              <p className="text-[14px] mt-2">Football Shoes</p>
-              <p className="text-[14px] mt-2">Sports Shoes</p>
-              <p className="text-[14px] mt-2">Casual Shoes</p>
-            </div>
-            <Image src={shoe_1} alt="shoe1" width={300} />
+          <div className="min-w-[280px] h-[auto] w-full max-w-[300px] md:max-w-[350px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl">
+            <Link
+              href="/products?category=running-shoes"
+              className="group block w-full max-w-[400px] h-[500px]"
+            >
+              <div className="relative flex flex-col justify-between h-full bg-white rounded-[24px] p-8 overflow-hidden border transition-colors duration-700 border-black/30">
+                {/* --- TOP: TEXT & BRANDING --- */}
+                <div className="relative z-20 flex flex-col items-start">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-3">
+                    High Performance
+                  </p>
+                  <h3 className="text-[32px] font-medium tracking-tight text-black">
+                    Running Shoes
+                  </h3>
+
+                  {/* Subtle brand color line that elegantly expands on hover */}
+                  <div className="h-[2px] w-8 bg-brand mt-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:w-16"></div>
+                </div>
+
+                {/* --- CENTER: THE PRODUCT IMAGE --- */}
+                {/* We use pointer-events-none so the image doesn't block the link click */}
+                <div className="absolute inset-0 top-[15%] flex items-center justify-center pointer-events-none">
+                  {/* Ultra-slow, refined zoom and slight lift */}
+                  <div className="w-[85%] transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 group-hover:-translate-y-4">
+                    <Image
+                      src={shoe_1}
+                      alt="asdasd"
+                      width={400}
+                      height={400}
+                      className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+                    />
+                  </div>
+                </div>
+
+                {/* --- BOTTOM: GLASSMORPHISM ACTION BUTTON --- */}
+                <div className="relative z-20 flex justify-end items-end w-full">
+                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-md border border-black/30 text-black text-[13px] px-6 py-3 rounded-full opacity-100 translate-y-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+                    Explore{" "}
+                    <span className="text-brand ml-2 text-lg leading-none">
+                      →
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
           </div>
         </ScrollReveal>
 
-        <div className="flex flex-col  gap-10 min-w-[280px] w-full max-w-[350px] md:max-w-[420px]">
-          <ScrollReveal>
-            <div className="min-w-[280px] w-full max-w-[350px] md:max-w-[420px] flex flex-col justify-between gap-6 bg-[#E6E6E6] rounded-4xl p-5">
-              <div className="price-label bg-white w-fit pl-3 pt-2 pb-2 pr-3 rounded-[50px] ">
-                <p className="text-[12px]">
-                  <span className="text-brand">500+</span> Items
-                </p>
-              </div>
-              <div className="flex relative">
-                <div>
-                  <div className="text-gray-500">
-                    <h3 className="text-[28px] font-semibold text-black">
-                      Jersey
-                    </h3>
-                    <p className="text-[14px] text-gray-600 mt-2 max-w-[140px] md:max-w-[180px] lg:max-w-[200px]">
-                      Authentic-inspired football jerseys from the world&apm;s
-                      biggest clubs. Represent your team with pride, on match
-                      day and every day.
-                    </p>
+        <ScrollReveal>
+          <div className="min-w-[280px] h-[auto] w-full max-w-[300px] md:max-w-[350px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl">
+            <Link
+              href="/products?category=football-studs"
+              className="group block w-full max-w-[400px] h-[500px]"
+            >
+              <div className="relative flex flex-col justify-between h-full bg-white rounded-[24px] p-8 overflow-hidden border transition-colors duration-700 border-black/30">
+                {/* --- TOP: TEXT & BRANDING --- */}
+                <div className="relative z-20 flex flex-col items-start">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-3">
+                    Pitch Precision
+                  </p>
+                  <h3 className="text-[32px] font-medium tracking-tight text-black">
+                    Football Shoes
+                  </h3>
+
+                  {/* Subtle brand color line that elegantly expands on hover */}
+                  <div className="h-[2px] w-8 bg-brand mt-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:w-16"></div>
+                </div>
+
+                {/* --- CENTER: THE PRODUCT IMAGE --- */}
+                {/* We use pointer-events-none so the image doesn't block the link click */}
+                <div className="absolute inset-0 top-[15%] flex items-center justify-center pointer-events-none">
+                  {/* Ultra-slow, refined zoom and slight lift */}
+                  <div className="w-[85%] transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 group-hover:-translate-y-4">
+                    <Image
+                      src={shooe_2}
+                      alt="asdasd"
+                      width={400}
+                      height={400}
+                      className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+                    />
                   </div>
                 </div>
-                <div className="absolute right-[-25] bottom-[-18]">
-                  <Image src={jersey} alt="shoe1" width={150} />
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal>
-            <div className="min-w-[280px] w-full max-w-[350px] md:max-w-[420px] flex flex-col justify-between gap-6 bg-[#E6E6E6] rounded-4xl p-5">
-              <div className="price-label bg-white w-fit pl-3 pt-2 pb-2 pr-3 rounded-[50px] ">
-                <p className="text-[12px]">
-                  <span className="text-brand">500+</span> Items
-                </p>
-              </div>
-              <div className="flex relative">
-                <div>
-                  <div className="text-gray-500">
-                    <h3 className="text-[28px] font-semibold text-black">
-                      Accessories
-                    </h3>
-                    <p className="text-[14px] text-gray-600 mt-2 max-w-[140px] md:max-w-[180px] lg:max-w-[200px]">
-                      Premium sports accessories for athletes and champions.
-                      Built for training, competition, and beyond.
-                    </p>
+
+                {/* --- BOTTOM: GLASSMORPHISM ACTION BUTTON --- */}
+               <div className="relative z-20 flex justify-end items-end w-full">
+                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-md border border-black/30 text-black text-[13px] px-6 py-3 rounded-full opacity-100 translate-y-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+                    Explore{" "}
+                    <span className="text-brand ml-2 text-lg leading-none">
+                      →
+                    </span>
                   </div>
                 </div>
-                <div className="absolute right-[-25] bottom-[-18]">
-                  <Image src={jersey} alt="shoe1" width={150} />
+              </div>
+            </Link>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <div className="min-w-[280px] h-[auto] w-full max-w-[300px] md:max-w-[350px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl">
+            <Link
+             href="/products?category=casual-shoes"
+              className="group block w-full max-w-[400px] h-[500px]"
+            >
+              <div className="relative flex flex-col justify-between h-full bg-white rounded-[24px] p-8 overflow-hidden border transition-colors duration-700 border-black/30">
+                {/* --- TOP: TEXT & BRANDING --- */}
+                <div className="relative z-20 flex flex-col items-start">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-3">
+                    Urban Lifestyle
+                  </p>
+                  <h3 className="text-[32px] font-medium tracking-tight text-black">
+                    Casual Shoes
+                  </h3>
+
+                  {/* Subtle brand color line that elegantly expands on hover */}
+                  <div className="h-[2px] w-8 bg-brand mt-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:w-16"></div>
+                </div>
+
+                {/* --- CENTER: THE PRODUCT IMAGE --- */}
+                {/* We use pointer-events-none so the image doesn't block the link click */}
+                <div className="absolute inset-0 top-[15%] flex items-center justify-center pointer-events-none">
+                  {/* Ultra-slow, refined zoom and slight lift */}
+                  <div className="w-[85%] transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 group-hover:-translate-y-4">
+                    <Image
+                      src={shooe_3}
+                      alt="asdasd"
+                      width={400}
+                      height={400}
+                      className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+                    />
+                  </div>
+                </div>
+
+                {/* --- BOTTOM: GLASSMORPHISM ACTION BUTTON --- */}
+                <div className="relative z-20 flex justify-end items-end w-full">
+                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-md border border-black/30 text-black text-[13px] px-6 py-3 rounded-full opacity-100 translate-y-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+                    Explore{" "}
+                    <span className="text-brand ml-2 text-lg leading-none">
+                      →
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </ScrollReveal>
-        </div>
+            </Link>
+          </div>
+        </ScrollReveal>
       </div>
 
       <div className="featured-products-section pt-[60px] pb-[60px] bg-bg-lightgrey">
