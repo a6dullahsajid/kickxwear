@@ -43,19 +43,28 @@ textarea {
   transition-timing-function: linear !important;
 }
 
-.marquee {
-  animation: marquee 20s linear infinite;
+/* Replace the old marquee CSS in globals.css with this: */
+@keyframes marquee {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
 }
 
-.marquee:hover {
+.animate-marquee {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: marquee 8s linear infinite; /* Changed from 15s to 8s for faster speed */
+  will-change: transform;
+}
+
+.animate-marquee:hover {
   animation-play-state: paused;
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
+/* Stop the scrolling on screens md (768px) and larger */
+@media (min-width: 768px) {
+  .animate-marquee {
+    animation: none;
+    transform: none;
   }
 }

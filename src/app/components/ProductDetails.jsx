@@ -38,7 +38,7 @@ Please confirm availability and next steps.`,
   )}`;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 scroll-mt-28">
       <div className="grid md:grid-cols-2 gap-10">
         {/* Images */}
         <div>

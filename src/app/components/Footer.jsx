@@ -62,13 +62,13 @@ export default function Footer() {
           <p className="font-bold">Company</p>
           <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-500">
             <li className="hover:text-black">
-              <a href="#">About Us</a>
+              <Link href="/aboutus">About Us</Link>
             </li>
             <li className="hover:text-black">
-              <a href="#">Contact Us</a>
+              <Link href="/#cta">Contact Us</Link>
             </li>
             <li className="hover:text-black">
-              <a href="#">Follow Us</a>
+              <Link href="/#followUs">Follow Us</Link>
             </li>
           </ul>
         </div>
@@ -76,13 +76,13 @@ export default function Footer() {
           <p className="font-bold">Customer Service</p>
           <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-500">
             <li className="hover:text-black">
-              <a href="#">Explore Products</a>
+              <Link href="/products">Explore Products</Link>
             </li>
             <li className="hover:text-black">
-              <a href="#">Send Query</a>
+              <Link  href="https://wa.me/918707697774" target="_blank">Send Query</Link>
             </li>
             <li className="hover:text-black">
-              <a href="#">FAQs</a>
+              <Link href="/#faq">FAQs</Link>
             </li>
           </ul>
         </div>
@@ -90,21 +90,21 @@ export default function Footer() {
           <p className="font-bold">Our Information</p>
           <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-500">
             <li className="hover:text-black">
-              <a href="#">Privacy</a>
+              <Link href="/privacy">Privacy</Link>
             </li>
             <li className="hover:text-black">
-              <a href="#">User Terms & Condition</a>
+              <Link href="/terms">User Terms & Condition</Link>
             </li>
             <li className="hover:text-black">
-              <a href="#">Return Policy</a>
+              <Link href="/return">Return Policy</Link>
             </li>
           </ul>
         </div>
         <div className="contact-info">
           <p className="font-bold">Contact Info</p>
           <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-500">
-            <li>+91 48516592</li>
-            <li>example@gmail.com</li>
+            <li>+91 9569603674</li>
+            <li>kickxwear.in@gmail.com</li>
             <li>Kanpur, India</li>
           </ul>
         </div>

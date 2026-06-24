@@ -42,7 +42,7 @@ export default async function ProductsPage({
 
     return (
         <>
-            <div className="p-2 md:p-12">
+            <div className="p-2 pt-10 md:p-12 scroll-mt-28">
                 <h1 className="text-2xl md:text-4xl font-bold text-black">
                     All Products
                 </h1>
@@ -57,7 +57,7 @@ export default async function ProductsPage({
             <div className="flex flex-wrap mb-8 md:p-4 md:px-12">
                 {products.map((product, index) => {
                     return <div key={index} className="card overflow-hidden w-1/2 md:w-fit border border-bg-lightgrey bg-white">
-                        <ScrollReveal key={product._id} delay={index * 0.15}>
+                        <ScrollReveal key={product._id} delay={index * 0.1}>
                             <ProductCard
                                 product_id={product._id.toString()}
                                 image={product.variants[0].images[0].url}

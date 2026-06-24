@@ -39,9 +39,9 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col bg-white font-inter">
         <Navbar />
-        <div className="pt-30">
+        <main className="flex-1 pt-30">
           {children}
-        </div>
+        </main>
         <Footer />
       </body>
     </html>

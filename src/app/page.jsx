@@ -2,9 +2,9 @@ import Image from "next/image";
 import { Archivo_Black } from "next/font/google";
 import shoe_1 from "../assests/icons/shoe1.png";
 import shadow from "../assests/icons/shadow.png";
-import shipping from "../assests/icons/shiping.png";
-import payment from "../assests/icons/payment.png";
-import support from "../assests/icons/support.png";
+import shipping from "../assests/icons/shippingWhite.png";
+import payment from "../assests/icons/paymentWhite.png";
+import support from "../assests/icons/supportWhite.png";
 import shooe_2 from "../assests/icons/shoe2.png";
 import shooe_3 from "../assests/icons/shoe3.png";
 import shooe_4 from "../assests/icons/shoe4.png";
@@ -145,7 +145,7 @@ export default async function Home() {
 
   return (
     <div className="main">
-      <div className="hero-section bg-bg-lightgrey pt-20 pb-40 md:pt-40 md:pb-40 lg:pt-30 lg:pb:35 flex flex-col justify-center items-center">
+      <div id="hero" className="hero-section scroll-mt-28 bg-bg-lightgrey pt-20 pb-40 md:pt-40 md:pb-40 lg:pt-30 lg:pb:35 flex flex-col justify-center items-center">
         <div className="relative flex flex-col">
           <h1
             className={`m-0 p-0 tracking-tight scale-y-125 text-center leading-25 md:leading-40 text-[100px] text-[100px] sm:text-[150px] md:text-[200px] text-white ${archivo.className}`}
@@ -162,48 +162,53 @@ export default async function Home() {
         </div>
 
         <div className="absolute cta-button z-30 flex flex-col md:flex-row gap-5 top-105 md:top-155">
-          <button className="bg-brand text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
+            <Link href="https://wa.me/918707697774" target="_blank" className="bg-brand flex items-center justify-center cursor-pointer text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
             Chat and Order On Whatsapp
-          </button>
-          <button className="bg-white text-black cursor-pointer border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
-            <Link href="/products">Explore Products</Link>
-          </button>
+            </Link>
+          
+          
+          
+          <Link href="/products" className="bg-white flex justify-center items-center text-black cursor-pointer border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black cursur-pointer">
+            Explore Products
+          </Link>
+          
+          
         </div>
       </div>
 
-      <div className="services-section flex flex-col md:flex-row gap-12 justify-between pt-[50px] lg:pt-[60px] pb-[50px] pl-[30px] pr-[30px] xl:pl-[100px] xl:pr-[100px]">
-        <div className="flex md:flex-col lg:flex-row gap-7 items-center border-b md:border-b-0 md:border-r pb-5 md:pr-20 border-b-gray-300 md:border-r-gray-300">
+      <div className="services-section bg-black flex flex-col md:flex-row gap-12 justify-between pt-[50px] lg:pt-[60px] pb-[50px] pl-[30px] pr-[30px] xl:pl-[100px] xl:pr-[100px]">
+        <div className="flex md:flex-col lg:flex-row gap-7 items-center border-b md:border-b-0 md:border-r pb-10 md:pb-5 md:pr-20 border-b-white/30 md:border-r-white/30">
           <Image src={shipping} alt="shipping" width={52} />
           <div>
-            <h2 className="text-[14px] lg:text-[16px]">Free Shipping</h2>
-            <p className="text-[12px] lg:text-[14px] text-gray-500">
+            <h2 className="text-[14px] lg:text-[16px] text-white">Free Shipping</h2>
+            <p className="text-[12px] lg:text-[14px] text-gray-300 mt-1">
               Free Shipping on orders above 999
             </p>
           </div>
         </div>
 
-        <div className="flex md:flex-col lg:flex-row gap-7 items-center border-b md:border-b-0 md:border-r pb-5 md:pr-20 border-b-gray-300 md:border-r-gray-300">
+        <div className="flex md:flex-col lg:flex-row gap-7 items-center border-b md:border-b-0 md:border-r pb-10 md:pb-5 md:pr-20 border-b-white/30 md:border-r-white/30">
           <Image src={payment} alt="payment" width={52} />
           <div>
-            <h2 className="text-[14px] lg:text-[16px]">Flexible Payment</h2>
-            <p className="text-[12px] lg:text-[14px] text-gray-500">
+            <h2 className="text-[14px] lg:text-[16px] text-white">Flexible Payment</h2>
+            <p className="text-[12px] lg:text-[14px] text-gray-300 mt-1">
               Multiple Secure Payment Options
             </p>
           </div>
         </div>
 
-        <div className="flex md:flex-col lg:flex-row gap-7 items-center border-b md:border-b-0 pb-5 md:pr-5 border-b-gray-300 m">
+        <div className="flex md:flex-col lg:flex-row gap-7 items-center border-b md:border-b-0 pb-5 md:pb-5  md:pr-5">
           <Image src={support} alt="support" width={52} />
           <div>
-            <h2 className="text-[14px] lg:text-[16px]">24x7 Support</h2>
-            <p className="text-[12px] lg:text-[14px] text-gray-500">
+            <h2 className="text-[14px] lg:text-[16px] text-white">24x7 Support</h2>
+            <p className="text-[12px] lg:text-[14px] text-gray-300 mt-1">
               We support online all days on Instagram
             </p>
           </div>
         </div>
       </div>
 
-      <div id="category" className="category-section flex flex-col md:flex-row gap-10 justify-center items-center pt-[50px] pb-[100px] pr-[20px] pl-[20px]">
+      <div id="category" className="category-section scroll-mt-15 flex flex-col md:flex-row gap-10 md:flex-wrap justify-center items-center pt-[100px] pb-[100px] pr-[20px] pl-[20px]">
         <ScrollReveal>
           <div className="min-w-[280px] h-[auto] w-full max-w-[300px] md:max-w-[350px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl">
             <Link
@@ -362,9 +367,10 @@ export default async function Home() {
           </h4>
         </div>
 
+        <ScrollReveal delay={0.15}>
         <div className="products-carosel flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide px-5 md:px-10 lg:px-15 pt-15">
-          {products.map((product, index) => (
-            <ScrollReveal key={product._id.toString()} delay={index * 0.2}>
+          {products.map((product) => (
+            
               <Card
                 key={product._id}
                 href={`/products/${product.category}/${product._id}`}
@@ -375,20 +381,20 @@ export default async function Home() {
                 originalPrice={product.MRP}
                 discount="10% off"
               />
-            </ScrollReveal>
+            
           ))}
-          <ScrollReveal delay={0.5}>
             <Link
               href="/products"
               className="flex justify-center items-center p-3 w-[150px] md:w-[250px] h-[250px] md:h-[300px] shrink-0 hover:underline"
             >
               View All →
             </Link>
-          </ScrollReveal>
+          
         </div>
+        </ScrollReveal>
       </div>
 
-      <div className="folow-us pt-[60px] pb-[60px]">
+      <div id="followUs" className="folow-us pt-[60px] pb-[60px] scroll-mt-28">
         <div className="flex flex-col justify-center items-center gap-3">
           <p className="text-[14px]">
             <span className="text-brand">--</span> Follow Us
@@ -397,9 +403,10 @@ export default async function Home() {
             Follow Us On<span className="text-brand"> Instagram</span>
           </h4>
         </div>
+        <ScrollReveal delay={0.15}>
         <div className="insta-carousel flex lg:justify-between gap-6 md:gap-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-5 md:px-10 lg:px-15 pt-15 pb-5">
           {reels.map((reel, index) => (
-            <ScrollReveal key={reel.id.toString()}>
+            
               <a
                 key={reel.id}
                 href={reel.reelLink}
@@ -426,12 +433,13 @@ export default async function Home() {
                   </div>
                 </div>
               </a>
-            </ScrollReveal>
+            
           ))}
         </div>
+        </ScrollReveal>
       </div>
 
-      <div id="testimonial" className="testimonial-section pt-[60px] pb-[60px] bg-bg-lightgrey">
+      <div id="testimonial" className="testimonial-section scroll-mt-28 pt-[60px] pb-[60px] bg-bg-lightgrey">
         <div className="flex flex-col justify-center items-center gap-3">
           <p className="text-[14px]">
             <span className="text-brand">--</span> Testimonial
@@ -443,7 +451,7 @@ export default async function Home() {
         <TestimonialCarousel testimonials={testimonials} />
       </div>
 
-      <div id="faq" className="faq-section pt-[60px] pb-[60px]">
+      <div id="faq" className="faq-section scroll-mt-30 pt-[60px] pb-[60px]">
         <div className="flex flex-col justify-center items-center gap-3">
           <p className="text-[14px]">
             <span className="text-brand">--</span> Faqs
@@ -531,7 +539,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div id="cta" className="cta-section pt-[70px] pb-[70px] px-10 bg-bg-lightgrey">
+      <div id="cta" className="cta-section scroll-mt-28 pt-[70px] pb-[70px] px-10 bg-black text-white">
         <div className="flex flex-col justify-center items-center gap-10">
           <p className="text-[14px]">
             <span className="text-brand">--</span> Buy Now
@@ -545,23 +553,23 @@ export default async function Home() {
             </div>
 
             <h5 className="text-center text-[14px]">
-              Don&amp;t wait—message us on WhatsApp and get your favorite gear
+              Don&apos;t wait—message us on WhatsApp and get your favorite gear
               today.
             </h5>
           </div>
 
           <ScrollReveal>
             <div className="cta-button flex flex-col gap-5 md:flex-row">
-              <Link href="https://wa.me/918707697774">
-                <button className="bg-brand text-black cursor-pointer border text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
+              
+                <Link href="https://wa.me/918707697774" target="_blank" className="bg-brand flex justify-center items-center text-black cursor-pointer border text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
                   Chat and Order On Whatsapp
-                </button>
-              </Link>
-              <Link href="/products">
-              <button className="bg-white cursor-pointer text-black border text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
+                </Link>
+              
+              
+              <Link href="/products" className="bg-white flex justify-center items-center cursor-pointer text-black border text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
                 Explore Products
-              </button>
               </Link>
+              
             </div>
           </ScrollReveal>
         </div>

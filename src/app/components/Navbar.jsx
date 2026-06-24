@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useState } from "react";
 import instagram_icon from "../../assests/icons/instagram_icon.png";
 import whatsapp_icon from "../../assests/icons/whatsapp_icon.png";
 import facebook_icon from "../../assests/icons/facebook_icon.png";
@@ -12,20 +11,51 @@ import Link from "next/link";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const [categoryOpen, setCategoryOpen] = useState(false);
+  // 1. Detect scroll to hide the banner
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="header fixed z-50 w-full">
-      <div className="banner bg-black h-12 text-brand flex justify-center md:justify-between items-center pl-8 pr-8 text-[12px]">
-        <p className="contact hidden md:block">Contact Us : +91 9569603674</p>
-        <div className="announcement flex justify-center items-center">
-          <p className="announcement-text hover:underline">
-            <a href="#">Get 20% off or any announcement</a>
-          </p>
-          <Image src={right_arrow} alt="right icon" width={16} height={16} />
+      <div
+        className={`banner bg-black text-brand flex justify-between items-center pl-4 pr-4 md:pl-8 md:pr-8 text-[12px] transition-all duration-300 ${
+          isScrolled ? "h-0 opacity-0 overflow-hidden" : "h-12 opacity-100"
+        }`}
+      >
+        {/* Left: Contact Info */}
+        <div className="w-1/4 hidden md:flex items-center">
+          <p className="contact">Contact Us : +91 9569603674</p>
         </div>
-        <div className="social hidden w-25 md:flex justify-between items-center">
+
+        {/* Middle: Announcement Container */}
+        <div className="flex-1 overflow-hidden relative flex items-center h-full mx-4">
+          {/* Added md:w-full and md:justify-center to center it on desktop */}
+          <div className="animate-marquee gap-2 cursor-pointer md:w-full md:justify-center">
+            <Link
+              href="/products"
+              className="announcement-text hover:underline"
+            >
+              Get 10% off on MRP on your first order.
+            </Link>
+            <Image
+              src={right_arrow}
+              alt="right icon"
+              width={16}
+              height={16}
+              className="object-contain"
+            />
+          </div>
+        </div>
+
+        {/* Right: Social Icons */}
+        <div className="social hidden w-1/4 md:flex justify-end items-center gap-4">
           <Link href="https://www.instagram.com/kickxwear.in/">
             <Image
               src={instagram_icon}
@@ -58,7 +88,7 @@ export default function Navbar() {
 
       <div className="w-full bg-white h-20 flex items-center justify-between pl-8 pr-8 text-black border-b border-gray-200">
         <div className="nav-left">
-          <Link href="/">
+          <Link href="/#hero">
             <Image
               src={kickxwear_logo}
               alt="kickxwear logo"
@@ -79,7 +109,7 @@ export default function Navbar() {
         <div className="desk nav-right hidden md:flex justify-center items-center text-[14px]">
           <ul className="flex items-center gap-8">
             <li className="hover:underline">
-              <Link href="/">Home</Link>
+              <Link href="/#hero">Home</Link>
             </li>
             <li className="hover:underline">
               <Link href="/products">Products</Link>
@@ -91,29 +121,15 @@ export default function Navbar() {
                   Categories
                 </button>
               </Link>
-
-              {/* <div className="absolute left-0 top-5 w-32 bg-white opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 pt-2 pb-2">
-                <ul className="flex flex-col gap-2 text-[12px] text-gray-500 p-3">
-                  <li className="hover:text-black cursor-pointer hover:underline">
-                    <Link href="/products">Shoes</Link>
-                  </li>
-                  <li className="hover:text-black cursor-pointer hover:underline">
-                    <Link href="/products/jersey">Jersey</Link>
-                  </li>
-                  <li className="hover:text-black cursor-pointer hover:underline">
-                    <Link href="/products/accesories">Sport Accessories</Link>
-                  </li>
-                </ul>
-              </div> */}
             </li>
 
             <li className="hover:underline">
-              <Link href="#testimonial">Testimonial</Link>
+              <Link href="/aboutus">About Us</Link>
             </li>
             <li className="hover:underline">
-              <Link href="#faq">FAQs</Link>
+              <Link href="/#faq">FAQs</Link>
             </li>
-            <Link href="#cta">
+            <Link href="/#cta">
               <button className="contact-us bg-black text-white pl-4 pr-4 pt-1.5 pb-1.5 rounded-md transition-transform duration-300 hover:scale-105 cursor-pointer">
                 Buy Now
               </button>
@@ -143,51 +159,45 @@ export default function Navbar() {
               ✕
             </button>
 
+            {/* 2. Added onClick={() => setMenuOpen(false)} to all sidebar list items */}
             <ul className="mt-6 pl-5 flex flex-col gap-6 cursor-pointer justify-center ">
-              <li className="hover:underline">
-                <Link href="/">Home</Link>
+              <li
+                className="hover:underline"
+                onClick={() => setMenuOpen(false)}
+              >
+                <Link href="/#hero">Home</Link>
               </li>
-              <li className="hover:underline">
-                <Link href="/products" scroll={true}>Products</Link>
+              <li
+                className="hover:underline"
+                onClick={() => setMenuOpen(false)}
+              >
+                <Link href="/products" scroll={true}>
+                  Products
+                </Link>
               </li>
-              <li className="w-full flex flex-col">
-                <button
-                  onClick={() => setCategoryOpen(!categoryOpen)}
-                  className="hover:underline flex items-center gap-6 cursor-pointer"
-                >
-                  Categories
-                  <span>{categoryOpen ? "⌄" : ">"}</span>
-                </button>
-
-                {/* {categoryOpen && (
-                  <ul
-                    className={`mt-3 pl-4 flex flex-col justify-center gap-3 text-sm text-gray-500 overflow-hidden transition-all duration-300 ${
-                      categoryOpen ? "max-h-40 mt-3" : "max-h-0"
-                    }`}
-                  >
-                    <li className="hover:text-black">
-                      <Link href="/products">Shoes</Link>
-                    </li>
-                    <li className="hover:text-black">
-                      <Link href="/products/jersey">Jerseys</Link>
-                    </li>
-                    <li className="hover:text-black">
-                      <Link href="/product/accessories">Sport Accessories</Link>
-                    </li>
-                  </ul>
-                )} */}
+              <li
+                className="w-full flex flex-col"
+                onClick={() => setMenuOpen(false)}
+              >
+                <Link href="/#category">Categories</Link>
               </li>
-              <li className="hover:underline">
-                <Link href="#testimonial">Testimonial</Link>
+              <li
+                className="hover:underline"
+                onClick={() => setMenuOpen(false)}
+              >
+                <Link href="/aboutus">About Us</Link>
               </li>
-              <li className="hover:underline">
-                <Link href="#">FAQs</Link>
+              <li
+                className="hover:underline"
+                onClick={() => setMenuOpen(false)}
+              >
+                <Link href="/#faq">FAQs</Link>
               </li>
-              <a href="cta">
+              <Link href="/#cta" onClick={() => setMenuOpen(false)}>
                 <button className="contact-us bg-black text-white pl-4 pr-4 pt-1.5 pb-1.5 rounded-md transition-transform duration-300 hover:scale-105 cursor-pointer">
                   Buy Now
                 </button>
-              </a>
+              </Link>
             </ul>
           </div>
         </div>
