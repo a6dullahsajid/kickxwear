@@ -5,9 +5,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-import shoe_1 from "../../assests/icons/shoe1.png";
-import shoe_2 from "../../assests/icons/shoe2.png";
 import shoe_3 from "../../assests/icons/shoe3.png";
+import shoe_1 from "../../assests/icons/shoe1.png";
+import shoe_4 from "../../assests/icons/shoe4.png";
 
 export default function HeroCarousel() {
   return (
@@ -24,7 +24,7 @@ export default function HeroCarousel() {
         <Image src={shoe_1} alt="shoe 1" className="w-full h-auto" />
       </SwiperSlide>
       <SwiperSlide>
-        <Image src={shoe_2} alt="shoe 2" className="w-full h-auto" />
+        <Image src={shoe_4} alt="shoe 2" className="w-full h-auto" />
       </SwiperSlide>
       <SwiperSlide>
         <Image src={shoe_3} alt="shoe 3" className="w-full h-auto" />

@@ -7,6 +7,9 @@ import payment from "../assests/icons/payment.png";
 import support from "../assests/icons/support.png";
 import shooe_2 from "../assests/icons/shoe2.png";
 import shooe_3 from "../assests/icons/shoe3.png";
+import shooe_4 from "../assests/icons/shoe4.png";
+import shoe_5 from "../assests/icons/shoe5.png";
+import shoe_6 from "../assests/icons/shoe6.png";
 import testimonial from "../assests/icons/testimonial.png";
 import Card from "./components/Card";
 import reel_1 from "../assests/icons/reel_1.png";
@@ -227,7 +230,7 @@ export default async function Home() {
                   {/* Ultra-slow, refined zoom and slight lift */}
                   <div className="w-[85%] transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 group-hover:-translate-y-4">
                     <Image
-                      src={shoe_1}
+                      src={shoe_5}
                       alt="asdasd"
                       width={400}
                       height={400}
@@ -276,7 +279,7 @@ export default async function Home() {
                   {/* Ultra-slow, refined zoom and slight lift */}
                   <div className="w-[85%] transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 group-hover:-translate-y-4">
                     <Image
-                      src={shooe_2}
+                      src={shoe_6}
                       alt="asdasd"
                       width={400}
                       height={400}
@@ -286,7 +289,7 @@ export default async function Home() {
                 </div>
 
                 {/* --- BOTTOM: GLASSMORPHISM ACTION BUTTON --- */}
-               <div className="relative z-20 flex justify-end items-end w-full">
+                <div className="relative z-20 flex justify-end items-end w-full">
                   <div className="flex items-center justify-center bg-white/10 backdrop-blur-md border border-black/30 text-black text-[13px] px-6 py-3 rounded-full opacity-100 translate-y-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0">
                     Explore{" "}
                     <span className="text-brand ml-2 text-lg leading-none">
