@@ -1,20 +1,14 @@
-"use client";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Archivo_Black } from "next/font/google";
 import shoe_1 from "../assests/icons/shoe1.png";
-import shoe_2 from "../assests/icons/shoe2.png";
-import shoe_3 from "../assests/icons/shoe3.png";
 import shadow from "../assests/icons/shadow.png";
 import shipping from "../assests/icons/shiping.png";
 import payment from "../assests/icons/payment.png";
 import support from "../assests/icons/support.png";
-import jersey from "../assests/icons/jersey.png";
+import shooe_2 from "../assests/icons/shoe2.png";
+import shooe_3 from "../assests/icons/shoe3.png";
 import testimonial from "../assests/icons/testimonial.png";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 import Card from "./components/Card";
-import TestimonialCard from "./components/TestimoniaCard";
 import reel_1 from "../assests/icons/reel_1.png";
 import reel_2 from "../assests/icons/reel_2.png";
 import reel_3 from "../assests/icons/reel_3.png";
@@ -22,26 +16,27 @@ import reel_4 from "../assests/icons/reel_4.png";
 import reel_5 from "../assests/icons/reel_5.png";
 import reel_6 from "../assests/icons/reel_6.png";
 import instagram_icon from "../assests/icons/instagram_icon.png";
-
-import "swiper/css";
+import HeroCarousel from "./components/HeroCarousel";
+import TestimonialCarousel from "./components/TestimonialCarousel";
+import connectDB from "@/app/lib/mongodb";
+import Product from "@/app/models/Products";
+import ScrollReveal from "./components/ScrollReveal";
+import Link from "next/link";
 
 const archivo = Archivo_Black({
   subsets: ["latin"],
   weight: "400",
 });
 
-export default function Home() {
-  const [products, setProducts] = useState([]);
+export default async function Home() {
+  // 1. Connect to the database
+  await connectDB();
 
-  useEffect(() => {
-    async function fetchProducts() {
-      const res = await fetch("/api/products?featured=true&limit=6");
-      const data = await res.json();
-      setProducts(data);
-    }
-
-    fetchProducts();
-  }, []);
+  // 2. Fetch featured products directly from MongoDB
+  const products = await Product.find({ isfeatured: true })
+    .sort({ createdAt: -1 })
+    .limit(6)
+    .lean();
 
   const testimonials = [
     {
@@ -156,35 +151,11 @@ export default function Home() {
           </h1>
         </div>
 
-        <div className="absolute top-25 md:top-30 w-ful h-full max-w-[350px] md:max-w-[550px] z-20">
-          <Swiper
-            modules={[Autoplay]}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            loop={true}
-            slidesPerView={1}
-          >
-            <SwiperSlide>
-              <Image
-                src={shoe_1}
-                alt="shoe 1"
-                className="w-full h-auto"
-              />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <Image src={shoe_2} alt="shoe 2" className="w-full h-auto" />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <Image src={shoe_3} alt="shoe 3" className="w-full h-auto" />
-            </SwiperSlide>
-          </Swiper>
+        <div className="absolute top-35 md:top-30 w-ful h-full max-w-[280px] md:max-w-[550px] z-20">
+          <HeroCarousel />
         </div>
         <div className="absolute w-full h-auto max-w-[1000px]">
-          <Image src={shadow} alt="shadow" />
+          <Image src={shadow} alt="shadow" loading="eager" />
         </div>
 
         <div className="absolute cta-button z-30 flex flex-col md:flex-row gap-5 top-105 md:top-155">
@@ -196,7 +167,8 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className="services-section flex flex-col md:flex-row gap-12 justify-between pt-[50px] lg:pt-[60px] pb-[50px] pl-[30px] pr-[30px] xl:pl-[100px] xl:pr-[100px] border-t border-b  border-brand">
+
+      <div className="services-section flex flex-col md:flex-row gap-12 justify-between pt-[50px] lg:pt-[60px] pb-[50px] pl-[30px] pr-[30px] xl:pl-[100px] xl:pr-[100px]">
         <div className="flex md:flex-col lg:flex-row gap-7 items-center border-b md:border-b-0 md:border-r pb-5 md:pr-20 border-b-gray-300 md:border-r-gray-300">
           <Image src={shipping} alt="shipping" width={52} />
           <div>
@@ -206,6 +178,7 @@ export default function Home() {
             </p>
           </div>
         </div>
+
         <div className="flex md:flex-col lg:flex-row gap-7 items-center border-b md:border-b-0 md:border-r pb-5 md:pr-20 border-b-gray-300 md:border-r-gray-300">
           <Image src={payment} alt="payment" width={52} />
           <div>
@@ -215,6 +188,7 @@ export default function Home() {
             </p>
           </div>
         </div>
+
         <div className="flex md:flex-col lg:flex-row gap-7 items-center border-b md:border-b-0 pb-5 md:pr-5 border-b-gray-300 m">
           <Image src={support} alt="support" width={52} />
           <div>
@@ -225,76 +199,157 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="category-section flex flex-col md:flex-row gap-10 justify-center items-center pt-[50px] pb-[50px] pr-[20px] pl-[20px] border-t border-b  border-brand">
-        <div className="min-w-[280px] w-full max-w-[350px] md:max-w-[400px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl p-5">
-          <div className="price-label bg-white w-fit pl-3 pt-2 pb-2 pr-3 rounded-[50px] ">
-            <p className="text-[12px]">
-              <span className="text-brand">500+</span> Items
-            </p>
-          </div>
-          <div className="text-gray-500">
-            <h3 className="text-[28px] font-semibold text-black">Shoes</h3>
-            <p className="text-[14px] text-gray-600 mt-2">
-              Footwear engineered for sport and designed for everyday life.
-            </p>
-            <p className="text-[14px] mt-2">Football Shoes</p>
-            <p className="text-[14px] mt-2">Sports Shoes</p>
-            <p className="text-[14px] mt-2">Casual Shoes</p>
-          </div>
-          <Image src={shoe_1} alt="shoe1" width={300}/>
-        </div>
 
-        <div className="flex flex-col  gap-10 min-w-[280px] w-full max-w-[350px] md:max-w-[420px]">
-          <div className="min-w-[280px] w-full max-w-[350px] md:max-w-[420px] flex flex-col justify-between gap-6 bg-[#E6E6E6] rounded-4xl p-5">
-            <div className="price-label bg-white w-fit pl-3 pt-2 pb-2 pr-3 rounded-[50px] ">
-              <p className="text-[12px]">
-                <span className="text-brand">500+</span> Items
-              </p>
-            </div>
-            <div className="flex relative">
-              <div>
-                <div className="text-gray-500">
-                  <h3 className="text-[28px] font-semibold text-black">
-                    Jersey
-                  </h3>
-                  <p className="text-[14px] text-gray-600 mt-2 max-w-[140px] md:max-w-[180px] lg:max-w-[200px]">
-                    Authentic-inspired football jerseys from the world&apm;s biggest
-                    clubs. Represent your team with pride, on match day and
-                    every day.
+      <div className="category-section flex flex-col md:flex-row gap-10 justify-center items-center pt-[50px] pb-[100px] pr-[20px] pl-[20px]">
+        <ScrollReveal>
+          <div className="min-w-[280px] h-[auto] w-full max-w-[300px] md:max-w-[350px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl">
+            <Link
+              href="/products?category=running-shoes"
+              className="group block w-full max-w-[400px] h-[500px]"
+            >
+              <div className="relative flex flex-col justify-between h-full bg-white rounded-[24px] p-8 overflow-hidden border transition-colors duration-700 border-black/30">
+                {/* --- TOP: TEXT & BRANDING --- */}
+                <div className="relative z-20 flex flex-col items-start">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-3">
+                    High Performance
                   </p>
+                  <h3 className="text-[32px] font-medium tracking-tight text-black">
+                    Running Shoes
+                  </h3>
+
+                  {/* Subtle brand color line that elegantly expands on hover */}
+                  <div className="h-[2px] w-8 bg-brand mt-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:w-16"></div>
+                </div>
+
+                {/* --- CENTER: THE PRODUCT IMAGE --- */}
+                {/* We use pointer-events-none so the image doesn't block the link click */}
+                <div className="absolute inset-0 top-[15%] flex items-center justify-center pointer-events-none">
+                  {/* Ultra-slow, refined zoom and slight lift */}
+                  <div className="w-[85%] transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 group-hover:-translate-y-4">
+                    <Image
+                      src={shoe_1}
+                      alt="asdasd"
+                      width={400}
+                      height={400}
+                      className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+                    />
+                  </div>
+                </div>
+
+                {/* --- BOTTOM: GLASSMORPHISM ACTION BUTTON --- */}
+                <div className="relative z-20 flex justify-end items-end w-full">
+                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-md border border-black/30 text-black text-[13px] px-6 py-3 rounded-full opacity-100 translate-y-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+                    Explore{" "}
+                    <span className="text-brand ml-2 text-lg leading-none">
+                      →
+                    </span>
+                  </div>
                 </div>
               </div>
-              <div className="absolute right-[-25] bottom-[-18]">
-                <Image src={jersey} alt="shoe1" width={150}/>
-              </div>
-            </div>
+            </Link>
           </div>
-          <div className="min-w-[280px] w-full max-w-[350px] md:max-w-[420px] flex flex-col justify-between gap-6 bg-[#E6E6E6] rounded-4xl p-5">
-            <div className="price-label bg-white w-fit pl-3 pt-2 pb-2 pr-3 rounded-[50px] ">
-              <p className="text-[12px]">
-                <span className="text-brand">500+</span> Items
-              </p>
-            </div>
-            <div className="flex relative">
-              <div>
-                <div className="text-gray-500">
-                  <h3 className="text-[28px] font-semibold text-black">
-                    Accessories
-                  </h3>
-                  <p className="text-[14px] text-gray-600 mt-2 max-w-[140px] md:max-w-[180px] lg:max-w-[200px]">
-                    Premium sports accessories for athletes and champions. Built
-                    for training, competition, and beyond.
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <div className="min-w-[280px] h-[auto] w-full max-w-[300px] md:max-w-[350px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl">
+            <Link
+              href="/products?category=football-studs"
+              className="group block w-full max-w-[400px] h-[500px]"
+            >
+              <div className="relative flex flex-col justify-between h-full bg-white rounded-[24px] p-8 overflow-hidden border transition-colors duration-700 border-black/30">
+                {/* --- TOP: TEXT & BRANDING --- */}
+                <div className="relative z-20 flex flex-col items-start">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-3">
+                    Pitch Precision
                   </p>
+                  <h3 className="text-[32px] font-medium tracking-tight text-black">
+                    Football Shoes
+                  </h3>
+
+                  {/* Subtle brand color line that elegantly expands on hover */}
+                  <div className="h-[2px] w-8 bg-brand mt-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:w-16"></div>
+                </div>
+
+                {/* --- CENTER: THE PRODUCT IMAGE --- */}
+                {/* We use pointer-events-none so the image doesn't block the link click */}
+                <div className="absolute inset-0 top-[15%] flex items-center justify-center pointer-events-none">
+                  {/* Ultra-slow, refined zoom and slight lift */}
+                  <div className="w-[85%] transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 group-hover:-translate-y-4">
+                    <Image
+                      src={shooe_2}
+                      alt="asdasd"
+                      width={400}
+                      height={400}
+                      className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+                    />
+                  </div>
+                </div>
+
+                {/* --- BOTTOM: GLASSMORPHISM ACTION BUTTON --- */}
+               <div className="relative z-20 flex justify-end items-end w-full">
+                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-md border border-black/30 text-black text-[13px] px-6 py-3 rounded-full opacity-100 translate-y-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+                    Explore{" "}
+                    <span className="text-brand ml-2 text-lg leading-none">
+                      →
+                    </span>
+                  </div>
                 </div>
               </div>
-              <div className="absolute right-[-25] bottom-[-18]">
-                <Image src={jersey} alt="shoe1" width={150}/>
-              </div>
-            </div>
+            </Link>
           </div>
-        </div>
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <div className="min-w-[280px] h-[auto] w-full max-w-[300px] md:max-w-[350px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl">
+            <Link
+             href="/products?category=casual-shoes"
+              className="group block w-full max-w-[400px] h-[500px]"
+            >
+              <div className="relative flex flex-col justify-between h-full bg-white rounded-[24px] p-8 overflow-hidden border transition-colors duration-700 border-black/30">
+                {/* --- TOP: TEXT & BRANDING --- */}
+                <div className="relative z-20 flex flex-col items-start">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-3">
+                    Urban Lifestyle
+                  </p>
+                  <h3 className="text-[32px] font-medium tracking-tight text-black">
+                    Casual Shoes
+                  </h3>
+
+                  {/* Subtle brand color line that elegantly expands on hover */}
+                  <div className="h-[2px] w-8 bg-brand mt-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:w-16"></div>
+                </div>
+
+                {/* --- CENTER: THE PRODUCT IMAGE --- */}
+                {/* We use pointer-events-none so the image doesn't block the link click */}
+                <div className="absolute inset-0 top-[15%] flex items-center justify-center pointer-events-none">
+                  {/* Ultra-slow, refined zoom and slight lift */}
+                  <div className="w-[85%] transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 group-hover:-translate-y-4">
+                    <Image
+                      src={shooe_3}
+                      alt="asdasd"
+                      width={400}
+                      height={400}
+                      className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+                    />
+                  </div>
+                </div>
+
+                {/* --- BOTTOM: GLASSMORPHISM ACTION BUTTON --- */}
+                <div className="relative z-20 flex justify-end items-end w-full">
+                  <div className="flex items-center justify-center bg-white/10 backdrop-blur-md border border-black/30 text-black text-[13px] px-6 py-3 rounded-full opacity-100 translate-y-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+                    Explore{" "}
+                    <span className="text-brand ml-2 text-lg leading-none">
+                      →
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </ScrollReveal>
       </div>
-      <div className="featured-products-section pt-[60px] pb-[60px] border-t border-b  border-brand bg-bg-lightgrey">
+
+      <div className="featured-products-section pt-[60px] pb-[60px] bg-bg-lightgrey">
         <div className="flex flex-col justify-center items-center gap-3">
           <p className="text-[14px]">
             <span className="text-brand">--</span> Our Products
@@ -303,78 +358,34 @@ export default function Home() {
             Our <span className="text-brand">Products Collections</span>
           </h4>
         </div>
-        <div className="products-carosel flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide px-5 md:px-10 lg:px-15 pt-15">
-          {products.map((product) => (
-            <Card
-              key={product._id}
-              href="#"
-              image={product.variants?.[0]?.images?.[0]?.url}
-              category={product.category}
-              title={product.title}
-              price={product.SP}
-              originalPrice={product.MRP}
-              discount="10% off"
-            />
-          ))}
 
-          <a
-            href="#"
-            className="flex justify-center items-center p-3 w-[150px] md:w-[250px] h-[250px] md:h-[300px] shrink-0 hover:underline"
-          >
-            View All →
-          </a>
+        <div className="products-carosel flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide px-5 md:px-10 lg:px-15 pt-15">
+          {products.map((product, index) => (
+            <ScrollReveal key={product._id.toString()} delay={index * 0.2}>
+              <Card
+                key={product._id}
+                href="#"
+                image={product.variants?.[0]?.images?.[0]?.url}
+                category={product.category}
+                title={product.title}
+                price={product.SP}
+                originalPrice={product.MRP}
+                discount="10% off"
+              />
+            </ScrollReveal>
+          ))}
+          <ScrollReveal delay={0.5}>
+            <a
+              href="#"
+              className="flex justify-center items-center p-3 w-[150px] md:w-[250px] h-[250px] md:h-[300px] shrink-0 hover:underline"
+            >
+              View All →
+            </a>
+          </ScrollReveal>
         </div>
       </div>
-      <div className="testimonial-section pt-[60px] pb-[60px] border-t border-b  border-brand">
-        <div className="flex flex-col justify-center items-center gap-3">
-          <p className="text-[14px]">
-            <span className="text-brand">--</span> Testimonial
-          </p>
-          <h4 className="text-[20px] font-semibold">
-            What <span className="text-brand">Our Customer Say</span>
-          </h4>
-        </div>
-        <div className="testimonial-carousel pb-5 pt-10">
-          <Swiper
-            modules={[Autoplay]}
-            slidesPerView={"auto"}
-            spaceBetween={20}
-            loop
-            speed={3000}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-          >
-            {testimonials.map((item) => (
-              <SwiperSlide key={item.id} className="!w-[250px] !h-[180px]">
-                <TestimonialCard {...item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <Swiper
-            modules={[Autoplay]}
-            slidesPerView={"auto"}
-            spaceBetween={20}
-            loop
-            speed={3000}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-              reverseDirection: true,
-            }}
-          >
-            {testimonials.map((item) => (
-              <SwiperSlide key={`reverse-${item.id}`} className="!w-[250px]">
-                <TestimonialCard {...item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </div>
-      <div className="folow-us pt-[60px] pb-[60px] border-t border-b  border-brand">
+
+      <div className="folow-us pt-[60px] pb-[60px]">
         <div className="flex flex-col justify-center items-center gap-3">
           <p className="text-[14px]">
             <span className="text-brand">--</span> Follow Us
@@ -384,37 +395,52 @@ export default function Home() {
           </h4>
         </div>
         <div className="insta-carousel flex lg:justify-between gap-6 md:gap-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-5 md:px-10 lg:px-15 pt-15 pb-5">
-          {reels.map((reel) => (
-            <a
-              key={reel.id}
-              href={reel.reelLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className="reel-card group relative flex-shrink-0 w-[200px] h-[200px] bg-bg-lightgrey rounded-[30px] overflow-hidden">
-                <Image
-                  src={reel.image}
-                  alt={`Reel ${reel.id}`}
-                  className="w-full h-full object-cover"
-                  width={200}
-                  height={200}
-                />
-
-                <div className="absolute inset-0 flex items-center justify-center bg-black/0 backdrop-blur-none transition-all duration-300 group-hover:bg-black/20 group-hover:backdrop-blur-sm">
+          {reels.map((reel, index) => (
+            <ScrollReveal key={reel.id.toString()}>
+              <a
+                key={reel.id}
+                href={reel.reelLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="reel-card group relative flex-shrink-0 w-[200px] h-[200px] bg-bg-lightgrey rounded-[30px] overflow-hidden">
                   <Image
-                    src={instagram_icon}
-                    alt="Instagram"
-                    width={32}
-                    height={32}
-                    className="opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100"
+                    src={reel.image}
+                    alt={`Reel ${reel.id}`}
+                    className="w-full h-full object-cover"
+                    width={200}
+                    height={200}
                   />
+
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 backdrop-blur-none transition-all duration-300 group-hover:bg-black/20 group-hover:backdrop-blur-sm">
+                    <Image
+                      src={instagram_icon}
+                      alt="Instagram"
+                      width={32}
+                      height={32}
+                      className="opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100"
+                    />
+                  </div>
                 </div>
-              </div>
-            </a>
+              </a>
+            </ScrollReveal>
           ))}
         </div>
       </div>
-      <div className="faq-section pt-[60px] pb-[60px] border-t border-b border-brand">
+
+      <div className="testimonial-section pt-[60px] pb-[60px] bg-bg-lightgrey">
+        <div className="flex flex-col justify-center items-center gap-3">
+          <p className="text-[14px]">
+            <span className="text-brand">--</span> Testimonial
+          </p>
+          <h4 className="text-[20px] font-semibold">
+            What <span className="text-brand">Our Customer Say</span>
+          </h4>
+        </div>
+        <TestimonialCarousel testimonials={testimonials} />
+      </div>
+
+      <div className="faq-section pt-[60px] pb-[60px]">
         <div className="flex flex-col justify-center items-center gap-3">
           <p className="text-[14px]">
             <span className="text-brand">--</span> Faqs
@@ -425,96 +451,112 @@ export default function Home() {
         </div>
 
         <div className="max-w-[900px] mx-auto px-5 md:px-10 mt-12 flex flex-col gap-4">
-          <details className="group bg-bg-lightgrey rounded-[24px] p-5">
-            <summary className="flex justify-between items-center cursor-pointer list-none">
-              <h5 className="font-medium text-[15px] md:text-[16px]">
-                How long does shipping take?
-              </h5>
+          <ScrollReveal>
+            <details className="group bg-bg-lightgrey rounded-[24px] p-5">
+              <summary className="flex justify-between items-center cursor-pointer list-none">
+                <h5 className="font-medium text-[15px] md:text-[16px]">
+                  How long does shipping take?
+                </h5>
 
-              <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
-                +
-              </span>
-            </summary>
+                <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
+                  +
+                </span>
+              </summary>
 
-            <p className="mt-4 text-[14px] text-gray-600 leading-6">
-              Orders are typically delivered within 3–7 business days depending
-              on your location.
-            </p>
-          </details>
+              <p className="mt-4 text-[14px] text-gray-600 leading-6">
+                Orders are typically delivered within 3–7 business days
+                depending on your location.
+              </p>
+            </details>
+          </ScrollReveal>
 
-          <details className="group bg-bg-lightgrey rounded-[24px] p-5">
-            <summary className="flex justify-between items-center cursor-pointer list-none">
-              <h5 className="font-medium text-[15px] md:text-[16px]">
-                Do you offer Cash on Delivery?
-              </h5>
+          <ScrollReveal delay={0.1}>
+            <details className="group bg-bg-lightgrey rounded-[24px] p-5">
+              <summary className="flex justify-between items-center cursor-pointer list-none">
+                <h5 className="font-medium text-[15px] md:text-[16px]">
+                  Do you offer Cash on Delivery?
+                </h5>
 
-              <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
-                +
-              </span>
-            </summary>
+                <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
+                  +
+                </span>
+              </summary>
 
-            <p className="mt-4 text-[14px] text-gray-600 leading-6">
-              No, Cash on Delivery is not available as of now.
-            </p>
-          </details>
+              <p className="mt-4 text-[14px] text-gray-600 leading-6">
+                No, Cash on Delivery is not available as of now.
+              </p>
+            </details>
+          </ScrollReveal>
 
-          <details className="group bg-bg-lightgrey rounded-[24px] p-5">
-            <summary className="flex justify-between items-center cursor-pointer list-none">
-              <h5 className="font-medium text-[15px] md:text-[16px]">
-                Can I exchange my order?
-              </h5>
+          <ScrollReveal delay={0.2}>
+            <details className="group bg-bg-lightgrey rounded-[24px] p-5">
+              <summary className="flex justify-between items-center cursor-pointer list-none">
+                <h5 className="font-medium text-[15px] md:text-[16px]">
+                  Can I exchange my order?
+                </h5>
 
-              <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
-                +
-              </span>
-            </summary>
+                <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
+                  +
+                </span>
+              </summary>
 
-            <p className="mt-4 text-[14px] text-gray-600 leading-6">
-              Yes, exchanges are accepted within the specified return window if
-              the product is unused and in original condition.
-            </p>
-          </details>
+              <p className="mt-4 text-[14px] text-gray-600 leading-6">
+                Yes, exchanges are accepted within the specified return window
+                if the product is unused and in original condition.
+              </p>
+            </details>
+          </ScrollReveal>
 
-          <details className="group bg-bg-lightgrey rounded-[24px] p-5">
-            <summary className="flex justify-between items-center cursor-pointer list-none">
-              <h5 className="font-medium text-[15px] md:text-[16px]">
-                How can I contact support?
-              </h5>
+          <ScrollReveal delay={0.3}>
+            <details className="group bg-bg-lightgrey rounded-[24px] p-5">
+              <summary className="flex justify-between items-center cursor-pointer list-none">
+                <h5 className="font-medium text-[15px] md:text-[16px]">
+                  How can I contact support?
+                </h5>
 
-              <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
-                +
-              </span>
-            </summary>
+                <span className="text-brand text-xl transition-transform duration-300 group-open:rotate-45">
+                  +
+                </span>
+              </summary>
 
-            <p className="mt-4 text-[14px] text-gray-600 leading-6">
-              You can reach us through Instagram or WhatsApp for quick support.
-            </p>
-          </details>
+              <p className="mt-4 text-[14px] text-gray-600 leading-6">
+                You can reach us through Instagram or WhatsApp for quick
+                support.
+              </p>
+            </details>
+          </ScrollReveal>
         </div>
       </div>
-      <div className="cta-section pt-[70px] pb-[70px] px-10 border-t border-b  border-brand bg-bg-lightgrey">
+
+      <div className="cta-section pt-[70px] pb-[70px] px-10 bg-bg-lightgrey">
         <div className="flex flex-col justify-center items-center gap-10">
           <p className="text-[14px]">
             <span className="text-brand">--</span> Buy Now
           </p>
+
           <div className="flex flex-col justify-center items-center gap-10 ">
             <div className="text-[18px] lg:text-[24px] lg: font-semibold text-center flex flex-col gap-4">
               <h4>Gear Up Like a Champion </h4>
+
               <h4>Play Hard, Drip Harder</h4>
             </div>
+
             <h5 className="text-center text-[14px]">
               Don&amp;t wait—message us on WhatsApp and get your favorite gear
               today.
             </h5>
           </div>
-          <div className="cta-button flex flex-col gap-5 md:flex-row">
-            <button className="bg-brand text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
-              Chat and Order On Whatsapp
-            </button>
-            <button className="bg-white text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
-              Explore Products
-            </button>
-          </div>
+
+          <ScrollReveal>
+            <div className="cta-button flex flex-col gap-5 md:flex-row">
+              <button className="bg-brand text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
+                Chat and Order On Whatsapp
+              </button>
+              <button className="bg-white text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
+                Explore Products
+              </button>
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ScrollReveal from "./ScrollReveal";
 
 export default function TestimonialCard({
   icon,
@@ -6,7 +7,8 @@ export default function TestimonialCard({
   name,
 }) {
   return (
-    <div className="testimonial-card w-[250px] h-[150px] flex flex-col gap-3 border border-bg-lightgrey p-5 rounded-[30px]">
+    
+    <div className="testimonial-card w-[250px] h-[150px] flex flex-col gap-3 border border-gray-200 bg-white p-5 rounded-[30px]">
       <div>
         <Image
           src={icon}
