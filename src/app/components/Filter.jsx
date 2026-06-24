@@ -127,12 +127,12 @@ export default function Filter() {
       label: "Football Studs",
     },
     {
-      value: "running-shoes",
-      label: "Running Shoes",
-    },
-    {
       value: "casual-shoes",
       label: "Casual Shoes",
+    },
+    {
+      value: "running-shoes",
+      label: "Running Shoes",
     },
     {
       value: "jersey",
@@ -145,7 +145,7 @@ export default function Filter() {
   ];
 
   return (
-    <div className="px-8 md:px-12 mb-8">
+    <div className="px-2 md:px-12 mb-8">
       <div className="flex flex-col gap-4">
 
         {/* Categories */}

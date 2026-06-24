@@ -162,8 +162,8 @@ export default async function Home() {
           <button className="bg-brand text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
             Chat and Order On Whatsapp
           </button>
-          <button className="bg-white text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
-            Explore Products
+          <button className="bg-white text-black cursor-pointer border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
+            <Link href="/products">Explore Products</Link>
           </button>
         </div>
       </div>
@@ -200,11 +200,11 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="category-section flex flex-col md:flex-row gap-10 justify-center items-center pt-[50px] pb-[100px] pr-[20px] pl-[20px]">
+      <div id="category" className="category-section flex flex-col md:flex-row gap-10 justify-center items-center pt-[50px] pb-[100px] pr-[20px] pl-[20px]">
         <ScrollReveal>
           <div className="min-w-[280px] h-[auto] w-full max-w-[300px] md:max-w-[350px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl">
             <Link
-              href="/products?category=running-shoes"
+              href="/products/running-shoes"
               className="group block w-full max-w-[400px] h-[500px]"
             >
               <div className="relative flex flex-col justify-between h-full bg-white rounded-[24px] p-8 overflow-hidden border transition-colors duration-700 border-black/30">
@@ -253,7 +253,7 @@ export default async function Home() {
         <ScrollReveal>
           <div className="min-w-[280px] h-[auto] w-full max-w-[300px] md:max-w-[350px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl">
             <Link
-              href="/products?category=football-studs"
+              href="/products/football-studs"
               className="group block w-full max-w-[400px] h-[500px]"
             >
               <div className="relative flex flex-col justify-between h-full bg-white rounded-[24px] p-8 overflow-hidden border transition-colors duration-700 border-black/30">
@@ -286,7 +286,7 @@ export default async function Home() {
                 </div>
 
                 {/* --- BOTTOM: GLASSMORPHISM ACTION BUTTON --- */}
-               <div className="relative z-20 flex justify-end items-end w-full">
+                <div className="relative z-20 flex justify-end items-end w-full">
                   <div className="flex items-center justify-center bg-white/10 backdrop-blur-md border border-black/30 text-black text-[13px] px-6 py-3 rounded-full opacity-100 translate-y-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0">
                     Explore{" "}
                     <span className="text-brand ml-2 text-lg leading-none">
@@ -302,7 +302,7 @@ export default async function Home() {
         <ScrollReveal>
           <div className="min-w-[280px] h-[auto] w-full max-w-[300px] md:max-w-[350px] flex flex-col justify-between gap-6 lg:gap-4 bg-[#E6E6E6] rounded-4xl">
             <Link
-             href="/products?category=casual-shoes"
+              href="/products/casual-shoes"
               className="group block w-full max-w-[400px] h-[500px]"
             >
               <div className="relative flex flex-col justify-between h-full bg-white rounded-[24px] p-8 overflow-hidden border transition-colors duration-700 border-black/30">
@@ -364,7 +364,7 @@ export default async function Home() {
             <ScrollReveal key={product._id.toString()} delay={index * 0.2}>
               <Card
                 key={product._id}
-                href="#"
+                href={`/products/${product.category}/${product._id}`}
                 image={product.variants?.[0]?.images?.[0]?.url}
                 category={product.category}
                 title={product.title}
@@ -375,12 +375,12 @@ export default async function Home() {
             </ScrollReveal>
           ))}
           <ScrollReveal delay={0.5}>
-            <a
-              href="#"
+            <Link
+              href="/products"
               className="flex justify-center items-center p-3 w-[150px] md:w-[250px] h-[250px] md:h-[300px] shrink-0 hover:underline"
             >
               View All →
-            </a>
+            </Link>
           </ScrollReveal>
         </div>
       </div>
@@ -428,7 +428,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="testimonial-section pt-[60px] pb-[60px] bg-bg-lightgrey">
+      <div id="testimonial" className="testimonial-section pt-[60px] pb-[60px] bg-bg-lightgrey">
         <div className="flex flex-col justify-center items-center gap-3">
           <p className="text-[14px]">
             <span className="text-brand">--</span> Testimonial
@@ -440,7 +440,7 @@ export default async function Home() {
         <TestimonialCarousel testimonials={testimonials} />
       </div>
 
-      <div className="faq-section pt-[60px] pb-[60px]">
+      <div id="faq" className="faq-section pt-[60px] pb-[60px]">
         <div className="flex flex-col justify-center items-center gap-3">
           <p className="text-[14px]">
             <span className="text-brand">--</span> Faqs
@@ -528,7 +528,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="cta-section pt-[70px] pb-[70px] px-10 bg-bg-lightgrey">
+      <div id="cta" className="cta-section pt-[70px] pb-[70px] px-10 bg-bg-lightgrey">
         <div className="flex flex-col justify-center items-center gap-10">
           <p className="text-[14px]">
             <span className="text-brand">--</span> Buy Now
@@ -549,12 +549,16 @@ export default async function Home() {
 
           <ScrollReveal>
             <div className="cta-button flex flex-col gap-5 md:flex-row">
-              <button className="bg-brand text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
-                Chat and Order On Whatsapp
-              </button>
-              <button className="bg-white text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
+              <Link href="https://wa.me/918707697774">
+                <button className="bg-brand text-black cursor-pointer border text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
+                  Chat and Order On Whatsapp
+                </button>
+              </Link>
+              <Link href="/products">
+              <button className="bg-white cursor-pointer text-black border text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black ">
                 Explore Products
               </button>
+              </Link>
             </div>
           </ScrollReveal>
         </div>

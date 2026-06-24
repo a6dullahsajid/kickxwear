@@ -2,6 +2,7 @@ import Filter from "../components/Filter";
 import Product from "@/app/models/Products";
 import connectDB from "@/app/lib/mongodb";
 import ProductCard from "../components/ProductCard";
+import ScrollReveal from "@/app/components/ScrollReveal";
 
 export default async function ProductsPage({
     searchParams,
@@ -41,7 +42,7 @@ export default async function ProductsPage({
 
     return (
         <>
-            <div className="p-8 md:p-12">
+            <div className="p-2 md:p-12">
                 <h1 className="text-2xl md:text-4xl font-bold text-black">
                     All Products
                 </h1>
@@ -53,18 +54,21 @@ export default async function ProductsPage({
                 </p>
             </div>
             <Filter />
-            <div className="flex p-2 flex-wrap justify-center gap-4 md:p-4 md:gap-8">
-                {products.map((product) => {
-                    return <ProductCard
-                        key={product._id}
-                        product_id={product._id.toString()}
-                        image={product.variants[0].images[0].url}
-                        category={product.category}
-                        title={product.title}
-                        price={product.SP}
-                        originalPrice={product.MRP}
-                        outOfStock={!product.variants.some((variant) => variant.inStock)}
-                    />
+            <div className="flex flex-wrap mb-8 md:p-4 md:px-12">
+                {products.map((product, index) => {
+                    return <div key={index} className="card overflow-hidden w-1/2 md:w-fit border border-bg-lightgrey bg-white">
+                        <ScrollReveal key={product._id} delay={index * 0.15}>
+                            <ProductCard
+                                product_id={product._id.toString()}
+                                image={product.variants[0].images[0].url}
+                                category={product.category}
+                                title={product.title}
+                                price={product.SP}
+                                originalPrice={product.MRP}
+                                outOfStock={!product.variants.some((variant) => variant.inStock)}
+                            />
+                        </ScrollReveal>
+                    </div>
                 })}
             </div >
         </>
