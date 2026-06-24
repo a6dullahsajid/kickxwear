@@ -15,20 +15,21 @@ export default function ProductCard({
   outOfStock,
 }) {
   return (
-    <div className="card overflow-hidden rounded-2xl border border-brand bg-white">
-      <div className="bg-white rounded-[20px] p-3 w-[200px] md:w-[250px] h-[180px] md:h-[200px] relative flex items-center justify-center">
+    <>
+      <div className="bg-white rounded-[20px] p-3 w-full md:w-[280px] h-[180px] md:h-[200px] relative flex items-center justify-center">
         {outOfStock && (
           <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-full text-[12px] z-10">
             Out of Stock
           </div>
         )}
 
-        <div className="w-full h-full flex items-center justify-center  border-b border-bg-lightgrey">
+        <div className="w-full h-full flex items-center justify-center">
           <Image
             src={image}
             alt={title}
             width={200}
             height={200}
+            loading="eager"
             className="object-contain"
           />
         </div>
@@ -51,6 +52,6 @@ export default function ProductCard({
         </p>
       </div>
       <ProductButton category={category} product_id={product_id} />
-    </div>
+    </>
   );
 }

@@ -6,6 +6,7 @@ import instagram_icon from "../../assests/icons/instagram_icon.png";
 import whatsapp_icon from "../../assests/icons/whatsapp_icon.png";
 import facebook_icon from "../../assests/icons/facebook_icon.png";
 import { Bungee_Shade } from "next/font/google";
+import Link from "next/link";
 
 const bungee = Bungee_Shade({
   subsets: ["latin"],
@@ -28,7 +29,7 @@ export default function Footer() {
             must-have sports accessories, we&apos;ve got you covered.
           </p>
           <div className="social w-25 flex justify-between items-center mt-2">
-            <a href="#">
+            <Link href="https://www.instagram.com/kickxwear.in/">
               <Image
                 src={instagram_icon}
                 alt="instagram icon"
@@ -36,8 +37,8 @@ export default function Footer() {
                 height={18}
                 className="transition-transform duration-300 hover:scale-125"
               />
-            </a>
-            <a href="#">
+            </Link>
+            <Link href="https://wa.me/918707697774">
               <Image
                 src={whatsapp_icon}
                 alt="whatsapp icon"
@@ -45,8 +46,8 @@ export default function Footer() {
                 height={18}
                 className="transition-transform duration-300 hover:scale-125"
               />
-            </a>
-            <a href="#">
+            </Link>
+            <Link href="https://www.facebook.com/share/1M6D3Umm1U/">
               <Image
                 src={facebook_icon}
                 alt="facebook icon"
@@ -54,7 +55,7 @@ export default function Footer() {
                 height={18}
                 className="transition-transform duration-300 hover:scale-125"
               />
-            </a>
+            </Link>
           </div>
         </div>
         <div className="company">
@@ -110,7 +111,7 @@ export default function Footer() {
       </div>
       <div className="footer-bottom flex justify-center items-center pt-4 pb-15 md:pt-10 md:pb-20 pl-2 pr-2 bg-white text-black">
         <h1
-          className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl ${bungee.className} text-bg-lightgrey`}
+          className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl ${bungee.className} text-black/30`}
         >
           kick<span className="text-brand">x</span>wear
         </h1>

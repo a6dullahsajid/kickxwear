@@ -39,7 +39,9 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col bg-white font-inter">
         <Navbar />
-        {children}
+        <div className="pt-30">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>
