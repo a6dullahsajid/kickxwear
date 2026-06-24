@@ -16,7 +16,7 @@ export default function ProductCard({
 }) {
   return (
     <div className="card overflow-hidden rounded-2xl border border-brand bg-white">
-      <div className="bg-white rounded-[20px] p-3 w-[200px] md:w-[250px] h-[180px] md:h-[200px] relative flex items-center justify-center">
+      <div className="bg-white rounded-[20px] p-3 w-[320px] md:w-62.5 h-45 md:h-50 relative flex items-center justify-center">
         {outOfStock && (
           <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-full text-[12px] z-10">
             Out of Stock
@@ -29,6 +29,7 @@ export default function ProductCard({
             alt={title}
             width={200}
             height={200}
+            loading="eager"
             className="object-contain"
           />
         </div>

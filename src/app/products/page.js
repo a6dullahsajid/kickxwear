@@ -15,7 +15,6 @@ export default async function ProductsPage({
     const category = params.category || "all";
     const featured = params.featured;
     const stock = params.stock;
-    console.log("Search Params:", { search, category, featured, stock });
 
     if (search?.trim()) {
         query.title = {
@@ -39,13 +38,22 @@ export default async function ProductsPage({
     const products = await Product.find(query)
         .sort({ createdAt: -1 })
         .lean();
-    console.log("Products found:", products);
 
     return (
         <>
-            <Filter />
+            <div className="p-8 md:p-12">
+                <h1 className="text-2xl md:text-4xl font-bold text-black">
+                    All Products
+                </h1>
 
-            <div className="flex p-4 flex-wrap justify-center gap-8">
+                <p className="mt-3 text-sm md:text-base max-w-2xl text-gray-600">
+                    Explore our complete collection of football studs,
+                    running shoes and sports essentials
+                    engineered for performance, comfort and style.
+                </p>
+            </div>
+            <Filter />
+            <div className="flex p-2 flex-wrap justify-center gap-4 md:p-4 md:gap-8">
                 {products.map((product) => {
                     return <ProductCard
                         key={product._id}
