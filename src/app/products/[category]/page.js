@@ -83,7 +83,7 @@ export default async function CategoryPage({
 
     return (
         <>
-            <div className="p-2 md:p-12">
+            <div className="p-2 pt-10 md:p-12 scroll-mt-28">
                 <h1 className="text-2xl md:text-4xl font-bold text-black">
                     {currentCategory.title}
                 </h1>
