@@ -7,7 +7,6 @@ export default async function sitemap() {
     await connectDB();
 
     const products = await Product.find({})
-        .select("slug category updatedAt")
         .lean();
 
     const staticPages = [

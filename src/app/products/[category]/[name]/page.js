@@ -69,7 +69,7 @@ export default async function ProductPage({ params }) {
 
     return (
         <>
-            <ProductSchema />
+            <ProductSchema product={product} />
             <BreadcrumbSchema
                 category={product.category}
                 title={product.title}
