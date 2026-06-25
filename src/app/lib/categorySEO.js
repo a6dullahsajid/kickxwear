@@ -17,13 +17,13 @@ export const categorySEO = {
       "Shop stylish casual sneakers that combine everyday comfort with modern design.",
   },
 
-  jerseys: {
+  "jersey": {
     title: "Sports Jerseys",
     description:
       "Premium sports jerseys built for training, match days, and all-day comfort.",
   },
 
-  accessories: {
+  "accessories": {
     title: "Sports Accessories",
     description:
       "Complete your game with quality sports accessories from Kickxwear.",

@@ -18,7 +18,7 @@ export async function generateMetadata({
         };
 
     return {
-        title: `${seo.title} | Kickxwear`,
+        title: `${seo.title}`,
 
         description: seo.description,
 
@@ -82,6 +82,8 @@ export default async function CategoryPage({
     const products = await Product.find(query)
         .sort({ createdAt: -1 })
         .lean();
+
+
     const categoryData = {
         "football-studs": {
             title: "Football Studs",
@@ -139,6 +141,38 @@ export default async function CategoryPage({
                 </p>
             </div>
             <Filter />
+            {products.length === 0 &&
+                <div className="flex min-h-[45vh] flex-col items-center justify-center px-6 text-center">
+                    <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-[#99ef12]/10">
+                        <span className="text-5xl">👟</span>
+                    </div>
+
+                    <h2 className="text-3xl font-bold text-black">
+                        No Products Found
+                    </h2>
+
+                    <p className="mt-3 max-w-lg text-gray-600">
+                        We couldn&apos;t find any products matching your search or filters.
+                        Try clearing the filters or browse the complete collection.
+                    </p>
+
+                    <div className="mt-8 flex flex-wrap justify-center gap-4">
+                        <a
+                            href={`/products`}
+                            className="rounded-xl bg-[#99ef12] px-6 py-3 text-black transition hover:opacity-90"
+                        >
+                            Clear Filters
+                        </a>
+
+                        <a
+                            href="/products"
+                            className="rounded-xl border border-gray-300 px-6 py-3 text-black transition hover:bg-gray-100"
+                        >
+                            Browse All Products
+                        </a>
+                    </div>
+                </div>
+            }
 
             <div className="flex flex-wrap mb-8 md:p-4 md:px-12">
                 {products.map((product, index) => {
