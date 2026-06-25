@@ -4,6 +4,58 @@ import connectDB from "@/app/lib/mongodb";
 import ProductCard from "../components/ProductCard";
 import ScrollReveal from "@/app/components/ScrollReveal";
 
+export const metadata = {
+    title: "All Products | Kickxwear",
+
+    description:
+        "Browse Kickxwear's complete collection of football studs, running shoes, casual shoes, jerseys, and sports accessories.",
+
+    keywords: [
+        "Kickxwear",
+        "Sports Shoes",
+        "Football Studs",
+        "Running Shoes",
+        "Casual Shoes",
+        "Sports Accessories",
+        "Sports Jerseys",
+    ],
+
+    alternates: {
+        canonical: "/products",
+    },
+
+    openGraph: {
+        title: "All Products | Kickxwear",
+
+        description:
+            "Browse Kickxwear's complete collection of sports footwear and accessories.",
+
+        url: "/products",
+
+        type: "website",
+
+        images: [
+            {
+                url: "/og-image.jpg",
+                width: 1200,
+                height: 630,
+                alt: "Kickxwear Products",
+            },
+        ],
+    },
+
+    twitter: {
+        card: "summary_large_image",
+
+        title: "All Products | Kickxwear",
+
+        description:
+            "Browse Kickxwear's complete collection of sports footwear and accessories.",
+
+        images: ["/og-image.jpg"],
+    },
+};
+
 export default async function ProductsPage({
     searchParams,
 }) {

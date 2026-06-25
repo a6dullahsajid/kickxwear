@@ -3,6 +3,53 @@ import Product from "@/app/models/Products";
 import connectDB from "@/app/lib/mongodb";
 import ProductCard from "../../components/ProductCard";
 import ScrollReveal from "@/app/components/ScrollReveal";
+import { categorySEO } from "@/app/lib/categorySEO";
+
+export async function generateMetadata({
+    params,
+}) {
+    const { category } = await params;
+
+    const seo =
+        categorySEO[category] ?? {
+            title: "Products",
+            description:
+                "Browse sports footwear from Kickxwear.",
+        };
+
+    return {
+        title: `${seo.title} | Kickxwear`,
+
+        description: seo.description,
+
+        alternates: {
+            canonical: `/products/${category}`,
+        },
+
+        openGraph: {
+            title: `${seo.title} | Kickxwear`,
+            description: seo.description,
+            url: `/products/${category}`,
+            type: "website",
+
+            images: [
+                {
+                    url: "/og-image.jpg",
+                    width: 1200,
+                    height: 630,
+                    alt: seo.title,
+                },
+            ],
+        },
+
+        twitter: {
+            card: "summary_large_image",
+            title: `${seo.title} | Kickxwear`,
+            description: seo.description,
+            images: ["/og-image.jpg"],
+        },
+    };
+}
 
 export default async function CategoryPage({
     params,

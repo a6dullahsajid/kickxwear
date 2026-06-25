@@ -6,7 +6,6 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 export default function ProductCard({
-  product_id,
   image,
   category,
   title,
@@ -51,7 +50,7 @@ export default function ProductCard({
           )}
         </p>
       </div>
-      <ProductButton category={category} product_id={product_id} />
+      <ProductButton category={category} product_name={title} />
     </>
   );
 }
