@@ -46,12 +46,21 @@ export default async function sitemap() {
         priority: 0.9,
     }));
 
-    const productPages = products.map((product) => ({
-        url: `${BASE_URL}/products/${product.category}/${product.slug}`,
-        lastModified: product.updatedAt,
-        changeFrequency: "weekly",
-        priority: 0.8,
-    }));
+    const productPages = products.map((product) => {
+        const slug = product.title
+            .toLowerCase()
+            .trim()
+            .replace(/&/g, "and")
+            .replace(/[^a-z0-9\s-]/g, "")
+            .replace(/\s+/g, "-");
+
+        return {
+            url: `${BASE_URL}/products/${product.category}/${slug}`,
+            lastModified: product.updatedAt,
+            changeFrequency: "weekly",
+            priority: 0.8,
+        };
+    });
 
     return [
         ...staticPages,
