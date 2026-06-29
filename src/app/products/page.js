@@ -5,7 +5,7 @@ import ProductCard from "../components/ProductCard";
 import ScrollReveal from "@/app/components/ScrollReveal";
 
 export const metadata = {
-    title: "All Products",
+    title: "Products",
 
     description:
         "Browse Kickxwear's complete collection of football studs, running shoes, casual shoes, jerseys, and sports accessories.",
@@ -25,7 +25,7 @@ export const metadata = {
     },
 
     openGraph: {
-        title: "All Products | Kickxwear",
+        title: "Products | Kickxwear",
 
         description:
             "Browse Kickxwear's complete collection of sports footwear and accessories.",
@@ -47,7 +47,7 @@ export const metadata = {
     twitter: {
         card: "summary_large_image",
 
-        title: "All Products",
+        title: "Products",
 
         description:
             "Browse Kickxwear's complete collection of sports footwear and accessories.",

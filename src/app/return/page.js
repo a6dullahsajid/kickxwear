@@ -1,6 +1,42 @@
 import React from 'react';
 import Link from 'next/link';
 
+export const metadata = {
+    title: "Return & Refund Policy",
+    description: "Read Kickxwear's return and refund policy for WhatsApp orders, exchanges, and refund processing.",
+    keywords: [
+        "Kickxwear",
+        "Return Policy",
+        "Refund Policy",
+        "WhatsApp Orders",
+        "Returns",
+        "Exchanges",
+    ],
+    alternates: {
+        canonical: "/return",
+    },
+    openGraph: {
+        title: "Return & Refund Policy | Kickxwear",
+        description: "Read Kickxwear's return and refund policy for WhatsApp orders, exchanges, and refund processing.",
+        url: "/return",
+        type: "website",
+        images: [
+            {
+                url: "/og-image.jpg",
+                width: 1200,
+                height: 630,
+                alt: "Kickxwear Return Policy",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Return & Refund Policy | Kickxwear",
+        description: "Read Kickxwear's return and refund policy for WhatsApp orders, exchanges, and refund processing.",
+        images: ["/og-image.jpg"],
+    },
+};
+
 const ReturnPolicy = () => {
   return (
     <div className="min-h-screen bg-white selection:bg-brand selection:text-black">

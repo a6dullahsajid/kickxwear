@@ -3,6 +3,58 @@ import Link from 'next/link';
 import Image from 'next/image';
 import lifestyle from "../../assests/icons/lifestyle.jpg"
 
+export const metadata = {
+    title: "About Us",
+
+    description:
+        "Learn the Kickxwear story, our mission, and how we deliver premium sports gear through personal WhatsApp support.",
+
+    keywords: [
+        "Kickxwear",
+        "About Us",
+        "Sports Gear",
+        "Football Boots",
+        "Athletic Apparel",
+        "WhatsApp Support",
+        "Authentic Gear",
+    ],
+
+    alternates: {
+        canonical: "/aboutus",
+    },
+
+    openGraph: {
+        title: "About Us | Kickxwear",
+
+        description:
+            "Discover Kickxwear's mission, values, and how we provide direct support for premium sports gear.",
+
+        url: "/aboutus",
+
+        type: "website",
+
+        images: [
+            {
+                url: "/og-image.jpg",
+                width: 1200,
+                height: 630,
+                alt: "Kickxwear About Us",
+            },
+        ],
+    },
+
+    twitter: {
+        card: "summary_large_image",
+
+        title: "About Us | Kickxwear",
+
+        description:
+            "Discover Kickxwear's mission, values, and how we provide direct support for premium sports gear.",
+
+        images: ["/og-image.jpg"],
+    },
+};
+
 const AboutUs = () => {
   return (
     <div className="min-h-screen bg-white selection:bg-brand selection:text-black pb-24">

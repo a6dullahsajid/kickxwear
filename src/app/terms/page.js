@@ -1,6 +1,43 @@
 import React from 'react';
 import Link from 'next/link';
 
+export const metadata = {
+    title: "Terms & Conditions",
+    description: "Read Kickxwear's terms and conditions for catalog browsing, WhatsApp ordering, payments, and delivery.",
+    keywords: [
+        "Kickxwear",
+        "Terms and Conditions",
+        "WhatsApp Ordering",
+        "Catalog Policies",
+        "Shipping",
+        "Payments",
+        "India",
+    ],
+    alternates: {
+        canonical: "/terms",
+    },
+    openGraph: {
+        title: "Terms & Conditions | Kickxwear",
+        description: "Read Kickxwear's terms and conditions for catalog browsing, WhatsApp ordering, payments, and delivery.",
+        url: "/terms",
+        type: "website",
+        images: [
+            {
+                url: "/og-image.jpg",
+                width: 1200,
+                height: 630,
+                alt: "Kickxwear Terms",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Terms & Conditions | Kickxwear",
+        description: "Read Kickxwear's terms and conditions for catalog browsing, WhatsApp ordering, payments, and delivery.",
+        images: ["/og-image.jpg"],
+    },
+};
+
 const Terms = () => {
   return (
     <div className="min-h-screen bg-white selection:bg-brand selection:text-black">

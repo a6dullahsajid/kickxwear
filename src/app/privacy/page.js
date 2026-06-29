@@ -1,6 +1,42 @@
 import React from 'react';
 import Link from 'next/link';
 
+export const metadata = {
+    title: "Privacy Policy",
+    description: "Read Kickxwear's privacy policy for catalog browsing, WhatsApp communication, order processing, and data protection.",
+    keywords: [
+        "Kickxwear",
+        "Privacy Policy",
+        "Data Protection",
+        "WhatsApp Ordering",
+        "User Privacy",
+        "Personal Data",
+    ],
+    alternates: {
+        canonical: "/privacy",
+    },
+    openGraph: {
+        title: "Privacy Policy | Kickxwear",
+        description: "Read Kickxwear's privacy policy for catalog browsing, WhatsApp communication, order processing, and data protection.",
+        url: "/privacy",
+        type: "website",
+        images: [
+            {
+                url: "/og-image.jpg",
+                width: 1200,
+                height: 630,
+                alt: "Kickxwear Privacy Policy",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Privacy Policy | Kickxwear",
+        description: "Read Kickxwear's privacy policy for catalog browsing, WhatsApp communication, order processing, and data protection.",
+        images: ["/og-image.jpg"],
+    },
+};
+
 const Privacy = () => {
   return (
     <div className="min-h-screen bg-white selection:bg-brand selection:text-black">

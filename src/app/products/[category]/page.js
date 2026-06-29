@@ -60,6 +60,34 @@ export default async function CategoryPage({
     const { category } = await params;
     const filters = await searchParams;
 
+    if (!categorySEO[category]) {
+        const formattedCategory = category
+            .split("-")
+            .map((word) =>
+                word.charAt(0).toUpperCase() + word.slice(1)
+            )
+            .join(" ");
+
+        return (
+            <div className="p-2 pt-10 md:p-12 scroll-mt-28 text-center">
+                <h1 className="text-4xl md:text-6xl font-bold text-black">
+                    {formattedCategory} Collection Coming Soon
+                </h1>
+                <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base text-gray-600">
+                    We&apos;re preparing the {formattedCategory} range for launch. Check back soon or browse our current collections in the store.
+                </p>
+                <div className="mt-8 flex flex-wrap justify-center gap-4">
+                    <a
+                        href="/products"
+                        className="rounded-xl bg-[#99ef12] px-6 py-3 text-black transition hover:opacity-90"
+                    >
+                        Browse All Products
+                    </a>
+                </div>
+            </div>
+        );
+    }
+
     const query = {
         category,
     };
@@ -142,31 +170,17 @@ export default async function CategoryPage({
             </div>
             <Filter />
             {products.length === 0 &&
-                <div className="flex min-h-[45vh] flex-col items-center justify-center px-6 text-center">
-                    <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-[#99ef12]/10">
-                        <span className="text-5xl">👟</span>
-                    </div>
-
-                    <h2 className="text-3xl font-bold text-black">
-                        No Products Found
-                    </h2>
-
-                    <p className="mt-3 max-w-lg text-gray-600">
-                        We couldn&apos;t find any products matching your search or filters.
-                        Try clearing the filters or browse the complete collection.
+                <div className="p-2 pt-10 md:p-12 scroll-mt-28 text-center">
+                    <h1 className="text-2xl md:text-4xl font-bold text-gray-900/50">
+                        {currentCategory.title} Collection Coming Soon
+                    </h1>
+                    <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base text-gray-800/40">
+                        We&apos;re preparing the {currentCategory.title} range for launch. Check back soon or browse our current collections in the store.
                     </p>
-
                     <div className="mt-8 flex flex-wrap justify-center gap-4">
                         <a
-                            href={`/products`}
-                            className="rounded-xl bg-[#99ef12] px-6 py-3 text-black transition hover:opacity-90"
-                        >
-                            Clear Filters
-                        </a>
-
-                        <a
                             href="/products"
-                            className="rounded-xl border border-gray-300 px-6 py-3 text-black transition hover:bg-gray-100"
+                            className="rounded-xl bg-[#99ef12] px-6 py-3 text-black transition hover:opacity-90"
                         >
                             Browse All Products
                         </a>
