@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import { Bungee_Shade, Inter } from "next/font/google";
 import OrganizationSchema from "./components/OrganizationSchema";
 import WebsiteSchema from "./components/WebsiteSchema";
+import { Analytics } from "@vercel/analytics/next";
 
 const bungee = Bungee_Shade({
   subsets: ["latin"],
@@ -122,6 +123,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${bungee.variable} ${inter.variable} h-full antialiased`}
     >
+      <Analytics />
       <body className="min-h-full flex flex-col bg-white font-inter">
         <OrganizationSchema />
         <WebsiteSchema />
