@@ -60,6 +60,7 @@ export default async function ProductPage({ params }) {
     const product = await Product.findOne({
         title: title,
     }).lean();
+    console.log("Product:", JSON.stringify(product._id));
 
     if (!product) {
         return (

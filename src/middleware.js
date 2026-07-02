@@ -6,6 +6,7 @@ export function middleware(request) {
 
     const pathname =
         request.nextUrl.pathname;
+    const method = request.method;
 
     // Logged-in user visiting login page
     if (pathname === "/admin/login") {
@@ -30,9 +31,26 @@ export function middleware(request) {
         }
     }
 
+    // Protect mutating API routes with the same admin token logic
+    if (
+        pathname.startsWith("/api/") &&
+        ["POST", "PATCH", "DELETE"].includes(method) &&
+        pathname !== "/api/auth/login"
+    ) {
+        if (!token) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: "Unauthorized",
+                },
+                { status: 401 }
+            );
+        }
+    }
+
     return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/admin/:path*"],
+    matcher: ["/admin/:path*", "/api/:path*"],
 };
