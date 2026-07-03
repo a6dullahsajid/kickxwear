@@ -5,6 +5,14 @@ import ProductSchema from "@/app/components/ProductSchema";
 import BreadcrumbSchema from "@/app/components/BreadcrumbSchema";
 import Link from "next/link";
 
+const resolveOgImage = (imageUrl) => {
+  const fallback = `${process.env.NEXT_PUBLIC_SITE_URL}/og-image.jpg`;
+  if (!imageUrl) return fallback;
+  if (/^https?:\/\//i.test(imageUrl)) return imageUrl;
+  if (imageUrl.startsWith("//")) return `https:${imageUrl}`;
+  return `${process.env.NEXT_PUBLIC_SITE_URL}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
+};
+
 export async function generateMetadata({ params }) {
     await connectDB();
 
@@ -21,25 +29,33 @@ export async function generateMetadata({ params }) {
         };
     }
 
-    const image =
-        product.variants?.[0]?.images?.[0]?.url ??
-        "/og-image.jpg";
+    const image = resolveOgImage(
+        product.variants?.[0]?.images?.[0]?.url,
+    );
+
+    const pageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/products/${category}/${name}`;
 
     return {
         title: `${product.title}`,
 
-        description:
-            product.description?.text?.slice(0, 155),
+        description: product.description?.text?.slice(0, 155),
 
         alternates: {
-            canonical: `/products/${category}/${name}`,
+            canonical: pageUrl,
         },
 
         openGraph: {
             title: product.title,
             description: product.description?.text,
-            url: `/products/${category}/${name}`,
-            images: [image],
+            url: pageUrl,
+            images: [
+                {
+                    url: image,
+                    alt: product.title,
+                    width: 1200,
+                    height: 630,
+                },
+            ],
             type: "website",
         },
 
@@ -60,7 +76,6 @@ export default async function ProductPage({ params }) {
     const product = await Product.findOne({
         title: title,
     }).lean();
-    console.log("Product:", JSON.stringify(product._id));
 
     if (!product) {
         return (

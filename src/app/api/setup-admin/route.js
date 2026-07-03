@@ -20,7 +20,7 @@ export async function GET() {
 
         const hashedPassword =
             await bcrypt.hash(
-                "12kickxwear12",
+                "1@kickxwear2",
                 10
             );
 
