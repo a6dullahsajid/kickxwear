@@ -9,7 +9,7 @@ export default function OrganizationSchema() {
 
     logo: `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`,
 
-    sameAs: ["https://instagram.com/yourpage", "https://facebook.com/yourpage"],
+    sameAs: ["https://instagram.com/kickxwear.in", "https://www.facebook.com/p/Kickx-Wear-61590736619986/"],
 
     contactPoint: {
       "@type": "ContactPoint",
