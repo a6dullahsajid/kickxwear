@@ -50,7 +50,7 @@ export async function generateMetadata({ params }) {
             url: pageUrl,
             images: [
                 {
-                    url: image,
+                    url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${category}/${name}/opengraph-image`,
                     alt: product.title,
                 },
             ],
@@ -61,7 +61,12 @@ export async function generateMetadata({ params }) {
             card: "summary_large_image",
             title: product.title,
             description: product.description?.text,
-            images: [image],
+            images: [
+                {
+                    url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${category}/${name}/opengraph-image`,
+                    alt: product.title,
+                },
+            ],
         },
     };
 }
