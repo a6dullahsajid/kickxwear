@@ -39,8 +39,8 @@ export const metadata = {
   },
 
   description:
-    "Buy football boots, running shoes, sportswear, jerseys, and athletic accessories online at Kickxwear. Premium sports gear for athletes, footballers, runners, and fitness enthusiasts across India.",
-
+    "Shop premium football studs, running shoes, casual shoes, sports jerseys and athletic accessories online at Kickxwear. High-performance sports footwear designed for athletes across India.",
+  category: "Sports",
   keywords: [
     "Kickxwear",
     "Sports Shoes",
@@ -81,6 +81,15 @@ export const metadata = {
   alternates: {
     canonical: "/",
   },
+  icon: [
+    {
+      url: "/favicon.ico",
+    },
+    {
+      url: "/icon.png",
+      type: "image/png",
+    },
+  ],
 
   openGraph: {
     type: "website",
@@ -89,7 +98,7 @@ export const metadata = {
     siteName: "Kickxwear",
     title: "Kickxwear | Premium Sports Shoes & Apparel",
     description:
-      "Buy football boots, running shoes, sportswear, jerseys, and athletic accessories online at Kickxwear. Premium sports gear for athletes, footballers, runners, and fitness enthusiasts across India.",
+      "Shop premium football studs, running shoes, casual shoes, sports jerseys and athletic accessories online at Kickxwear. High-performance sports footwear designed for athletes across India.",
 
     images: [
       {
@@ -123,8 +132,8 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${bungee.variable} ${inter.variable} h-full antialiased`}
     >
-      <Analytics />
       <body className="min-h-full flex flex-col bg-white font-inter">
+        <Analytics />
         <OrganizationSchema />
         <WebsiteSchema />
         <Navbar />

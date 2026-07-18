@@ -4,6 +4,7 @@ import connectDB from "@/app/lib/mongodb";
 import ProductCard from "../../components/ProductCard";
 import ScrollReveal from "@/app/components/ScrollReveal";
 import { categorySEO } from "@/app/lib/categorySEO";
+import Link from "next/link";
 
 export async function generateMetadata({
     params,
@@ -77,12 +78,12 @@ export default async function CategoryPage({
                     We&apos;re preparing the {formattedCategory} range for launch. Check back soon or browse our current collections in the store.
                 </p>
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
-                    <a
+                    <Link
                         href="/products"
                         className="rounded-xl bg-[#99ef12] px-6 py-3 text-black transition hover:opacity-90"
                     >
                         Browse All Products
-                    </a>
+                    </Link>
                 </div>
             </div>
         );
@@ -178,12 +179,12 @@ export default async function CategoryPage({
                         We&apos;re preparing the {currentCategory.title} range for launch. Check back soon or browse our current collections in the store.
                     </p>
                     <div className="mt-8 flex flex-wrap justify-center gap-4">
-                        <a
+                        <Link
                             href="/products"
                             className="rounded-xl bg-[#99ef12] px-6 py-3 text-black transition hover:opacity-90"
                         >
                             Browse All Products
-                        </a>
+                        </Link>
                     </div>
                 </div>
             }
