@@ -59,7 +59,7 @@ export async function generateMetadata({ params }) {
 
         twitter: {
             card: "summary_large_image",
-            title: `Sega {product.title} | ${product.category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}`,
+            title: `Sega ${product.title} | ${product.category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}`,
             description: product.description?.text,
             images: [
                 {
