@@ -60,7 +60,7 @@ export default function Footer() {
         </div>
         <div className="company">
           <p className="font-bold">Company</p>
-          <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-500">
+          <ul className="mt-1.5 text-[14px] flex flex-col gap-2 text-gray-500">
             <li className="hover:text-black">
               <Link href="/aboutus">About Us</Link>
             </li>
