@@ -6,11 +6,11 @@ import BreadcrumbSchema from "@/app/components/BreadcrumbSchema";
 import Link from "next/link";
 
 const resolveOgImage = (imageUrl) => {
-  const fallback = `${process.env.NEXT_PUBLIC_SITE_URL}/og-image.jpg`;
-  if (!imageUrl) return fallback;
-  if (/^https?:\/\//i.test(imageUrl)) return imageUrl;
-  if (imageUrl.startsWith("//")) return `https:${imageUrl}`;
-  return `${process.env.NEXT_PUBLIC_SITE_URL}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
+    const fallback = `${process.env.NEXT_PUBLIC_SITE_URL}/og-image.jpg`;
+    if (!imageUrl) return fallback;
+    if (/^https?:\/\//i.test(imageUrl)) return imageUrl;
+    if (imageUrl.startsWith("//")) return `https:${imageUrl}`;
+    return `${process.env.NEXT_PUBLIC_SITE_URL}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
 };
 
 export async function generateMetadata({ params }) {
@@ -36,16 +36,16 @@ export async function generateMetadata({ params }) {
     const pageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/products/${category}/${name}`;
 
     return {
-        title: `${product.title}`,
+        title: `Sega ${product.title}  ${product.category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())} for Men | Buy Online | Kickxwear`,
 
-        description: product.description?.text?.slice(0, 155),
+        description: product.description?.text,
 
         alternates: {
             canonical: pageUrl,
         },
 
         openGraph: {
-            title: product.title,
+            title: `Sega {product.title} | ${product.category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}`,
             description: product.description?.text,
             url: pageUrl,
             images: [
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }) {
 
         twitter: {
             card: "summary_large_image",
-            title: product.title,
+            title: `Sega {product.title} | ${product.category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}`,
             description: product.description?.text,
             images: [
                 {
