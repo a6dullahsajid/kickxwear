@@ -148,7 +148,7 @@ Please confirm availability and next steps.`,
           </Link>
 
           {/* Features */}
-          <div className="mt-8">
+          <div className="mt-8 mb-4">
             <h3 className="text-3xl font-semibold underline mb-3">Features</h3>
 
             <ul className="space-y-2">
