@@ -14,7 +14,7 @@ export default function ProductDetails({ product }) {
     product.variants?.[0]?.images?.[0]?.url,
   );
 
-  const currentUrl = `https://kickxwear.vercel.app/products/${product.category}/${product._id}`;
+  const currentUrl = `https://kickxwear.in/products/${product.category}/${product._id}`;
 
   const handleVariantChange = (variant) => {
     setSelectedVariant(variant);
