@@ -43,7 +43,7 @@ export default function ProductSchema({ product }) {
         "@type": "OfferShippingDetails",
         shippingRate: {
           "@type": "MonetaryAmount",
-          priceCurrency: "INR",
+          currency: "INR",
           value: 0,
         },
         deliveryTime: {
@@ -73,7 +73,14 @@ export default function ProductSchema({ product }) {
         url: `${process.env.NEXT_PUBLIC_SITE_URL}/return`,
         returnPolicyCategory:
           "https://schema.org/MerchantReturnFiniteReturnWindow",
-        merchantReturnDays: 0,
+        merchantReturnDays: 1,
+        returnFees: {
+          "@type": "MonetaryAmount",
+          currency: "INR",
+          value: 0,
+        },
+        returnMethod: "ReturnByMail",
+        applicableCountry: "IN",
       },
 
       availability: firstVariant?.inStock
