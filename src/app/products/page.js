@@ -36,7 +36,7 @@ export const metadata = {
 
         images: [
             {
-                url: "/og-image.jpg",
+                url: "/og-image-products.jpg",
                 width: 1200,
                 height: 630,
                 alt: "Kickxwear Products",

@@ -1,5 +1,6 @@
 export default function ProductSchema({ product }) {
   const firstVariant = product.variants?.[0];
+  const validFrom = new Date().toISOString();
 
   const images =
     product.variants?.flatMap((variant) =>
@@ -35,6 +36,45 @@ export default function ProductSchema({ product }) {
       price: product.SP,
 
       priceValidUntil: "2027-12-31",
+
+      validFrom,
+
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          priceCurrency: "INR",
+          value: 0,
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: {
+            "@type": "QuantitativeValue",
+            minValue: 1,
+            maxValue: 2,
+            unitCode: "d",
+          },
+          transitTime: {
+            "@type": "QuantitativeValue",
+            minValue: 3,
+            maxValue: 7,
+            unitCode: "d",
+          },
+        },
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "IN",
+        },
+      },
+
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        name: "Kickxwear return policy",
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/return`,
+        returnPolicyCategory:
+          "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 0,
+      },
 
       availability: firstVariant?.inStock
         ? "https://schema.org/InStock"
