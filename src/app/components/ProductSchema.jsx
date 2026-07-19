@@ -77,7 +77,7 @@ export default function ProductSchema({ product }) {
         returnFees: {
           "@type": "MonetaryAmount",
           currency: "INR",
-          value: 0,
+          value: 79,
         },
         returnMethod: "ReturnByMail",
         applicableCountry: "IN",
