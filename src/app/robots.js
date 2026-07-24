@@ -6,6 +6,6 @@ export default function robots() {
         allow: "/",
       },
     ],
-    sitemap: "https://kickxwear.in/sitemap.xml",
+    sitemap: "https://www.kickxwear.in/sitemap.xml",
   };
 }
