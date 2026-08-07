@@ -31,7 +31,10 @@ const geistMono = Geist_Mono({
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL),
   verification: {
-    google: "hJJtZDhMeJUxMoe1jspPlaV-qCYPR6OhZjJKxJTZA5M",
+    google: [
+      'hJJtZDhMeJUxMoe1jspPlaV-qCYPR6OhZjJKxJTZA5M', // Google Search Console token
+      'fkbP8QXTjj0wz9Ehsm64-yaJHysTwFIWopX8F7Ed2Uc',  // Google Merchant Center token
+    ],
   },
   title: {
     default: "Kickxwear | Premium Sports Shoes & Apparel",
