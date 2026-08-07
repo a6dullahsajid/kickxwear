@@ -4,12 +4,17 @@ export default function OrganizationSchema() {
     "@type": "Organization",
 
     name: "Kickxwear",
+    
+    description: "Authorized distributor of SEGA sports footwear in India.",
 
     url: process.env.NEXT_PUBLIC_SITE_URL,
 
     logo: `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`,
 
-    sameAs: ["https://instagram.com/kickxwear.in", "https://www.facebook.com/p/Kickx-Wear-61590736619986/"],
+    sameAs: [
+      "https://instagram.com/kickxwear.in",
+      "https://www.facebook.com/p/Kickx-Wear-61590736619986/",
+    ],
 
     contactPoint: {
       "@type": "ContactPoint",

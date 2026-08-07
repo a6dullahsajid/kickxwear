@@ -117,7 +117,10 @@ export default function ProductSchema({ product }) {
 
         url: `${process.env.NEXT_PUBLIC_SITE_URL}/return`,
 
-        applicableCountry: "IN",
+        applicableCountry: {
+          "@type": "Country",
+          name: "IN",
+        },
 
         returnPolicyCategory:
           "https://schema.org/MerchantReturnFiniteReturnWindow",
@@ -127,6 +130,12 @@ export default function ProductSchema({ product }) {
         returnMethod: "https://schema.org/ReturnByMail",
 
         returnFees: "https://schema.org/ReturnShippingFees",
+
+        returnShippingFeesAmount: {
+          "@type": "MonetaryAmount",
+          value: 99,
+          currency: "INR",
+        },
       },
     },
   };
