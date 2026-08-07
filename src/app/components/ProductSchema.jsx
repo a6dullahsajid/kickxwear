@@ -9,11 +9,24 @@ export default function ProductSchema({ product }) {
 
   const slug = product.title.trim().toLowerCase().replace(/\s+/g, "-");
 
+  const productUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.category}/${slug}`;
+
+  const colors = product.variants
+    ?.map((v) => v.colorName)
+    .filter(Boolean)
+    .join(", ");
+
+  const sizes = [
+    ...new Set(product.variants?.flatMap((v) => v.sizes || []) || []),
+  ].join(", ");
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Product",
 
     name: product.title,
+
+    url: productUrl,
 
     image: images,
 
@@ -21,17 +34,23 @@ export default function ProductSchema({ product }) {
 
     sku: product.sku,
 
+    mpn: product.sku,
+
     brand: {
       "@type": "Brand",
-      name: "Sega",
+      name: "SEGA",
     },
 
     category: product.category,
 
+    ...(colors && { color: colors }),
+
+    ...(sizes && { size: sizes }),
+
     offers: {
       "@type": "Offer",
 
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.category}/${slug}`,
+      url: productUrl,
 
       priceCurrency: "INR",
 
@@ -46,6 +65,12 @@ export default function ProductSchema({ product }) {
         : "https://schema.org/OutOfStock",
 
       itemCondition: "https://schema.org/NewCondition",
+
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        price: product.SP,
+        priceCurrency: "INR",
+      },
 
       seller: {
         "@type": "Organization",
@@ -101,10 +126,7 @@ export default function ProductSchema({ product }) {
 
         returnMethod: "https://schema.org/ReturnByMail",
 
-        // Google Merchant expects an enum here.
         returnFees: "https://schema.org/ReturnShippingFees",
-
-        // If you want to mention ₹79, put it on your return policy page.
       },
     },
   };
