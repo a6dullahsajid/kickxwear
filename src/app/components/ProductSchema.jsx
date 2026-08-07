@@ -32,9 +32,9 @@ export default function ProductSchema({ product }) {
 
     description: product.description?.text,
 
-    sku: product.sku,
+    sku: product.sku.trim().toLowerCase().replace(/\s+/g, "-"),
 
-    mpn: product.sku,
+    mpn: product.sku.trim().toLowerCase().replace(/\s+/g, "-"),
 
     brand: {
       "@type": "Brand",
