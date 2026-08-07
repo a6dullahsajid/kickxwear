@@ -28,8 +28,9 @@ export default function ProductSchema({ product }) {
 
     offers: {
       "@type": "Offer",
-
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.category}/${product.slug}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.category}/${product.title
+        .replace(/\s+/g, "-")
+        .toLowerCase()}`,
 
       priceCurrency: "INR",
 
@@ -79,7 +80,7 @@ export default function ProductSchema({ product }) {
           currency: "INR",
           value: 79,
         },
-        returnMethod: "ReturnByMail",
+        returnMethod: "https://schema.org/ReturnByMail",
         applicableCountry: "IN",
       },
 
