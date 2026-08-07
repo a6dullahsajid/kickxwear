@@ -4,8 +4,10 @@ export default function ProductSchema({ product }) {
 
   const images =
     product.variants?.flatMap((variant) =>
-      variant.images.map((image) => image.url),
+      (variant.images || []).map((image) => image.url),
     ) || [];
+
+  const slug = product.title.trim().toLowerCase().replace(/\s+/g, "-");
 
   const schema = {
     "@context": "https://schema.org",
@@ -21,16 +23,15 @@ export default function ProductSchema({ product }) {
 
     brand: {
       "@type": "Brand",
-      name: "Kickxwear",
+      name: "Sega",
     },
 
     category: product.category,
 
     offers: {
       "@type": "Offer",
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.category}/${product.title
-        .replace(/\s+/g, "-")
-        .toLowerCase()}`,
+
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.category}/${slug}`,
 
       priceCurrency: "INR",
 
@@ -39,50 +40,6 @@ export default function ProductSchema({ product }) {
       priceValidUntil: "2027-12-31",
 
       validFrom,
-
-      shippingDetails: {
-        "@type": "OfferShippingDetails",
-        shippingRate: {
-          "@type": "MonetaryAmount",
-          currency: "INR",
-          value: 0,
-        },
-        deliveryTime: {
-          "@type": "ShippingDeliveryTime",
-          handlingTime: {
-            "@type": "QuantitativeValue",
-            minValue: 1,
-            maxValue: 2,
-            unitCode: "d",
-          },
-          transitTime: {
-            "@type": "QuantitativeValue",
-            minValue: 3,
-            maxValue: 7,
-            unitCode: "d",
-          },
-        },
-        shippingDestination: {
-          "@type": "DefinedRegion",
-          addressCountry: "IN",
-        },
-      },
-
-      hasMerchantReturnPolicy: {
-        "@type": "MerchantReturnPolicy",
-        name: "Kickxwear return policy",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL}/return`,
-        returnPolicyCategory:
-          "https://schema.org/MerchantReturnFiniteReturnWindow",
-        merchantReturnDays: 1,
-        returnFees: {
-          "@type": "MonetaryAmount",
-          currency: "INR",
-          value: 79,
-        },
-        returnMethod: "https://schema.org/ReturnByMail",
-        applicableCountry: "IN",
-      },
 
       availability: firstVariant?.inStock
         ? "https://schema.org/InStock"
@@ -93,6 +50,61 @@ export default function ProductSchema({ product }) {
       seller: {
         "@type": "Organization",
         name: "Kickxwear",
+      },
+
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          currency: "INR",
+          value: 0,
+        },
+
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "IN",
+        },
+
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+
+          handlingTime: {
+            "@type": "QuantitativeValue",
+            minValue: 1,
+            maxValue: 2,
+            unitCode: "d",
+          },
+
+          transitTime: {
+            "@type": "QuantitativeValue",
+            minValue: 3,
+            maxValue: 7,
+            unitCode: "d",
+          },
+        },
+      },
+
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+
+        name: "Kickxwear Return Policy",
+
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/return`,
+
+        applicableCountry: "IN",
+
+        returnPolicyCategory:
+          "https://schema.org/MerchantReturnFiniteReturnWindow",
+
+        merchantReturnDays: 1,
+
+        returnMethod: "https://schema.org/ReturnByMail",
+
+        // Google Merchant expects an enum here.
+        returnFees: "https://schema.org/ReturnShippingFees",
+
+        // If you want to mention ₹79, put it on your return policy page.
       },
     },
   };
