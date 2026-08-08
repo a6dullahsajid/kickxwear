@@ -107,6 +107,11 @@ ${size
 <g:gender>unisex</g:gender>
 
 <g:age_group>adult</g:age_group>
+<g:shipping>
+    <g:country>IN</g:country>
+    <g:service>Standard</g:service>
+    <g:price>49.00 INR</g:price>
+</g:shipping>
 
 </item>
 `);
