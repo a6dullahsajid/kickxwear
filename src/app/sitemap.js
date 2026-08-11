@@ -23,7 +23,7 @@ export default async function sitemap() {
             priority: 0.95,
         },
         {
-            url: `${BASE_URL}/about`,
+            url: `${BASE_URL}/aboutus`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.7,
@@ -34,7 +34,7 @@ export default async function sitemap() {
         "football-studs",
         "running-shoes",
         "casual-shoes",
-        "jerseys",
+        "jersey",
         "accessories",
     ];
 

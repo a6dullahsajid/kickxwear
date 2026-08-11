@@ -125,7 +125,7 @@ export default async function ProductPage({ params }) {
             <BreadcrumbSchema
                 category={product.category}
                 title={product.title}
-                slug={product.title}
+                slug={name}
             />
             <ProductDetails
                 product={JSON.parse(

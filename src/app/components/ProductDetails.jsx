@@ -91,21 +91,25 @@ Please confirm availability and next steps.`,
           <div className="mt-8">
             <h3 className="font-semibold mb-3">Color</h3>
 
-            <div className="flex gap-3">
-              {product.variants?.map((variant) => (
-                <button
-                  key={variant.colorName}
-                  onClick={() => handleVariantChange(variant)}
-                  className={`px-4 py-2 rounded-lg border ${
-                    selectedVariant.colorName === variant.colorName
-                      ? "border-black bg-black text-white"
-                      : "border-gray-300"
-                  }`}
-                >
-                  {variant.colorName}
-                </button>
-              ))}
-            </div>
+            {product.variants.length === 1 ? (
+              <p className="text-gray-700">{selectedVariant.colorName}</p>
+            ) : (
+              <div className="flex gap-3">
+                {product.variants.map((variant) => (
+                  <button
+                    key={variant.colorName}
+                    onClick={() => handleVariantChange(variant)}
+                    className={`px-4 py-2 rounded-lg border ${
+                      selectedVariant.colorName === variant.colorName
+                        ? "border-black bg-black text-white"
+                        : "border-gray-300"
+                    }`}
+                  >
+                    {variant.colorName}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Sizes */}

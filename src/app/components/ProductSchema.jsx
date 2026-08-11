@@ -7,7 +7,13 @@ export default function ProductSchema({ product }) {
       (variant.images || []).map((image) => image.url),
     ) || [];
 
-  const slug = product.title.trim().toLowerCase().replace(/\s+/g, "-");
+  const slug = product.title
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
 
   const productUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.category}/${slug}`;
 
