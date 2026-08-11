@@ -110,7 +110,7 @@ ${size
 <g:shipping>
     <g:country>IN</g:country>
     <g:service>Standard</g:service>
-    <g:price>49.00 INR</g:price>
+    <g:price>99.00 INR</g:price>
 </g:shipping>
 
 </item>
