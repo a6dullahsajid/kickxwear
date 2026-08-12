@@ -38,11 +38,11 @@ Please confirm availability and next steps.`,
   )}`;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 scroll-mt-28">
+    <main className="max-w-7xl mx-auto px-4 py-8 scroll-mt-28">
       <div className="grid md:grid-cols-2 gap-10">
         {/* Images */}
-        <div>
-          <div className="border border-black/30 rounded-xl p-6">
+        <section aria-labelledby="product-images">
+          <figure className="border border-black/30 rounded-xl p-6">
             <Image
               src={selectedImage}
               alt={product.title}
@@ -50,7 +50,7 @@ Please confirm availability and next steps.`,
               height={600}
               className="w-full h-[300px] md:h-[500px] object-contain"
             />
-          </div>
+          </figure>
 
           <div className="flex gap-3 mt-4 overflow-x-auto">
             {selectedVariant.images?.map((image) => (
@@ -73,23 +73,26 @@ Please confirm availability and next steps.`,
               </button>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Details */}
-        <div>
-          <h1 className="text-4xl font-bold">{product.title}</h1>
+        <article>
+          <header>
+            <h1 className="text-4xl font-bold">{product.title}</h1>
 
-          <div className="flex items-center gap-3 mt-4">
-            <span className="text-3xl font-bold">₹{product.SP}</span>
+            <div className="flex items-center gap-3 mt-4">
+              <span className="text-3xl font-bold">₹{product.SP}</span>
 
-            <span className="line-through text-gray-400">₹{product.MRP}</span>
-          </div>
+              <span className="line-through text-gray-400">₹{product.MRP}</span>
+            </div>
 
-          <p className="mt-6 text-gray-600">{product.description?.text}</p>
+            <p className="mt-6 text-gray-600">{product.description?.text}</p>
+          </header>
 
-          {/* Colors */}
-          <div className="mt-8">
-            <h3 className="font-semibold mb-3">Color</h3>
+          <section className="mt-8" aria-labelledby="product-color">
+            <h2 id="product-color" className="font-semibold mb-3">
+              Color
+            </h2>
 
             {product.variants.length === 1 ? (
               <p className="text-gray-700">{selectedVariant.colorName}</p>
@@ -110,11 +113,12 @@ Please confirm availability and next steps.`,
                 ))}
               </div>
             )}
-          </div>
+          </section>
 
-          {/* Sizes */}
-          <div className="mt-8">
-            <h3 className="font-semibold mb-3">Sizes</h3>
+          <section className="mt-8" aria-labelledby="product-sizes">
+            <h2 id="product-sizes" className="font-semibold mb-3">
+              Sizes
+            </h2>
 
             <div className="flex gap-2 flex-wrap">
               {selectedVariant.sizes?.map((size) => (
@@ -132,9 +136,8 @@ Please confirm availability and next steps.`,
                 </button>
               ))}
             </div>
-          </div>
+          </section>
 
-          {/* Stock */}
           <div className="mt-6">
             {selectedVariant.inStock ? (
               <span className="text-green-600 font-medium">In Stock</span>
@@ -151,9 +154,10 @@ Please confirm availability and next steps.`,
             Order Now
           </Link>
 
-          {/* Features */}
-          <div className="mt-8 mb-4">
-            <h3 className="text-3xl font-semibold underline mb-3">Features</h3>
+          <section className="mt-8 mb-4" aria-labelledby="product-features">
+            <h2 id="product-features" className="text-3xl font-semibold underline mb-3">
+              Features
+            </h2>
 
             <ul className="space-y-2">
               {product.description?.featured?.map((feature, index) => (
@@ -170,9 +174,9 @@ Please confirm availability and next steps.`,
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
+          </section>
+        </article>
       </div>
-    </div>
+    </main>
   );
 }
