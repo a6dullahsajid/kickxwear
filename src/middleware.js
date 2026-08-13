@@ -8,14 +8,8 @@ export function middleware(request) {
         request.nextUrl.pathname;
     const method = request.method;
 
-    // Logged-in user visiting login page
+    // Allow access to the login page (avoid redirect loops when token is invalid)
     if (pathname === "/admin/login") {
-        if (token) {
-            return NextResponse.redirect(
-                new URL("/admin", request.url)
-            );
-        }
-
         return NextResponse.next();
     }
 

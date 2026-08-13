@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+// Link removed; using a button to record orders before opening WhatsApp
 
 export default function ProductDetails({ product }) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0]);
@@ -36,6 +36,39 @@ export default function ProductDetails({ product }) {
 
 Please confirm availability and next steps.`,
   )}`;
+
+  const handleOrderClick = async () => {
+    const orderPayload = {
+      product: {
+        id: product._id || null,
+        title: product.title,
+        sku: product.sku,
+        category: product.category,
+      },
+      variant: {
+        colorName: selectedVariant?.colorName,
+        size: selectedSize || null,
+      },
+      price: product.SP,
+      quantity: 1,
+      whatsappLink,
+    };
+
+    try {
+      await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderPayload),
+      });
+    } catch (err) {
+      console.error("Failed to record manual order:", err);
+    }
+
+    // Open WhatsApp in a new tab regardless of save result
+    if (typeof window !== "undefined") {
+      window.open(whatsappLink, "_blank");
+    }
+  };
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-8 scroll-mt-28">
@@ -145,14 +178,13 @@ Please confirm availability and next steps.`,
               <span className="text-red-600 font-medium">Out of Stock</span>
             )}
           </div>
-          <Link
-            href={whatsappLink}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            onClick={handleOrderClick}
+            type="button"
             className="mt-8 inline-flex px-6 py-3 rounded-lg bg-brand text-black hover:opacity-90"
           >
             Order Now
-          </Link>
+          </button>
 
           <section className="mt-8 mb-4" aria-labelledby="product-features">
             <h2 id="product-features" className="text-3xl font-semibold underline mb-3">
