@@ -102,10 +102,12 @@ export default function Footer() {
         </div>
         <div className="contact-info">
           <p className="font-bold">Contact Info</p>
-          <ul className="mt-2 text-[14px] flex flex-col gap-2 text-gray-500">
-            <li>+91 9569603674</li>
-            <li>kickxwear.in@gmail.com</li>
-            <li>Kanpur, India</li>
+          <ul className="mt-2 text-[13px] flex flex-col gap-1.5 text-gray-500">
+            <li>Phone no: +91 9569603674</li>
+            <li>E-mail: kickxwear.in@gmail.com</li>
+            <li className="pt-1">Gstin: 09BFPPH2013R1Z0</li>
+            <li>Address: House No. 17, Flat No. 3, Om Purwa</li>
+            <li>Kanpur, Uttar Pradesh 208007</li>
           </ul>
         </div>
       </div>

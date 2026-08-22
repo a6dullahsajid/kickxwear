@@ -11,6 +11,17 @@ export default function OrganizationSchema() {
 
     logo: `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`,
 
+    vatID: "09BFPPH2013R1Z0",
+
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "House No. 17, Flat No. 3, Om Purwa",
+      addressLocality: "Kanpur",
+      addressRegion: "Uttar Pradesh",
+      postalCode: "208007",
+      addressCountry: "IN",
+    },
+
     sameAs: [
       "https://instagram.com/kickxwear.in",
       "https://www.facebook.com/p/Kickx-Wear-61590736619986/",
