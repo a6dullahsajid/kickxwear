@@ -116,6 +116,13 @@ export default async function ProductPage({ params }) {
             </div>
         );
     }
+    const suggestedProducts = await Product.find({
+        category: product.category,
+        _id: { $ne: product._id },
+    })
+        .sort({ createdAt: -1 })
+        .lean();
+
     const allImages = (product.variants || []).flatMap((v) => (v.images || []).map((i) => i.url));
     const mainImage = allImages.length ? allImages[0] : null;
 
@@ -130,6 +137,9 @@ export default async function ProductPage({ params }) {
             <ProductDetails
                 product={JSON.parse(
                     JSON.stringify(product)
+                )}
+                suggestedProducts={JSON.parse(
+                    JSON.stringify(suggestedProducts)
                 )}
             />
         </>

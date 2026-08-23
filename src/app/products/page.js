@@ -109,7 +109,7 @@ export default async function ProductsPage({
             <div className="flex flex-wrap mb-8 md:p-4 md:px-12">
                 {products.map((product, index) => {
                     return <div key={index} className="card overflow-hidden w-1/2 md:w-fit border border-bg-lightgrey bg-white">
-                        <ScrollReveal key={product._id} delay={index * 0.1}>
+                        <ScrollReveal key={product._id} delay={index * 0.08}>
                             <ProductCard
                                 product_id={product._id.toString()}
                                 image={product.variants[0].images[0].url}

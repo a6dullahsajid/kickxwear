@@ -12,7 +12,7 @@ export default function Card({
   return (
     <div className="card">
       <a href={href}>
-        <div className="bg-white rounded-[20px] p-3 w-[200px] md:w-[250px] h-[250px] md:h-[300px] relative flex items-center justify-center">
+        <div className="bg-white rounded-[20px] w-[200px] md:w-[250px] h-[250px] md:h-[300px] relative flex items-center justify-center">
           {discount && (
             <div className="absolute top-3 left-3 bg-brand w-fit px-3 py-1 rounded-full text-[12px] z-10">
               {discount}
@@ -23,8 +23,8 @@ export default function Card({
             <Image
               src={image}
               alt={title}
-              width={200}
-              height={200}
+              width={150}
+              height={150}
               style={{
                 width: "auto",
                 height: "auto",
@@ -44,7 +44,7 @@ export default function Card({
           <p>
             ₹{price}
             {originalPrice && (
-              <span className="text-[#B1B1B1] ml-2 line-through">
+              <span className="text-[#B1B1B1] text-xs ml-2 line-through">
                 ₹{originalPrice}
               </span>
             )}
