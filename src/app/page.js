@@ -21,6 +21,7 @@ import reel_6 from "../assests/icons/reel_6.png";
 import instagram_icon from "../assests/icons/instagram_icon.png";
 import HeroCarousel from "./components/HeroCarousel";
 import TestimonialCarousel from "./components/TestimonialCarousel";
+import TrackedWhatsappLink from "./components/TrackedWhatsappLink";
 import connectDB from "@/app/lib/mongodb";
 import Product from "@/app/models/Products";
 import ScrollReveal from "./components/ScrollReveal";
@@ -165,13 +166,12 @@ export default async function Home() {
         </div>
 
         <div className="absolute cta-button z-30 flex flex-col md:flex-row gap-5 top-105 md:top-155">
-          <Link
-            href="https://wa.me/918707697774"
-            target="_blank"
+          <TrackedWhatsappLink
+            source="homepage-hero"
             className="bg-brand flex items-center justify-center cursor-pointer text-black border-[1px] text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black "
           >
             Chat and Order On Whatsapp
-          </Link>
+          </TrackedWhatsappLink>
 
           <Link
             href="/products"
@@ -585,13 +585,12 @@ export default async function Home() {
 
           <ScrollReveal>
             <div className="cta-button flex flex-col gap-5 md:flex-row">
-              <Link
-                href="https://wa.me/918707697774"
-                target="_blank"
+              <TrackedWhatsappLink
+                source="homepage-cta"
                 className="bg-brand flex justify-center items-center text-black cursor-pointer border text-[12px] rounded-full pt-[8px] pb-[8px] pl-[5px] pr-[5px] w-[300px] md:w-[200px] h-[45px] border-black "
               >
                 Chat and Order On Whatsapp
-              </Link>
+              </TrackedWhatsappLink>
 
               <Link
                 href="/products"

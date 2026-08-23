@@ -1,6 +1,7 @@
 import connectDB from "@/app/lib/mongodb";
 import Order from "@/app/models/Order";
 import OrdersActions from "./OrdersActions";
+import WhatsappClickCount from "./WhatsappClickCount";
 import Product from "@/app/models/Products";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -75,6 +76,7 @@ export default async function OrdersPage({ searchParams }) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-6">Manual Orders</h1>
+        <WhatsappClickCount />
         <p className="text-gray-600">No orders found.</p>
       </div>
     );
@@ -82,6 +84,7 @@ export default async function OrdersPage({ searchParams }) {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Manual Orders</h1>
+      <WhatsappClickCount />
 
       {/* Analytics Section */}
       <section className="mb-6 p-4 border rounded-lg bg-white">
