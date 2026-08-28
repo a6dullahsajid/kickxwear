@@ -10,6 +10,7 @@ export default function ProductDetails({ product, suggestedProducts }) {
   const [selectedSize, setSelectedSize] = useState(
     product.variants?.[0]?.sizes?.[0] || "",
   );
+  const [isOrdering, setIsOrdering] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState(
     product.variants?.[0]?.images?.[0]?.url,
@@ -39,6 +40,8 @@ Please confirm availability and next steps.`,
   )}`;
 
   const handleOrderClick = async () => {
+    setIsOrdering(true);
+
     const orderPayload = {
       product: {
         id: product._id || null,
@@ -56,18 +59,19 @@ Please confirm availability and next steps.`,
     };
 
     try {
-      await fetch("/api/orders", {
+      const response = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderPayload),
       });
+      setIsOrdering(false);
+      if (typeof window !== "undefined") {
+        window.open(whatsappLink, "_blank");
+      }
     } catch (err) {
       console.error("Failed to record manual order:", err);
-    }
-
-    // Open WhatsApp in a new tab regardless of save result
-    if (typeof window !== "undefined") {
-      window.open(whatsappLink, "_blank");
+    } finally {
+      setIsOrdering(false);
     }
   };
 
@@ -185,9 +189,10 @@ Please confirm availability and next steps.`,
           <button
             onClick={handleOrderClick}
             type="button"
+            disabled={isOrdering}
             className="mt-2 md:mt-4 inline-flex px-6 py-3 rounded-lg bg-brand text-black hover:opacity-90"
           >
-            Order Now
+            {isOrdering ? "Checking out..." : "Order Now"}
           </button>
 
           <section className="mt-4 mb-4" aria-labelledby="product-features">
