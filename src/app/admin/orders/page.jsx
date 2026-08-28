@@ -149,7 +149,7 @@ export default async function OrdersPage({ searchParams }) {
       <div className="overflow-x-auto">
         <table className="min-w-full table-auto border-collapse">
           <thead>
-            <tr className="text-left">
+            <tr className="text-left text-xs md:text-sm">
               <th className="px-3 py-2">Ordered At</th>
               <th className="px-3 py-2">Product</th>
               <th className="px-3 py-2">Variant</th>
@@ -159,13 +159,31 @@ export default async function OrdersPage({ searchParams }) {
           </thead>
           <tbody>
             {orders.map((order) => (
-              <tr key={order._id} className="border-t">
-                <td className="px-3 py-2 align-top">
-                  {new Date(order.createdAt).toLocaleString()}
+              <tr key={order._id} className="border-t text-xs md:text-sm">
+                <td className="px-3 py-2 align-top text-[10px] overflow-hidden whitespace-nowrap text-ellipsis">
+                  {(() => {
+                    const orderDate = new Date(order.createdAt);
+                    const date = orderDate.toLocaleDateString("en-IN", {
+                      day: "2-digit",
+                      month: "short",
+                      timeZone: "Asia/Kolkata",
+                    });
+                    const year = orderDate.toLocaleDateString("en-IN", {
+                      year: "2-digit",
+                      timeZone: "Asia/Kolkata",
+                    });
+                    const time = orderDate.toLocaleTimeString("en-IN", {
+                      hour: "numeric",
+                      minute: "2-digit",
+                      timeZone: "Asia/Kolkata",
+                    });
+
+                    return `${date}, ${year}, ${time}`;
+                  })()}
                 </td>
                 <td className="px-3 py-2 align-top">
                   <div className="font-medium">{order.product?.title}</div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-[10px] md:text-sm text-gray-500">
                     SKU: {order.product?.sku}
                   </div>
                 </td>
