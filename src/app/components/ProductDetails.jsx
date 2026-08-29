@@ -78,6 +78,7 @@ Please confirm availability and next steps.`,
         }
 
         toast.error(errorMessage);
+        return;
       }
 
       if (typeof window !== "undefined") {
@@ -86,7 +87,6 @@ Please confirm availability and next steps.`,
     } catch (err) {
       console.error("Failed to record manual order:", err);
       toast.error(err?.message || "Order could not be saved. Please try again.");
-      window.open(whatsappLink, "_blank", "noopener,noreferrer");
     } finally {
       setIsOrdering(false);
     }
