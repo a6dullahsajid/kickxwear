@@ -64,9 +64,13 @@ Please confirm availability and next steps.`,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderPayload),
       });
-      setIsOrdering(false);
+
+      if (!response.ok) {
+        throw new Error(`Order submission failed with status ${response.status}`);
+      }
+
       if (typeof window !== "undefined") {
-        window.open(whatsappLink, "_blank");
+        window.open(whatsappLink, "_blank", "noopener,noreferrer");
       }
     } catch (err) {
       console.error("Failed to record manual order:", err);
