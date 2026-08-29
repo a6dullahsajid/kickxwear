@@ -25,11 +25,18 @@ export function middleware(request) {
         }
     }
 
+    // Allow public storefront requests that are intentionally guest-accessible
+    const isPublicOrderPost = pathname === "/api/orders" && method === "POST";
+    const isPublicWhatsappClickPost =
+        pathname === "/api/whatsapp-clicks" && method === "POST";
+
     // Protect mutating API routes with the same admin token logic
     if (
         pathname.startsWith("/api/") &&
         ["POST", "PATCH", "DELETE"].includes(method) &&
-        pathname !== "/api/auth/login"
+        pathname !== "/api/auth/login" &&
+        !isPublicOrderPost &&
+        !isPublicWhatsappClickPost
     ) {
         if (!token) {
             return NextResponse.json(
