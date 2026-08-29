@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import SuggestedProducts from "./SuggestedProducts";
 // Link removed; using a button to record orders before opening WhatsApp
@@ -65,11 +67,25 @@ Please confirm availability and next steps.`,
         body: JSON.stringify(orderPayload),
       });
 
+      if (!response.ok) {
+        let errorMessage = "Failed to save order. Please try again.";
+
+        try {
+          const errorData = await response.json();
+          if (errorData?.message) errorMessage = errorData.message;
+        } catch {
+          // ignore JSON parse errors and keep the default message
+        }
+
+        toast.error(errorMessage);
+      }
+
       if (typeof window !== "undefined") {
         window.open(whatsappLink, "_blank", "noopener,noreferrer");
       }
     } catch (err) {
       console.error("Failed to record manual order:", err);
+      toast.error(err?.message || "Order could not be saved. Please try again.");
       window.open(whatsappLink, "_blank", "noopener,noreferrer");
     } finally {
       setIsOrdering(false);
@@ -231,6 +247,18 @@ Please confirm availability and next steps.`,
       <SuggestedProducts
         products={suggestedProducts}
         category={product.category}
+      />
+
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
       />
     </main>
   );
