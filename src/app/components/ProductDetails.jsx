@@ -65,15 +65,12 @@ Please confirm availability and next steps.`,
         body: JSON.stringify(orderPayload),
       });
 
-      if (!response.ok) {
-        throw new Error(`Order submission failed with status ${response.status}`);
-      }
-
       if (typeof window !== "undefined") {
         window.open(whatsappLink, "_blank", "noopener,noreferrer");
       }
     } catch (err) {
       console.error("Failed to record manual order:", err);
+      window.open(whatsappLink, "_blank", "noopener,noreferrer");
     } finally {
       setIsOrdering(false);
     }
