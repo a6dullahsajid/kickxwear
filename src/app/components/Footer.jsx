@@ -7,6 +7,7 @@ import whatsapp_icon from "../../assests/icons/whatsapp_icon.png";
 import facebook_icon from "../../assests/icons/facebook_icon.png";
 import { Bungee_Shade } from "next/font/google";
 import Link from "next/link";
+import TrackedWhatsappLink from "./TrackedWhatsappLink";
 
 const bungee = Bungee_Shade({
   subsets: ["latin"],
@@ -38,7 +39,10 @@ export default function Footer() {
                 className="transition-transform duration-300 hover:scale-125"
               />
             </Link>
-            <Link href="https://wa.me/918707697774">
+            <TrackedWhatsappLink
+              source="footer-whatsapp-icon"
+              className="inline-flex"
+            >
               <Image
                 src={whatsapp_icon}
                 alt="whatsapp icon"
@@ -46,7 +50,7 @@ export default function Footer() {
                 height={18}
                 className="transition-transform duration-300 hover:scale-125"
               />
-            </Link>
+            </TrackedWhatsappLink>
             <Link href="https://www.facebook.com/share/1M6D3Umm1U/">
               <Image
                 src={facebook_icon}
@@ -79,7 +83,12 @@ export default function Footer() {
               <Link href="/products">Explore Products</Link>
             </li>
             <li className="hover:text-black">
-              <Link  href="https://wa.me/918707697774" target="_blank">Send Query</Link>
+              <TrackedWhatsappLink
+                source="footer-send-query"
+                className="inline-block"
+              >
+                Send Query
+              </TrackedWhatsappLink>
             </li>
             <li className="hover:text-black">
               <Link href="/#faq">FAQs</Link>
