@@ -129,11 +129,11 @@ export default function Footer() {
       </div>
       <div className="footer-middle bg-black pl-8 pr-8 pt-8 text-center pb-8 md:pt-6 md:pb-6 text-[12px] flex justify-center items-center gap-4">
         <p className="text-brand">
-          Copyright © 2026 kickxwear. All Rights Reserved.
+          Copyright © 2026 kickxwear. All Rights Reserved. | Designed & Developed by{" "}
+          <Link className="text-white/90 hover:text-dark-button underline" href="https://www.shiftweb.in/">ShiftWeb</Link>
         </p>
         {/* <p className="text-white text-[10px] md:text-[12px]">Designed by Ali Arshad Khan</p> */}
       </div>
-      
     </>
   );
 }
