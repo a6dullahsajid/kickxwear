@@ -6,6 +6,7 @@ import { Bungee_Shade, Inter } from "next/font/google";
 import OrganizationSchema from "./components/OrganizationSchema";
 import WebsiteSchema from "./components/WebsiteSchema";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const bungee = Bungee_Shade({
   subsets: ["latin"],
@@ -140,6 +141,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col bg-white font-inter">
         <Analytics />
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         <OrganizationSchema />
         <WebsiteSchema />
         <Navbar />
