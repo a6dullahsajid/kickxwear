@@ -24,7 +24,7 @@ export default function ProductDetails({ product, suggestedProducts }) {
   //   setSelectedImage(variant.images?.[0]?.url);
   // };
 
-  const whatsappLink = `https://wa.me/916393170895?text=${encodeURIComponent(
+  const whatsappLink = `https://wa.me/918707697774?text=${encodeURIComponent(
     `Hi, I want to order this product from Kickxwear.
 *Product:* ${product.title}
 *SKU:* ${product.sku}
