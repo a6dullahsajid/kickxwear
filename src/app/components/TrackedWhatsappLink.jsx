@@ -16,16 +16,16 @@ export default function TrackedWhatsappLink({ source, className, children }) {
         throw new Error(`Tracking failed with status ${response.status}`);
       }
 
-      window.open("https://wa.me/918707697774", "_blank", "noopener,noreferrer");
+      window.open("https://wa.me/916393170895", "_blank", "noopener,noreferrer");
     } catch (error) {
       console.error("Failed to track WhatsApp click:", error);
-      window.open("https://wa.me/918707697774", "_blank", "noopener,noreferrer");
+      window.open("https://wa.me/916393170895", "_blank", "noopener,noreferrer");
     }
   };
 
   return (
     <a
-      href="https://wa.me/918707697774"
+      href="https://wa.me/916393170895"
       target="_blank"
       rel="noreferrer"
       onClick={handleClick}

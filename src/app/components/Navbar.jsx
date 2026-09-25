@@ -65,7 +65,7 @@ export default function Navbar() {
               className="transition-transform duration-300 hover:scale-125"
             />
           </Link>
-          <Link href="https://wa.me/918707697774">
+          <Link href="https://wa.me/916393170895">
             <Image
               src={whatsapp_icon}
               alt="whatsapp icon"
