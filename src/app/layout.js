@@ -7,6 +7,7 @@ import OrganizationSchema from "./components/OrganizationSchema";
 import WebsiteSchema from "./components/WebsiteSchema";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const bungee = Bungee_Shade({
   subsets: ["latin"],
@@ -141,6 +142,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col bg-white font-inter">
         <Analytics />
+        <SpeedInsights />
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         <OrganizationSchema />
         <WebsiteSchema />
