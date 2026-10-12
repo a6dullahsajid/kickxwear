@@ -8,6 +8,7 @@ import WebsiteSchema from "./components/WebsiteSchema";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import ReduxProvider from "./components/Provider";
 
 const bungee = Bungee_Shade({
   subsets: ["latin"],
@@ -146,11 +147,13 @@ export default function RootLayout({ children }) {
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         <OrganizationSchema />
         <WebsiteSchema />
-        <Navbar />
-        <main className="flex-1 pt-30">
-          {children}
-        </main>
-        <Footer />
+        <ReduxProvider>
+          <Navbar />
+          <main className="flex-1 pt-30">
+            {children}
+          </main>
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );

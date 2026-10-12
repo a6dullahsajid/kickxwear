@@ -35,6 +35,8 @@ export function middleware(request) {
         pathname.startsWith("/api/") &&
         ["POST", "PATCH", "DELETE"].includes(method) &&
         pathname !== "/api/auth/login" &&
+        pathname !== "/api/auth/send-otp" &&
+        pathname !== "/api/auth/verify-otp" &&
         !isPublicOrderPost &&
         !isPublicWhatsappClickPost
     ) {
