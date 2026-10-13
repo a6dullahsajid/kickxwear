@@ -73,13 +73,14 @@ export default function LoginPage() {
       // Only permit same-site relative paths.
       const safeRedirect =
         redirectTo &&
-        redirectTo.startsWith("/") &&
-        !redirectTo.startsWith("//") &&
-        !redirectTo.startsWith("/\\")
+          redirectTo.startsWith("/") &&
+          !redirectTo.startsWith("//") &&
+          !redirectTo.startsWith("/\\")
           ? redirectTo
           : "/";
 
-      router.replace(safeRedirect);
+      router.replace("/");
+      router.refresh();
     } catch (err) {
       setError(err.message);
     } finally {

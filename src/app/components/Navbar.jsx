@@ -7,11 +7,29 @@ import whatsapp_icon from "../../assests/icons/whatsapp_icon.png";
 import facebook_icon from "../../assests/icons/facebook_icon.png";
 import right_arrow from "../../assests/icons/right-arrow.png";
 import kickxwear_logo from "../../assests/icons/kickxwear_logo.png";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { FaRegUser } from "react-icons/fa";
+import { IoBagOutline } from "react-icons/io5";
+import { FaSearch } from "react-icons/fa";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [customer, setCustomer] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearch = (event) => {
+    event.preventDefault();
+
+    const query = searchQuery.trim();
+
+    if (!query) return;
+
+    router.push(`/products?search=${encodeURIComponent(query)}`);
+  };
+
+  const router = useRouter();
 
   // 1. Detect scroll to hide the banner
   useEffect(() => {
@@ -20,6 +38,41 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const checkCustomerSession = async () => {
+      try {
+        const response = await fetch("/api/auth/me", {
+          cache: "no-store",
+        });
+        const data = await response.json();
+
+        if (!cancelled && response.ok && data.success) {
+          setCustomer(data.customer);
+        } else if (!cancelled) {
+          setCustomer(null);
+        }
+      } catch (error) {
+        console.error("Unable to check customer session:", error);
+
+        if (!cancelled) {
+          setCustomer(null);
+        }
+      } finally {
+        if (!cancelled) {
+          setAuthLoading(false);
+        }
+      }
+    };
+
+    checkCustomerSession();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
@@ -106,34 +159,147 @@ export default function Navbar() {
           ☰
         </button>
 
-        <div className="desk nav-right hidden md:flex justify-center items-center text-[14px]">
+        <div className="desk nav-right hidden md:flex ml-42 justify-center items-center text-[14px]">
           <ul className="flex items-center gap-8">
-            <li className="hover:underline">
+            <li className="hover:underline underline-offset-2">
               <Link href="/#hero">Home</Link>
             </li>
-            <li className="hover:underline">
-              <Link href="/products">Products</Link>
+            <li className="hover:underline underline-offset-2">
+              <Link href="/products">Shop</Link>
             </li>
 
             <li className="relative group">
               <Link href="/#category">
-                <button className="hover:underline cursor-pointer">
-                  Categories
+                <button className="hover:underline text-black/65 font-semibold text-shadow-[0px_0px_0px_rgb(168,255,0)] underline-offset-2 cursor-pointer">
+                  Collections
                 </button>
               </Link>
             </li>
 
-            <li className="hover:underline">
+            {/* <li className="hover:underline underline-offset-2">
               <Link href="/aboutus">About Us</Link>
-            </li>
-            <li className="hover:underline">
+            </li> */}
+            {/* <li className="hover:underline">
               <Link href="/#faq">FAQs</Link>
-            </li>
-            <Link href="/#cta">
+            </li> */}
+            {/* <Link href="/#cta">
               <button className="contact-us bg-black text-white pl-4 pr-4 pt-1.5 pb-1.5 rounded-md transition-transform duration-300 hover:scale-105 cursor-pointer">
                 Buy Now
               </button>
-            </Link>
+            </Link> */}
+          </ul>
+        </div>
+        <div className="desk nav-right w-80 justify-end hidden md:flex">
+          <ul className="flex items-center gap-5">
+            
+            <li className="group/search flex items-center">
+              <form
+                onSubmit={handleSearch}
+                className="relative flex items-center"
+              >
+                <button
+                  type="submit"
+                  aria-label="Search products"
+                  className="absolute left-3 z-10 text-gray-800/90"
+                >
+                  <FaSearch className="text" />
+                </button>
+
+                <input
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Search..."
+                  aria-label="Search products"
+                  className="
+        w-6 cursor-pointer rounded-full border border-transparent
+        bg-transparent py-1 pl-8 pr-1 text-sm text-black
+        outline-none transition-all duration-300 ease-in-out
+        placeholder:text-transparent
+        hover:border-gray-200
+        focus:w-40 focus:cursor-text focus:border-gray-900
+        focus:bg-gray-50 focus:placeholder:text-gray-500
+        focus:ring-2 focus:ring-black/5
+        md:group-hover/search:w-40
+        md:group-hover/search:border-gray-900
+        md:group-hover/search:bg-gray-100
+        md:group-hover/search:placeholder:text-gray-500
+        lg:focus:w-26 lg:group-hover/search:w-26
+      "
+                />
+              </form>
+            </li>
+          
+            <li className="relative">
+              {authLoading ? null : customer ? (
+                <div className="group relative">
+                  <button
+                    type="button"
+                    aria-label="Open account menu"
+                    className="flex items-center"
+                  >
+                    <FaRegUser className="cursor-pointer text-lg" />
+                  </button>
+
+                  <div className="invisible absolute right-0 top-full z-50 w-36 pt-2 opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100">
+                    <ul className="flex flex-col gap-3 rounded-md border border-gray-200 bg-white p-3 text-sm text-black shadow-lg">
+                      <li className="hover:underline">
+                        <Link href="/account">My Account</Link>
+                      </li>
+
+                      <li>
+                        <button
+                          type="button"
+                          className="hover:underline"
+                          onClick={async () => {
+                            try {
+                              const response = await fetch("/api/auth/logout", {
+                                method: "POST",
+                              });
+
+                              const data = await response.json();
+
+                              if (!response.ok || !data.success) {
+                                throw new Error(
+                                  data.message || "Logout failed.",
+                                );
+                              }
+
+                              setCustomer(null);
+                              router.refresh();
+                            } catch (error) {
+                              console.error("Logout error:", error);
+                            }
+                          }}
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                <div className="group relative">
+                  <button
+                    type="button"
+                    aria-label="Open account menu"
+                    className="flex items-center"
+                  >
+                    <FaRegUser className="cursor-pointer text-lg" />
+                    <div className="invisible absolute -left-1/2 top-full z-50 w-fit pt-1 opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100">
+                      <ul className="flex flex-col gap-3 rounded-md border border-gray-200 bg-white px-2 py-1 text-sm text-black shadow-lg">
+                        <li className="hover:underline">
+                          <Link href="/login">Login</Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </button>
+                </div>
+              )}
+            </li>
+            <li>
+              <IoBagOutline className="text-xl font-bold cursor-pointer" />
+            </li>
           </ul>
         </div>
 
@@ -172,7 +338,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
               >
                 <Link href="/products" scroll={true}>
-                  Products
+                  Shop
                 </Link>
               </li>
               <li
@@ -187,17 +353,29 @@ export default function Navbar() {
               >
                 <Link href="/aboutus">About Us</Link>
               </li>
-              <li
+              {/* <li
                 className="hover:underline"
                 onClick={() => setMenuOpen(false)}
               >
                 <Link href="/#faq">FAQs</Link>
-              </li>
-              <Link href="/#cta" onClick={() => setMenuOpen(false)}>
+              </li> */}
+              {/* <Link href="/#cta" onClick={() => setMenuOpen(false)}>
                 <button className="contact-us bg-black text-white pl-4 pr-4 pt-1.5 pb-1.5 rounded-md transition-transform duration-300 hover:scale-105 cursor-pointer">
                   Buy Now
                 </button>
-              </Link>
+              </Link> */}
+              <li
+                className="hover:underline"
+                onClick={() => setMenuOpen(false)}
+              >
+                {authLoading ? null : customer ? (
+                  <Link href="/account">
+                    <FaRegUser />
+                  </Link>
+                ) : (
+                  <Link href="/login">Login</Link>
+                )}
+              </li>
             </ul>
           </div>
         </div>
