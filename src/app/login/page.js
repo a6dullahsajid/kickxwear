@@ -79,8 +79,8 @@ export default function LoginPage() {
           ? redirectTo
           : "/";
 
-      router.replace("/");
-      router.refresh();
+      window.dispatchEvent(new Event("customer-auth-changed"));
+      router.replace(safeRedirect);
     } catch (err) {
       setError(err.message);
     } finally {

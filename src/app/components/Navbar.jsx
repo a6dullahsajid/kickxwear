@@ -7,11 +7,12 @@ import whatsapp_icon from "../../assests/icons/whatsapp_icon.png";
 import facebook_icon from "../../assests/icons/facebook_icon.png";
 import right_arrow from "../../assests/icons/right-arrow.png";
 import kickxwear_logo from "../../assests/icons/kickxwear_logo.png";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaRegUser } from "react-icons/fa";
 import { IoBagOutline } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
+import { BiExit } from "react-icons/bi";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,6 +20,8 @@ export default function Navbar() {
   const [customer, setCustomer] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const pathname = usePathname();
+
   const handleSearch = (event) => {
     event.preventDefault();
 
@@ -73,7 +76,7 @@ export default function Navbar() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <div className="header fixed z-50 w-full">
@@ -159,7 +162,7 @@ export default function Navbar() {
           ☰
         </button>
 
-        <div className="desk nav-right hidden md:flex ml-42 justify-center items-center text-[14px]">
+        <div className="desk nav-right hidden md:flex justify-center items-center text-[14px]">
           <ul className="flex items-center gap-8">
             <li className="hover:underline underline-offset-2">
               <Link href="/#hero">Home</Link>
@@ -189,10 +192,10 @@ export default function Navbar() {
             </Link> */}
           </ul>
         </div>
-        <div className="desk nav-right w-80 justify-end hidden md:flex">
+        <div className="desk nav-right justify-end hidden md:flex">
           <ul className="flex items-center gap-5">
             
-            <li className="group/search flex items-center">
+            {/* <li className="group/search flex items-center">
               <form
                 onSubmit={handleSearch}
                 className="relative flex items-center"
@@ -228,7 +231,7 @@ export default function Navbar() {
       "
                 />
               </form>
-            </li>
+            </li> */}
           
             <li className="relative">
               {authLoading ? null : customer ? (
@@ -241,7 +244,7 @@ export default function Navbar() {
                     <FaRegUser className="cursor-pointer text-lg" />
                   </button>
 
-                  <div className="invisible absolute right-0 top-full z-50 w-36 pt-2 opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100">
+                  <div className="invisible absolute -right-16 top-full z-50 w-28 pt-2 opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100">
                     <ul className="flex flex-col gap-3 rounded-md border border-gray-200 bg-white p-3 text-sm text-black shadow-lg">
                       <li className="hover:underline">
                         <Link href="/account">My Account</Link>
@@ -250,7 +253,7 @@ export default function Navbar() {
                       <li>
                         <button
                           type="button"
-                          className="hover:underline"
+                          className="hover:underline flex justify-between items-center w-full"
                           onClick={async () => {
                             try {
                               const response = await fetch("/api/auth/logout", {
@@ -273,6 +276,7 @@ export default function Navbar() {
                           }}
                         >
                           Logout
+                          <BiExit className="text-lg" />
                         </button>
                       </li>
                     </ul>

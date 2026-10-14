@@ -116,10 +116,15 @@ export async function POST(request) {
     }
 
     // Find an existing customer or create a new account.
+    const defaultCustomerName = email.split("@")[0]?.trim() || "Customer";
+
     const customer = await Customer.findOneAndUpdate(
       { email },
       {
-        $setOnInsert: { email },
+        $setOnInsert: {
+          email,
+          name: defaultCustomerName,
+        },
       },
       {
         upsert: true,
@@ -145,7 +150,7 @@ export async function POST(request) {
       message: "Login successful.",
       customer: {
         id: customer._id.toString(),
-        name: customer.email.split("@")[0],
+        name: customer.name?.trim() || defaultCustomerName,
         email: customer.email,
       },
     });
